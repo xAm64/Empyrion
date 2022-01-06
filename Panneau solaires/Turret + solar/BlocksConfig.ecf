@@ -19186,7 +19186,7 @@
   DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   DropInventoryEntity: DropContainer
   Place: Free
-  AllowPlacingAt: Base, display: true
+  AllowPlacingAt: "Base,MS", display: true
   SizeInBlocks: "2,2,2", display: true
   SizeInBlocksLocked: "Base,MS"
   IsActivateable: true
