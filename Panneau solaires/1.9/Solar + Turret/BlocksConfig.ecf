@@ -21181,7 +21181,7 @@
   Place: Free
   Model: @models/Blocks/Misc/SolarPanelSlopePrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
-  AllowPlacingAt: Base, display: true
+  AllowPlacingAt: "Base,MS", display: true
   SizeInBlocks: "5,2,3", display: true
   SizeInBlocksLocked: "Base,MS"
   Category: Devices
