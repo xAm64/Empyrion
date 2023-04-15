@@ -1,3 +1,0 @@
-Allez dans le dossier ou le jeu est installé.
-Allez dans le dossier Content > Configuration
-remplacer le fichier du jeu par le nouveau.

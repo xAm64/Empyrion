@@ -9593,7 +9593,7 @@
   BlockColor: "110,110,110"
   # ModelOffset: "0,0.5,0"
   StackSize: 500
-  MaxCount: 40, type: int, display: true
+  MaxCount: 4, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -9641,7 +9641,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 60, type: int, display: true
+  MaxCount: 6, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -21123,7 +21123,7 @@
   UnlockCost: 5, display: true
   UnlockLevel: 3, display: true
   TechTreeParent: SolarPanelSmallBlocks
-  TechTreeNames: "Base,MS"
+  TechTreeNames: "Base"
 }
 { +Block Id: 1495, Name: SolarGenerator
   Class: SolarGenerator
@@ -21152,6 +21152,8 @@
   Category: Devices
   HitPoints: 150, type: int, display: true
   EnergyDynamicGroup: SolarGenerator
+  IsActivateable: true
+
   
   BlockColor: "110,110,110"
 
@@ -27778,7 +27780,7 @@
   # IsRetractable: true
   # AboveTerrainCheck: false                 # Required?
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   # MarketPrice: 2200, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
@@ -28016,7 +28018,7 @@
   # IsRetractable: true
   # AboveTerrainCheck: false                 # Required?
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   # MarketPrice: 2200, display: true
   BlastParticleIndex: 11
   BlastRadius: 3

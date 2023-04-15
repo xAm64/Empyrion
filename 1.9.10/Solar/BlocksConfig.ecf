@@ -2401,7 +2401,7 @@
   Mass: 13510, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
 }
 { +Block Id: 284, Name: TurretMSRocketRetract, Ref: TurretTemplate   #TurretPlayer CV Rocket
   Model: @models/Blocks/Turrets/TurretMSRocketRetractPrefab
@@ -2418,7 +2418,7 @@
   Mass: 11850, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   RotSpeed: 120, type: int, display: true  
   SoundRotate: Weapons/Turret/TurretRotateVeryFast
   CPUIn: 9700, type: int, display: true
@@ -2566,7 +2566,7 @@
   # BlockColor: "26,50,89"
   # ModelOffset: "0,0.5,0"
   StackSize: 6
-  MaxCount: 60, type: int, display: true
+  MaxCount: 6, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -2928,7 +2928,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 16, type: int, display: true
+  MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 2
   BlastDamage: 50
@@ -3009,7 +3009,7 @@
   IsRetractable: true
   IsOxygenTight: true, display: true
   Info: bkiTurretRetractSpace, display: true
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   RotSpeed: 80, type: int, display: true
   CPUIn: 20700, type: int, display: true
   SoundRotate: Weapons/Turret/TurretRotateSlow
@@ -3028,7 +3028,7 @@
   IsRetractable: true
   IsOxygenTight: true, display: true
   Info: bkiTurretRetractSpace, display: true
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   CPUIn: 1300, type: int, display: true
   HitPoints: 4500, type: int, display: true
   Mass: 13660, type: float, display: true, formatter: Kilogram
@@ -3045,7 +3045,7 @@
   IsRetractable: true
   IsOxygenTight: true, display: true
   Info: bkiTurretRetract, display: true
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   RotSpeed: 150, type: int, display: true
   CPUIn: 2500, type: int, display: true
   SoundRotate: Weapons/Turret/TurretRotateFast
@@ -3491,7 +3491,7 @@
   Volume: 281.25, type: float, display: true, formatter: Liter
   Mass: 500, type: float, display: true, formatter: Kilogram
   StackSize: 500
-  MaxCount: 60, type: int, display: true
+  MaxCount: 6, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 2
   BlastDamage: 50
@@ -7305,7 +7305,7 @@
   IsActivateableInCP: true
   #IsAccessible: true
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -7351,7 +7351,7 @@
   IsActivateableInCP: true
   #IsAccessible: true
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -7894,7 +7894,7 @@
   Info: bkiTurret, display: true
   Category: Weapons/Items
   StackSize: 25
-  MaxCount: 80, type: int, display: true
+  MaxCount: 8, type: int, display: true
   # ModelOffset: "0,0.5,0"
   BlastParticleIndex: 4
   BlastRadius: 2
@@ -9641,7 +9641,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 60, type: int, display: true
+  MaxCount: 6, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -9687,7 +9687,7 @@
   Volume: 281.25, type: float, display: true, formatter: Liter
   Mass: 500, type: float, display: true, formatter: Kilogram
   StackSize: 500
-  # MaxCount: 60, type: int, display: true
+  # MaxCount: 6, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 2
   BlastDamage: 50
@@ -9724,7 +9724,7 @@
   Volume: 281.25, type: float, display: true, formatter: Liter
   Mass: 520, type: float, display: true, formatter: Kilogram
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 2
   BlastDamage: 50
@@ -9762,7 +9762,7 @@
   Volume: 281.25, type: float, display: true, formatter: Liter
   Mass: 1050, type: float, display: true, formatter: Kilogram
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 2
   BlastDamage: 50
@@ -10552,7 +10552,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 60, type: int, display: true
+  MaxCount: 6, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -10594,7 +10594,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 40, type: int, display: true
+  MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -10636,7 +10636,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -11038,7 +11038,7 @@
   Mass: 4350, type: float, display: true, formatter: Kilogram
   StackSize: 500
   IsDuplicateable: false
-  # MaxCount: 10, type: int, display: true
+  # MaxCount: 1, type: int, display: true
   
   BlastParticleIndex: 11
   BlastRadius: 2
@@ -16893,7 +16893,7 @@
   BlockColor: "110,110,110"
   # ModelOffset: "0,0.5,0"
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -16935,7 +16935,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 60, type: int, display: true
+  MaxCount: 6, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -16973,7 +16973,7 @@
   BlockColor: "110,110,110"
   # ModelOffset: "0,0.5,0"
   StackSize: 500
-  MaxCount: 40, type: int, display: true
+  MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -17013,7 +17013,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -17051,7 +17051,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -17093,7 +17093,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 60, type: int, display: true
+  MaxCount: 6, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -17133,7 +17133,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 60, type: int, display: true
+  MaxCount: 6, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -17175,7 +17175,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 250
-  MaxCount: 20, type: int, display: true
+  MaxCount: 2, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -19551,8 +19551,8 @@
   AllowPlacingAt: "Base,MS", display: true
   SizeInBlocks: "1,2,1", display: true
   SizeInBlocksLocked: "Base,MS"
-  IsActivateable: true
-  IsActivateableInCP: true
+  # IsActivateable: true
+  # IsActivateableInCP: true
   IsLockable: true
   IsOxygenTight: false, display: true 
   StackSize: 1000
@@ -21152,6 +21152,8 @@
   Category: Devices
   HitPoints: 150, type: int, display: true
   EnergyDynamicGroup: SolarGenerator
+  IsActivateable: true
+
   
   BlockColor: "110,110,110"
 
@@ -22657,7 +22659,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretMSCannon, TurretMSCannonRetract, TurretMSMinigun, TurretMSMinigunRetract"
-  MaxCount: 120, type: int, display: true
+  MaxCount: 12, type: int, display: true
   StackSize: 500
   
   AllowPlacingAt: MS, display: true
@@ -22685,7 +22687,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretMSRocket, TurretMSRocketRetract, TurretMSFlak, TurretMSFlakRetract"
-  MaxCount: 100, type: int, display: true
+  MaxCount: 10, type: int, display: true
   StackSize: 500
   
   AllowPlacingAt: MS, display: true
@@ -22713,7 +22715,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretMSPulseLaser, TurretMSPulseLaserRetract, TurretMSPlasma, TurretMSPlasmaRetract"
-  MaxCount: 100, type: int, display: true
+  MaxCount: 10, type: int, display: true
   StackSize: 500
   
   AllowPlacingAt: MS, display: true
@@ -22741,7 +22743,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretMSTool, TurretMSToolRetract, TurretMSDrill, TurretMSDrillRetract"
-  MaxCount: 80, type: int, display: true
+  MaxCount: 8, type: int, display: true
   StackSize: 500
   
   AllowPlacingAt: MS, display: true
@@ -22770,7 +22772,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretMSArtillery, TurretMSArtilleryRetract"
-  MaxCount: 20, type: int, display: true
+  MaxCount: 2, type: int, display: true
   StackSize: 250
   
   AllowPlacingAt: MS, display: true
@@ -22856,7 +22858,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretBaseCannon, TurretBaseCannonRetract, TurretBaseMinigun, TurretBaseMinigunRetract"
-  MaxCount: 120, type: int, display: true
+  MaxCount: 12, type: int, display: true
   StackSize: 500  
   AllowPlacingAt: Base, display: true
   Volume: 2880, type: float, display: true, formatter: Liter
@@ -22883,7 +22885,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretBaseRocket, TurretBaseRocketRetract, TurretBaseFlak, TurretBaseFlakRetract"
-  MaxCount: 100, type: int, display: true
+  MaxCount: 10, type: int, display: true
   StackSize: 500  
   AllowPlacingAt: Base, display: true
   Volume: 2880, type: float, display: true, formatter: Liter
@@ -22910,7 +22912,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretBasePulseLaser, TurretBasePulseLaserRetract, TurretBasePlasma, TurretBasePlasmaRetract"
-  MaxCount: 100, type: int, display: true
+  MaxCount: 10, type: int, display: true
   StackSize: 500  
   AllowPlacingAt: Base, display: true
   Volume: 2880, type: float, display: true, formatter: Liter 
@@ -22938,7 +22940,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretBaseArtillery, TurretBaseArtilleryRetract"
-  MaxCount: 20, type: int, display: true
+  MaxCount: 2, type: int, display: true
   StackSize: 250  
   AllowPlacingAt: Base, display: true
   Volume: 7700, type: float, display: true, formatter: Liter
@@ -23082,7 +23084,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVMinigun, TurretGVMinigunRetract"
-  MaxCount: 60, type: int, display: true
+  MaxCount: 6, type: int, display: true
   StackSize: 1000  
   AllowPlacingAt: GV, display: true
   Volume: 281.25, type: float, display: true, formatter: Liter
@@ -23109,7 +23111,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVRocket, TurretGVRocketRetract"
-  MaxCount: 40, type: int, display: true
+  MaxCount: 4, type: int, display: true
   StackSize: 1000 
   AllowPlacingAt: GV, display: true
   Volume: 281.25, type: float, display: true, formatter: Liter
@@ -23136,7 +23138,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVPlasma, TurretGVPlasmaRetract"
-  MaxCount: 40, type: int, display: true
+  MaxCount: 4, type: int, display: true
   StackSize: 1000
   
   AllowPlacingAt: GV, display: true
@@ -23165,7 +23167,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVArtillery, TurretGVArtilleryRetract"
-  MaxCount: 10, type: int, display: true
+  MaxCount: 1, type: int, display: true
   StackSize: 500
   
   AllowPlacingAt: GV, display: true
@@ -23193,7 +23195,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVTool, TurretGVToolRetract, TurretGVDrill, TurretGVDrillRetract"
-  MaxCount: 20, type: int, display: true
+  MaxCount: 2, type: int, display: true
   StackSize: 1000
   
   AllowPlacingAt: GV, display: true
@@ -23355,7 +23357,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "SentryGun03, SentryGun03Retract, SentryGun05, SentryGun05Retract"
-  MaxCount: 80, type: int, display: true
+  MaxCount: 8, type: int, display: true
   StackSize: 1000
   
   AllowPlacingAt: "Base,MS", display: true
