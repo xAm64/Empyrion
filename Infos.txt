@@ -1,0 +1,16 @@
+English
+To make the solar panels work on the motherships:
+1: Go to the folder where the game is installed.
+2: Open the Content > Configuration folder.
+3: Save the original BlocConfig file, and replace it with the one of your choice.
+
+Français
+1: Aller dans le dossier où est installé le jeu.
+2: Ouvrir le dossier Content > Configuration.
+3: Sauvegarder le fichier BlocConfig d'origine, et le remplacer par celui de votre choix.
+
+Español
+Para hacer que los paneles solares funcionen en las naves nodrizas:
+1: Ve a la carpeta donde está instalado el juego.
+2: Abre la carpeta Content > Configuration.
+3: Guarda el archivo BlocConfig original, y reemplázalo con el de tu elección.

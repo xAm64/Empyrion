@@ -10,7 +10,6 @@
 # - if used for Large Grid (BA,CV): Mass * 8 (2^3)  
 # 
 #  AllowPlacingAt: "Base,MS,SS,GV,Terrain", display: true     
-#  Collide: "movement,bullet,rocket,melee"    
 #  EnergyIn: 1, type: int, display: true, formatter: Watt  Value is given in kW
 # EnergyOut: 1, type: int, display: true, formatter: Watt  Value is given in kW  
 # 
@@ -24,25 +23,35 @@
 # 7   = Electric Explosion
 # 8 - 9 = Large Explosion Air
 # 10  = Electric Explosion   
+# == REF ===
+# You can REF an entry that is added BEFORE the entry you are adding the REF to. 
+# You cannot REF an entry that is placed on a higher ID than the entry that uses the REF!
 # ==Properties==
 # CustomIcon:  = Use with an existing Icon to show it ingame, f.ex. 'CustomIcon: DetectorSVT1'
 # PickupTarget = defines block, device OR item that will always (!) be placed in player inventory (count: 1) after picking up (deconstruct or retrieve) the block/device -  both (!) for public or private structures! Does NOT work for 'child' groups, but only for parent; eg do not use on HullFullLargeBlocks but only on its parent HullLargeBlocks
-# TemplateRoot: = Defines the crafting template; Usecase: Set for child-groups to allow using a particular crafting template when using UPGRADE functionality! Not required on parent (parent = always uses template name in templates.ecf!)
+# TemplateRoot: = Defines the crafting template; Usecase: Set for child-groups to allow using a particular crafting template when using UPGRADE functionality! Not required on parent (parent = always uses template name in templates.ecf!); IMPORTANT: Never REF to an entry that is the TemplateRoot in the actual entry, eg: REF IndoorPlants and TemplateRoot: Indoorplants cannot be in the SAME entry! This will lead to a stack overflow in the BP Libary otherwies
 # UpgradeTo: , display: true = Sets the device/blockgroup to upgrade to (set visibility to true or false). Important: when upgrading a child-group, this child group needs to have a TemplateRoot set, otherwise the upgrade will be 'free'; note: UpgradeTo: can also use the value 'null', eg. set when this block ref's another block that upgrades to this block (avoid loop).   
 # DowngradeTo: = same as UpgradeTo but in the other direction.
+#
+# 
+# Collide: "movement,bullet,rocket,melee,sight"   Modifies the collider set for the model to specifically collide only with some entities, eg. removing "movement" will remove collision for movement but still be affected by weapons or tools. Affects both AI and Player!
 # Place: NoRotation = device cannot be rotated 
-# RemoveOnSI: when structure collapses this block will be immediately removed 
+# Place: Face = device always snaps to the surface you target an is then orientated correctly. Downside: only rotation around X axis  (no Y or Z rotation)
+# Place: Free = device is previewed like it is set up in unity. All axis rotation possible. Downside: loses convenience of auto-snapping + auto-orientation (eg. for lights etc) requiring mandadory rotation steps in most cases. (eg. for lamps placed on a ceiling a rotation is required to have the base snapp to the wall/ceiling)
+# RemoveOnSI: when structure collapses this block will be immediately removed if set to true
+# IsPhysicsColliders: false    #  ramps are too thin and also might pose problems when SV/HV are on the ramp while physics colliders are on   
+# OccupySizeInBlocks: true    > for block that should not be voxelized because of an animation, specific shader, etc pp.. so the full SizeInBlocks is occupied
+# BlockSizeScale: 2 (=SV/HV) or 8 (=CV/BA) with this Mass and HitPoints will be scaled according to its voxels
+# Voxelize: determines whether a block is voxelized in small cubes to not occupy a full voxel space (Default Voxelize: true)
+#
 # IsActivateable: block can be switched on/off
 # IsActivateableInCP: block can be accessed via CP (eg turret, fuel tank, cargo box etc)
 # IsActivatedOnPlace: determines whether device is switched on when placed 
 # IsDuplicateable: defines whether block can be used for plane / line drawing tool
 # ForceMaxCount: will force the MaxCount even if difficulty level deactivated it (needed for Core, Warp Drive etc but not for weapons)
-# BlockSizeScale: 2 (=SV/HV) or 8 (=CV/BA) with this Mass and HitPoints will be scaled according to its voxels
-# Voxelize: determines whether a block is voxelized in small cubes to not occupy a full voxel space (Default Voxelize: true)
 # IsAntiInfantryWeapon: true   = Device properties (DMG, HP) are only computed for Infantry and Entity Attack-Defense values, but not for Artillery AD
 # IsKeepContainers: true   = ONLY USE FOR CORES. If set to true, pre-placed items will be saved with the blueprint and be available as loot in their specific location. Do ONLY use with NPC cores.  
 # VolumeCapacity: 125, type: float, display: true, formatter: Liter  ; Gives the SU available for this container. 
-# OccupySizeInBlocks: true    > for block that should not be voxelized because of an animation, specific shader, etc pp.. so the full SizeInBlocks is occupied
 # ShieldMultiplier: AnyStringPossible   > only for Class:ShieldGenerator devices; Allows to set a parameter that can be used in the DamageMultiplier of a weapon in the ItemsConfig.ecf
 # RepairToTemplate: false > allow excluding (rare or special) blocks from reparing to template to avoid exploits.
 # DropOnDeath:   > If set to 'False'  this item or block is not dropped on player death. Use for important story items that players shall not lose on death. Default is set to 'True'.
@@ -92,6 +101,9 @@
 # 
 # 
 #   Building Blocks:
+#
+# IMPORTANT: for use in ghe BlockShapesWindow.ecf all BUILDINGblocks need a FIXED ID below the 2048 limit!
+#
 # BA / CV:
 # 396	WoodBlocks				Wood Blocks
 # 399	ConcreteBlocks			Concrete Blocks
@@ -101,7 +113,7 @@
 # 405	HullArmoredLargeBlocks	Hardened Steel Blocks L
 # 411	HullCombatLargeBlocks	Combat Steel Blocks L
 # 1395	AlienLargeBlocks 		Xeno Steel Blocks L 
-# 408	AlienBlocks				Radioactive; for POI building only; Same Texture range than 1395
+# 408	AlienBlocks				Radioactive; for POI building only; Same Texture range than 1395 
 # 
 # SV / HV:
 # 1478	PlasticSmallBlocks		Carbon Composite Blocks S
@@ -115,7 +127,12 @@
 ## Properties:
 ## IsAccessible: shows up in Control Panel
 ## O2Accept: "OxygenBottleLarge,OxygenBottleSmall" > items that can be used to fill a O2 tank. First item in list will be filled when O2 is withdrawn 
-## FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel" > items that can be used to fill a fuel tank. First item in list will be filled when fuel is withdrawn 
+## FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall" > items that can be used to fill a fuel tank. First item in list will be filled when fuel is withdrawn 
+# 
+# 
+# ================== Important Notes / Change info ==========================
+# CutCornerB had to be updated with a dedicated left/right mirror, but needs to be kept in its group for backwards compatibilty. New left/right variant are in Extended7
+# ===========================================================================
 
 { Block Id: 0, Name: Air
   Material: air
@@ -1557,6 +1574,7 @@
     Prob: 0.2
   }
 }
+# available free 136
 
 #  136 - 255 available free BUT NEED TO BE KEPT FREE for TEXTURES only!!! (adding any other block or device will break textures)
 
@@ -1697,7 +1715,7 @@
   EnergyIn: 1, type: int, display: true, formatter: Watt
   CPUIn: 300, type: int, display: true
   HitPoints: 50, type: int, display: true
-  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   FuelCapacity: 1200, type: int, display: true    
   BlastParticleIndex: 10
   BlastRadius: 5
@@ -1714,7 +1732,7 @@
   Model: @models/Blocks/Mothership/FuelTankMSLargePrefab
   MarketPrice: 3845, display: true
   HitPoints: 80, type: int, display: true
-  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   FuelCapacity: 2700, type: int, display: true 
   AllowPlacingAt: "Base,MS", display: true   
   SizeInBlocks: "1,2,1", display: true
@@ -2225,47 +2243,49 @@
   ShowUser: NoButCSV
   AllowWander: true       # used in old prefabs as walkway blocks
 }
-{ +Block Id: 278, Name: GravityGeneratorMS
+{ +Block Id: 278, Name: GravityGeneratorMS       
+  Class: Generator
+  Info: bkiGravityGeneratorBlocksPreviewInfo, display: true
+  CustomIcon: GravityGeneratorBlocksBACV 
   IndexName: Gravity
-  Group: cpgGravityGenerator
+  Group: cpgGravityGenerator  
+  Category: Devices  
+  TemplateRoot: GravityGeneratorBlocksBACV
+  
   Material: metal
-  Shape: ModelEntity
-  ShowBlockName: true
-  MarketPrice: 14400, display: true
-  # ModelOffset: "0,0.5,0"
-  Model: @models/Blocks/Mothership/gravitygeneratorMSPrefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
-  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
-  Place: Free
-  AllowPlacingAt: "Base,MS", display: true
-  SizeInBlocks: "2,2,2", display: true
-  SizeInBlocksLocked: "Base,MS"
-  Volume: 6500, type: float, display: true, formatter: Liter
+
+  HitPoints: 400, type: int, display: true 
+  EnergyIn: 800, type: int, display: true, formatter: Watt
+  CPUIn: 50, type: int, display: true
+  Mass: 22800, type: float, display: true, formatter: Kilogram
+  
+  GravityGeneratorRadius: 75, type: int, display: true
+ 
   IsActivateable: true
   IsOxygenTight: false, display: true 
-  Info: bkiGravityGenerator, display: true
-  StackSize: 250
+  
+  Model: @models/Blocks/GravityGenerators/GravityGeneratorBACVLargePrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
+  
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  Shape: ModelEntity
+  # ModelOffset: "0,0.5,0"    
+  ShowBlockName: true
   BlockColor: "110,110,110"
-  Category: Devices
-  HitPoints: 120, type: int, display: true
-  Mass: 32000, type: float, display: true, formatter: Kilogram
-  EnergyIn: 100, type: int, display: true, formatter: Watt
-  CPUIn: 50, type: int, display: true
-
+ 
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  SizeInBlocks: "2,2,2", display: true 
 
   BlastParticleIndex: 4
   BlastRadius: 5
-  BlastDamage: 100
-
-  UnlockCost: 11, display: true
-  UnlockLevel: 7, display: true
-  # TechTreeParent: GeneratorBA
-  TechTreeNames: "Base,Capital Vessel"
+  BlastDamage: 100 
   
-  Radiation: 5, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
+  Radiation: 5, display: RadiationLevel     
   Temperature: 32, display: true
 }
 { +Block Id: 279, Name: LightSS01
@@ -3085,6 +3105,7 @@
   Material: human           # do not use "alien" because it will show dirt effect
   Shape: ModelEntity
   Class: NPCDialogue
+  NPCModelRotation: false
   Model: @models2/Entities/Decorations/HomeSweetHome/BedPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   BlockColor: "110,110,110"
@@ -3109,6 +3130,7 @@
 { +Block Id: 329, Name: NPCHumanTemplate
   Material: human
   Class: NPCDialogue
+  NPCModelRotation: false
   Shape: ModelEntity
   Model: @models2/Entities/Decorations/HomeSweetHome/BedPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
@@ -3244,11 +3266,12 @@
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
-  Model: @models/Blocks/Mothership/WarpDriveTankPrefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  Model: @models/Blocks/Devices/PentaxidTankFWNPrefab
+ # Model: @models/Blocks/Mothership/WarpDriveTankPrefab
+  # Mesh-Damage-1: Mesh/D0
+  # Mesh-Damage-2: Mesh/D1
+  # Mesh-Damage-3: Mesh/D2
+  # Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
   Place: Free
@@ -3277,7 +3300,7 @@
 
   UnlockCost: 13, display: true
   UnlockLevel: 10, display: true
-  TechTreeParent: GravityGeneratorMS
+  TechTreeParent: GravityGeneratorBlocksBACV
   TechTreeNames: "Base,Capital Vessel"
 
   WarpAccept: PentaxidCrystal
@@ -4053,6 +4076,8 @@
 
 # Obsolete but dont delete
 { Block Id: 391, Name: HullFull
+  AllowedInBlueprint: false, display: true
+  RepairToTemplate: false, display: true
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Material: hull
   Texture: 50
@@ -4621,7 +4646,7 @@
   EnergyIn: 1, type: int, display: true, formatter: Watt
   CPUIn: 150, type: int, display: true
   Category: Devices
-  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   FuelCapacity: 600, type: int, display: true
   BlastParticleIndex: 10
   BlastRadius: 5
@@ -4840,7 +4865,7 @@
   Category: Devices
   Mass: 40000, type: float, display: true, formatter: Kilogram
   EnergyIn: 1, type: int, display: true, formatter: Watt
-  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   FuelCapacity: 100, type: int, display: true
   BlastParticleIndex: 10
   BlastRadius: 5
@@ -5918,7 +5943,7 @@
   EnergyIn: 1, type: int, display: true, formatter: Watt
   CPUIn: 75, type: int, display: true
   Category: Devices
-  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   FuelCapacity: 300, type: int, display: true
   BlastParticleIndex: 10
   BlastRadius: 5
@@ -6013,18 +6038,14 @@
 { +Block Id: 474, Name: GamblingTableTwoPerson, Ref: NPCAlienTemplate
   # AllowedInBlueprint: false, display: true
   # CanPickup: true
-  Class: NPCDialogue
   Info: bkiGamblingTableTwoPerson, display: true
   Group: cpgCrewStationAlien
   IsAccessible: true, type: bool
-  NPCModelRotation: false
   Model: @models2/Entities/Decorations/DecoNPC/ScifiGamblingTableSingleNPCPrefab
   EnergyIn: 0, type: int, display: true, formatter: Watt
   ShowUser: Yes
 }
 { +Block Id: 475, Name: GamblingTableMultiplePeople, Ref: NPCAlienTemplate
-  Class: NPCDialogue
-  NPCModelRotation: false
   Info: bkiGamblingTableMultiplePeople, display: true
   Group: cpgCrewStationAlien
   IsAccessible: true, type: bool
@@ -7493,7 +7514,7 @@
   BlastRadius: 2
   BlastDamage: 50
   HitPoints: 80, type: int, display: true
-  FuelAccept: "EnergyCell, EnergyCellLarge, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
 
   # UnlockCost: 2, display: true
   # UnlockLevel: 2, display: true
@@ -8364,7 +8385,7 @@
   IsColorable: false
   # SizeInBlocks: "1,2,1", display: true   # removed to avoid problem with "cutting out water"
   # ModelOffset: "0,0.5,0"
-  FuelAccept: "EnergyCell, EnergyCellLarge, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   
   BlastParticleIndex: 4
   BlastRadius: 2
@@ -10844,11 +10865,12 @@
   MarketPrice: 100, display: true
   Material: metalhard
   Shape: ModelEntity
-  Model: @models/Blocks/Terrain/ConstructorSurvivalPrefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  Model: @models/Blocks/Devices/PortableConstructorFWNPrefab #1.11 update
+  #Model: @models/Blocks/Terrain/ConstructorSurvivalPrefab
+  #Mesh-Damage-1: Mesh/D0    #PortableConstructorPrefab does not have damage states
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
   Place: Free
@@ -10967,11 +10989,12 @@
   Material: metalhard
   Shape: ModelEntity
   ShowBlockName: true
-  Model: @models/Blocks/Mothership/ConstructorT2Prefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  Model: @models/Blocks/Devices/ConstructorT2FWNPrefab  #1.11 update
+  #Model: @models/Blocks/Mothership/ConstructorT2Prefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
   Place: Free
@@ -13125,7 +13148,7 @@
   }
 }
 
-# available free 865, 866
+# available free  865, 866
 
 { Block Id: 867, Name: OmicronWaterleaf
   Material: woodsoft
@@ -13835,7 +13858,7 @@
   IsAccessible: false, type: bool
   IsOxygenTight: false, display: true
   Category: Deco Blocks
-  ChildBlocks: "ScifiBed, Bed, BunkBed, BunkBed02, Sofa, ScifiSofa, ScifiLargeSofa, KitchenTable, ScifiTable, ScifiTableV2, ReceptionTable, ReceptionTableCorner, ReceptionTableThin, ReceptionTableCornerThin, SmallTable, ControlStation, TableTV, ScifiChair, ScifiNightstand, ScifiStorage, Bookshelf, KitchenCounter, BathroomCounter, Toilet, Shower, ScifiShower, ToiletModern, Closet, ReceptionTableWorkstation"
+  ChildBlocks: "ScifiBed, Bed, BunkBed, BunkBed02, Sofa, ScifiSofa, ScifiLargeSofa, KitchenTable, ScifiTable, ScifiTableV2, ReceptionTable, ReceptionTableCorner, ReceptionTableThin, ReceptionTableCornerThin, SmallTable, ControlStation, TableTV, ScifiChair, ScifiNightstand, ScifiStorage, Bookshelf, KitchenCounter, BathroomCounter, Toilet, Shower, ScifiShower, ToiletModern, Closet, ReceptionTableWorkstation"  #29 of 32
   
   UnlockCost: 0
   UnlockLevel: 1 
@@ -13861,7 +13884,7 @@
   BlastRadius: 3
   BlastDamage: 80
   EnergyIn: 1, type: int, display: false, formatter: Watt
-  ChildBlocks: "ConsoleMS01, ConsoleSmallMS01, ConsoleLargeMS01, ConsoleLargeMS01a, ConsoleLargeMS02, ConsoleMapMS01, ScifiMediaCenter, ScifiComputerTable, HoloScreen01, HoloScreen02, HoloScreen03, HoloScreen04, HoloScreen05, StationConsole, GeneralPurposeConsole, ConsoleTrading"
+  ChildBlocks: "ConsoleMS01, ConsoleSmallMS01, ConsoleLargeMS01, ConsoleLargeMS01a, ConsoleLargeMS02, ConsoleMapMS01, ScifiMediaCenter, ScifiComputerTable, HoloScreen01, HoloScreen02, HoloScreen03, HoloScreen04, HoloScreen05, StationConsole, GeneralPurposeConsole, ConsoleTrading, ComputerStation_C01, ComputerStation_C02, ConsoleDesk_C03, ConsoleDesk_C04, ConsoleDesk_C05, StandConsole_C06, StandConsole_C07, StandConsole_C17, ConsoleStation_C18"  #25 of 32
   
   UnlockCost: 0
   UnlockLevel: 1 
@@ -13884,7 +13907,7 @@
   IsAccessible: false, type: bool
   # ModelOffset: "0,0.5,0"
   Category: Deco Blocks
-  ChildBlocks: "IndoorPlant01, IndoorPlant02, IndoorPlant03, ScifiPlant, HollywoodJuniperDeco, ElderberryBushDeco, ElderberryBushBlueDeco, AkuaFernDeco, AlienPalmTreeDeco, AlienTentacleDeco, BallTreeDeco, BallFlower01Deco, GlowTube01Deco, OnionFlowerDeco, FantasyPlant1Deco"
+  ChildBlocks: "IndoorPlant01, IndoorPlant02, IndoorPlant03, ScifiPlant, HollywoodJuniperDeco, ElderberryBushDeco, ElderberryBushBlueDeco, AkuaFernDeco, AlienPalmTreeDeco, AlienTentacleDeco, BallTreeDeco, BallFlower01Deco, GlowTube01Deco, OnionFlowerDeco, FantasyPlant1Deco" #max 32 entries
   
   UnlockCost: 0
   UnlockLevel: 1 
@@ -14430,11 +14453,12 @@
   Material: metalhard
   Shape: ModelEntity
   ShowBlockName: true
-  Model: @models/Blocks/Spaceship/ConstructorSVPrefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  Model: @models/Blocks/Devices/ConstructorMobileFWNPrefab #1.11 update
+  #Model: @models/Blocks/Spaceship/ConstructorSVPrefab
+  #Mesh-Damage-1: Mesh/D0      #ConstructorMobilePrefab does not have damage states
+  #Mesh-Damage-2: Mesh/D1      #ConstructorMobilePrefab does not have damage states
+  #Mesh-Damage-3: Mesh/D2      #ConstructorMobilePrefab does not have damage states
+  #Mesh-Damage-4: Mesh/D3     #ConstructorMobilePrefab does not have damage states
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
   TemplateRoot: ConstructorSV
@@ -14470,11 +14494,12 @@
   Shape: ModelEntity
   MarketPrice: 16522, display: true
   ShowBlockName: true
-  Model: @models/Blocks/Mothership/ConstructorT1Prefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  Model: @models/Blocks/Devices/ConstructorT1FWNPrefab #1.11 update
+  #Model: @models/Blocks/Mothership/ConstructorT1Prefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
   Place: Free
@@ -14578,16 +14603,17 @@
   UpgradeTo: CockpitSV01T2, display: true
 }
 # Terrain Placeable
-{ +Block Id: 964, Name: OxygenGeneratorSmall
+{ +Block Id: 964, Name: OxygenGeneratorSmall    #Water / O2 Condenser
   Class: O2GeneratorSmall
   Material: metal
   MarketPrice: 30, display: true
   Shape: ModelEntity
-  Model: @models/Blocks/Terrain/OxygenGeneratorSmallPrefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  Model: @models/Blocks/Devices/PortableWaterO2CondenserFWNPrefab #1.11 update
+  #Model: @models/Blocks/Terrain/OxygenGeneratorSmallPrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
   Place: Free
@@ -14612,7 +14638,7 @@
   BlastRadius: 2
   BlastDamage: 50
   HitPoints: 80, type: int, display: true
-  FuelAccept: "EnergyCell, EnergyCellLarge, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   
   UnlockCost: 0, display: true
   UnlockLevel: 1, display: true
@@ -15636,7 +15662,8 @@
   ADBMaxSpawner: 2
   ADBMaxActiveDrone: 2
   ADBMaxReserve: 13
-  ADBActionRadius: 500
+  ADBActionRadius: 1000
+  ADBDockingSpeedFac: 0.2
   ADBDroneAmmoType: DroneLargePlayer01Unit 
 
   UnlockCost: 12, display: true
@@ -15656,8 +15683,8 @@
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   BlockColor: "255,247,0"
   Place: Free
-  TemplateRoot: HullLargeBlocks
-  PickupTarget: SteelPlate
+ # TemplateRoot: HullLargeBlocks
+ # PickupTarget: SteelPlate
   AllowPlacingAt: "Base,MS", display: true
   SizeInBlocks: "1,1,1", display: true
   SizeInBlocksLocked: "Base,MS" 
@@ -16337,11 +16364,12 @@
   Material: metalhard
   Shape: ModelEntity
   MarketPrice: 38367, display: true
-  Model: @models/Blocks/Terrain/AutoMiningDeviceT1Prefab
-  Mesh-Damage-1: Mesh/geo/D0
-  Mesh-Damage-2: Mesh/geo/D1
-  Mesh-Damage-3: Mesh/geo/D2
-  Mesh-Damage-4: Mesh/geo/D3
+  Model: @models/Blocks/Devices/AutoMinerT1FWNPrefab #1.11 update
+  #Model: @models/Blocks/Terrain/AutoMiningDeviceT1Prefab
+  #Mesh-Damage-1: Mesh/geo/D0
+  #Mesh-Damage-2: Mesh/geo/D1
+  #Mesh-Damage-3: Mesh/geo/D2
+  #Mesh-Damage-4: Mesh/geo/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
   Place: NoRotation
@@ -16364,7 +16392,7 @@
   SizeInBlocks: "3,6,3" 
   # ModelOffset: "0,0.5,0"
   BlockColor: "110,110,110"
-  FuelAccept: "EnergyCell, EnergyCellLarge, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   
   BlastParticleIndex: 4
   BlastRadius: 2
@@ -16381,7 +16409,8 @@
   # Temperature: 30, display: true
 }
 { +Block Id: 1109, Name: AutoMiningDeviceT2, Ref: AutoMiningDeviceT1
-  Model: @models/Blocks/Terrain/AutoMiningDeviceT2Prefab
+  Model: @models/Blocks/Devices/AutoMinerT2FWNPrefab  #1.11 update
+  #Model: @models/Blocks/Terrain/AutoMiningDeviceT2Prefab
   HitPoints: 400, type: int, display: true
   MarketPrice: 80521, display: true
   EnergyIn: 160, type: int, display: true, formatter: Watt  
@@ -16401,7 +16430,8 @@
   # Temperature: 35, display: true
 }
 { +Block Id: 1110, Name: AutoMiningDeviceT3, Ref: AutoMiningDeviceT1
-  Model: @models/Blocks/Terrain/AutoMiningDeviceT3Prefab
+  Model: @models/Blocks/Devices/AutoMinerT3FWNPrefab  #1.11 update
+  #Model: @models/Blocks/Terrain/AutoMiningDeviceT3Prefab
   HitPoints: 600, type: int, display: true
   MarketPrice: 127907, display: true
   EnergyIn: 320, type: int, display: true, formatter: Watt  
@@ -18282,7 +18312,7 @@
   Mass: 1, type: float, display: true, formatter: Kilogram
   EnergyIn: 1, type: int, display: false, formatter: Watt
   Category: Devices 
-  ChildBlocks: "CoreNPC, CoreNPCAdmin, TurretIONCannon, TurretIONCannon2, TurretEnemyLaser, TurretEnemyRocket, TurretEnemyArtillery, TurretEnemyEMP, SentryGun01, SentryGun01Retract, SentryGun02, SentryGun02Retract, AlienContainer, AlienContainerRare, AlienContainerVeryRare, AlienContainerUltraRare, EntitySpawner1, EntitySpawnerPlateThin, DroneSpawner, DroneSpawner2, Trader, StandingAlienAssassin, StandingHexapod, ZiraxCommander, HoverEngineSmallDeco, HoverEngineLargeDeco, DancingAlien3, DancingAlien4, TalonChief, StandingTalon, ControlFieldGenerator,StandingHishkal" 
+  ChildBlocks: "CoreNPC, CoreNPCAdmin, TurretIONCannon, TurretIONCannon2, TurretEnemyLaser, TurretEnemyRocket, TurretEnemyArtillery, TurretEnemyEMP, SentryGun01, SentryGun01Retract, SentryGun02, SentryGun02Retract, AlienContainer, AlienContainerRare, AlienContainerVeryRare, AlienContainerUltraRare, EntitySpawner1, EntitySpawnerPlateThin, DroneSpawner, DroneSpawner2, Trader, StandingAlienAssassin, StandingHexapod, HoverEngineSmallDeco, HoverEngineLargeDeco, DancingAlien3, DancingAlien4, TalonChief, StandingTalon, ControlFieldGenerator,StandingHishkal" 
 }
 # Obsolete Block (has been used during EXP 6 phase)
 { Block Id: 1255, Name: HullDestroyed
@@ -18683,7 +18713,7 @@
 { +Block Id: 1277, Name: LightMS04, Ref: LightMS01
   Model: @models/Blocks/Mothership/LightMS04Prefab
 }
-{ +Block Id: 1278, Name: LightLargeBlocks
+{ +Block Id: 1278, Name: LightLargeBlocks   #Lamps and lights that are usually smaller than a block high or would typically be placed on ceilings indoors
   Material: metallight
   Shape: Invisible
   MarketPrice: 255, display: true
@@ -18698,7 +18728,7 @@
   Mass: 0.4, type: float, display: true, formatter: Kilogram
   Volume: 1, type: float, display: true, formatter: Liter
   StackSize: 4000
-  ChildBlocks: "LightMS01, LightMS01Offset, LightMS01Corner, LightCorner, LightCorner02, LightMS02, LightMS03, LightMS04, LightInterior01, LightInterior02, LightLantern"
+  ChildBlocks: "LightMS01, LightMS01Offset, LightMS01Corner, LightCorner, LightCorner02, LightMS02, LightMS03, LightMS04, LightInterior01, LightInterior02, LightLantern, CeilingLamp01, CeilingLamp01Corner, LampRing, LampRingB, FloorLamp04 "  #15 of 32
 
   UnlockCost: 0, display: true
   UnlockLevel: 1, display: true
@@ -19715,11 +19745,12 @@
   MarketPrice: 35498, display: true
   Material: metal
   Shape: ModelEntity
-  Model: @models/Blocks/Mothership/DeconstructorPrefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  Model: @models/Blocks/Devices/DeconstructorFWNPrefab   #1.11 update
+  #Model: @models/Blocks/Mothership/DeconstructorPrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
   Place: Free
@@ -20811,32 +20842,44 @@
   Group: cpgCrewStationAlien
   #CustomIcon: StandingHexapod                       #Icon required
   # DialogueState: Barking_Military_Random_Init     #create matching barking text
-  Class: NPCDialogue
+  NPCModelRotation: true
   AllowedInBlueprint: false, display: true
   IsAccessible: true, type: bool
   # CanPickup: true
   Model: @models2/Entities/Decorations/DecoNPC/HishkalElderStandingIcePrefab  
 }
 
-{ +Block Id: 1451, Name: ZiraxNPCBlocks              #Icon required
-  CustomIcon: ZiraxCommander
-  Material: human
-  Class: NPCDialogue    
-  Shape: Invisible
-  MarketPrice: 5850, display: true 
-  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
-  # ModelOffset: "0,0.5,0"
-  Place: Free
-  AllowPlacingAt: "Base,MS", display: false
-  Info: bkiZiraxNPCBlocks, display: true
-  Mass: 80, type: float, display: true, formatter: Kilogram
-  Volume: 40, type: float, display: true, formatter: Liter
-  StackSize: 1000
-  EnergyIn: 1, type: int, display: false, formatter: Watt
-  Category: Devices 
-  HitPoints: 250, type: int, display: true
-  ChildBlocks: "ZiraxCommander, SecurityGuardZirax"
-}
+#{ +Block Id: 1451, Name: ZiraxNPCBlocks           
+#  CustomIcon: ZiraxCommander
+#  Material: human
+#  AllowedInBlueprint: false, display: true
+#  RepairToTemplate: false, display: true
+#  Class: NPCDialogue    
+#  Shape: ModelEntity
+#  MarketPrice: 5850, display: true 
+#  DropMeshfile: Entities/Misc/DropContainerNewPrefab      #       Large container box; Available variants: see start of this document!
+#   ModelOffset: "0,0.5,0"  
+#  BlockColor: "110,110,110"  
+#  SizeInBlocks: "1,1,1", display: true
+ # SizeInBlocksLocked: "Base,MS"    
+#  Place: Free
+#  IsAccessible: false, type: bool
+#  IsOxygenTight: false, display: true
+#  Category: Deco Blocks
+#  AllowPlacingAt: "Base,MS", display: false
+#  Info: bkiZiraxNPCBlocks, display: true 
+#  Volume: 40, type: float, display: true, formatter: Liter
+#  StackSize: 1000
+#  EnergyIn: 1, type: int, display: false, formatter: Watt 
+#  HitPoints: 250, type: int, display: true
+#  XpFactor: 0
+#  BlastParticleIndex: 14
+#  BlastRadius: 1
+#  BlastDamage: 0  
+#  Mass: 80, type: float, display: true, formatter: Kilogram
+#  ChildBlocks: "ZiraxCommander, SecurityGuardZirax"
+#
+#}
 { +Block Id: 1452, Name: ReceptionTableWorkstation, Ref: DecoTemplate
   # CanPickup: true
   Class: PassengerSeat
@@ -20916,7 +20959,7 @@
   ShowUser: Yes
 }
 { +Block Id: 1461, Name: CommandingOfficer, Ref: NPCHumanTemplate
-  Class: NPCDialogue
+  NPCModelRotation: true
   Group: cpgCrewStationHuman
   Info: bkiCommandingOfficer, display: true
   IsAccessible: true, type: bool
@@ -20926,6 +20969,7 @@
   ShowUser: Yes
 }
 { +Block Id: 1462, Name: SecurityGuard, Ref: NPCHumanTemplate
+  NPCModelRotation: true
   Group: cpgCrewStationHuman
   IsAccessible: true, type: bool
   # AllowedInBlueprint: false, display: true
@@ -20956,7 +21000,8 @@
 }
 { +Block Id: 1465, Name: AlienNPCBlocks
   Material: human
-  Class: NPCDialogue    
+  Class: NPCDialogue
+  NPCModelRotation: false  
   MarketPrice: 5850, display: true 
   Shape: Invisible
   # Model: @models2/Entities/Decorations/DecoNPC/ControlStationNPCPrefab
@@ -20975,7 +21020,8 @@
 }
 { +Block Id: 1466, Name: HumanNPCBlocks
   Material: human
-  Class: NPCDialogue    
+  Class: NPCDialogue
+  NPCModelRotation: false 
   Shape: Invisible
   MarketPrice: 5850, display: true
   # Model: @models2/Entities/Decorations/DecoNPC/ConsoleSmallHumanPrefab
@@ -20993,8 +21039,6 @@
   ChildBlocks: "ConsoleSmallHuman, StandingHuman, StandingHuman2, ControlStationHuman, ControlStationHuman2, ReceptionTableHuman, ScifiTableHuman, ScifiLargeSofaHuman, TacticalOfficer, CommandingOfficer, CommandingOfficer2, SecurityGuard, SecurityGuard2, OperatorPilot, EngineerMainStation, DancingHuman1, DancingHuman2, DancingHuman3, CommandingOfficerMale"
 }
 { +Block Id: 1467, Name: CommandingOfficer2, Ref: NPCHumanTemplate
-  Class: NPCDialogue
-  NPCModelRotation: false
   Group: cpgCrewStationHuman
   Info: bkiCommandingOfficer2, display: true
   IsAccessible: true, type: bool
@@ -21006,7 +21050,7 @@
   ShowUser: Yes
 }
 { +Block Id: 1468, Name: SecurityGuard2, Ref: NPCHumanTemplate
-  Class: NPCDialogue
+  NPCModelRotation: true
   Group: cpgCrewStationHuman
   Info: bkiSecurityGuard2, display: true
   IsAccessible: true, type: bool
@@ -21018,8 +21062,6 @@
   ShowUser: Yes
 }
 { +Block Id: 1469, Name: CommandingOfficerAlien, Ref: NPCAlienTemplate
-  Class: NPCDialogue
-  NPCModelRotation: false
   Group: cpgCrewStationAlien
   Info: bkiCommandingOfficerAlien, display: true
   IsAccessible: true, type: bool
@@ -21031,7 +21073,7 @@
   ShowUser: Yes
 }
 { +Block Id: 1470, Name: SecurityGuardAlien , Ref: NPCAlienTemplate
-  Class: NPCDialogue
+  NPCModelRotation: true
   Group: cpgCrewStationAlien
   Info: bkiSecurityGuardAlien, display: true
   IsAccessible: true, type: bool
@@ -21045,6 +21087,7 @@
 
 { +Block Id: 1471, Name: StandingTalon, Ref: NPCAlienTemplate
   Class: NPCDialogue
+  NPCModelRotation: true  
   Group: cpgCrewStationAlien
   Info: bkiStandingTalon, display: true
   AllowedInBlueprint: false, display: true
@@ -21228,7 +21271,8 @@
   Material: metalhard
   Shape: ModelEntity
   MarketPrice: 15, display: true
-  Model: @models/Blocks/Terrain/MobileAirConPrefab
+  Model: @models/Blocks/Devices/PortableHeaterCoolerFWNPrefab #1.11 update
+  #Model: @models/Blocks/Terrain/MobileAirConPrefab
   # Mesh-Damage-1: Mesh/D0
   # Mesh-Damage-2: Mesh/D1
   # Mesh-Damage-3: Mesh/D2
@@ -21407,8 +21451,8 @@
   Mass: 730, type: float, display: true, formatter: Kilogram
   Volume: 55, type: float, display: true, formatter: Liter
   StackSize: 500
-  MaxCount: 500, type: int, display: true
-  CPUIn: 15, type: int, display: true
+  MaxCount: 1000, type: int, display: true
+  CPUIn: 5, type: int, display: true
   ChildBlocks: "SolarPanelSlope, SolarPanelSlope2, SolarPanelSlope3, SolarPanelHorizontal, SolarPanelHorizontal2, SolarPanelHorizontalMount, SolarPanelHorizontalStand"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21481,8 +21525,8 @@
   Category: Devices
   HitPoints: 150, type: int, display: true
   Mass: 730, type: float, display: true, formatter: Kilogram
-  MaxCount: 500, type: int, display: true
-  CPUIn: 15, type: int, display: true
+  MaxCount: 1000, type: int, display: true
+  CPUIn: 1, type: int, display: true
   TemplateRoot: SolarPanelBlocks
   IsOxygenTight: false, display: true
   BlockColor: "110,110,110"  
@@ -21640,8 +21684,8 @@
   Mass: 350, type: float, display: true, formatter: Kilogram
   Volume: 50, type: float, display: true, formatter: Liter
   StackSize: 1000
-  MaxCount: 500, type: int, display: true
-  CPUIn: 15, type: int, display: true
+  MaxCount: 1000, type: int, display: true
+  CPUIn: 5, type: int, display: true
   ChildBlocks: "SolarPanelSlopeSmall, SolarPanelSlope3Small, SolarPanelHorizontalSmall"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21667,8 +21711,8 @@
   Category: Devices
   HitPoints: 100, type: int, display: true
   Mass: 350, type: float, display: true, formatter: Kilogram
-  MaxCount: 500, type: int, display: true
-  CPUIn: 15, type: int, display: true
+  MaxCount: 1000, type: int, display: true
+  CPUIn: 2, type: int, display: true
   TemplateRoot: SolarPanelSmallBlocks
   IsOxygenTight: true, display: true 
   BlockColor: "110,110,110"    
@@ -21713,7 +21757,7 @@
   AboveTerrainCheck: false
 }
 { +Block Id: 1519, Name: CommandingOfficerMale, Ref: NPCHumanTemplate
-  Class: NPCDialogue
+  NPCModelRotation: true
  # CustomIcon: CommandingOfficer
   Group: cpgCrewStationHuman
   Info: bkiCommandingOfficer, display: true
@@ -21724,20 +21768,44 @@
   Model: @models2/Entities/Decorations/DecoNPC/CommandingOfficerMalePrefab 
   ShowUser: Yes
 }
-{ +Block Id: 1520, Name: SecurityGuardZirax , Ref: NPCAlienTemplate         #Icon required
-  Class: NPCDialogue
- # CustomIcon: ZiraxCommander
-  #DialogueState: Barking_Military_Random_Init
+{ +Block Id: 1520, Name: SecurityGuardZirax # Ref: ZiraxNPCBlocks        #Replace Icon
+  Model: @models2/Entities/Decorations/DecoNPC/SecurityGuardZiraxPrefab 
+  Info: bkiSecurityGuardZirax, display: true 
+  Class: NPCDialogue  
+  NPCModelRotation: true  
+  #DialogueState: Barking_Zirax_Anywhere_Init
   #OmitCone: true
-  Group: cpgCrewStationAlien
-  Info: bkiSecurityGuardAlien, display: true
+  Group: cpgCrewStationAlien    
+  Category: Deco Blocks   
+  Material: human
+  AllowedInBlueprint: false, display: true
+  RepairToTemplate: false, display: true 
+  Shape: ModelEntity
+  MarketPrice: 5850, display: true 
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  # ModelOffset: "0,0.5,0"  
+  BlockColor: "110,110,110"  
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"    
+  Place: Free
   IsAccessible: true, type: bool
-  # AllowedInBlueprint: false, display: true
-  # CanPickup: true
-  # HitPoints: 150, type: int, display: true
-  Model: @models2/Entities/Decorations/DecoNPC/SecurityGuardZiraxPrefab    
-  EnergyIn: 0, type: int, display: true, formatter: Watt
-  ShowUser: Yes
+  IsOxygenTight: false, display: true 
+  AllowPlacingAt: "Base,MS", display: false 
+  Volume: 40, type: float, display: true, formatter: Liter
+  StackSize: 1
+  EnergyIn: 1, type: int, display: false, formatter: Watt 
+  HitPoints: 250, type: int, display: true
+  XpFactor: 0
+  BlastParticleIndex: 14
+  BlastRadius: 1
+  BlastDamage: 0  
+  Mass: 80, type: float, display: true, formatter: Kilogram
+  ShowBlockName: true  
+ # TemplateRoot: SecurityGuardZirax
+ # PickupTarget: SecurityGuardZirax
+  CanPickup: true
+  RpFactor: 0
+  #ShowUser: Yes
 }
 # available free 1521 - 1526
 # Sprout
@@ -22962,7 +23030,8 @@
 { +Block Id: 1628, Name: ConstructorT0, Ref: ConstructorT1V2
   Class: ConstructorT0
   MarketPrice: 8310, display: true
-  Model: @models/Blocks/Mothership/ConstructorT0Prefab
+  Model: @models/Blocks/Devices/ConstructorT0FWNPrefab      #1.11 update
+  #Model: @models/Blocks/Mothership/ConstructorT0Prefab
   SizeInBlocks: "1,1,1", display: true
   Mass: 1660, type: float, display: true, formatter: Kilogram
   Volume: 200, type: float, display: true, formatter: Liter
@@ -23177,6 +23246,7 @@
 
 { Block Id: 1643, Name: TalonChief, Ref: NPCAlienTemplate
   Class: NPCDialogue
+  NPCModelRotation: true  
   Group: cpgCrewStationAlien
   Info: bkiTalonChief, display: true
   AllowedInBlueprint: false, display: true
@@ -23189,19 +23259,44 @@
   HitPoints: 250, type: int, display: true
 }
 
-{ Block Id: 1644, Name: ZiraxCommander, Ref: NPCAlienTemplate
-  Class: NPCDialogue  
+{ Block Id: 1644, Name: ZiraxCommander  # Ref: ZiraxNPCBlocks
+  Model: @models2/Entities/Decorations/DecoNPC/ZiraxCommanderDecoPrefab
+  Info: bkiZiraxCommander, display: true 
+  Class: NPCDialogue 
+  NPCModelRotation: true    
   #DialogueState: Barking_Zirax_Anywhere_Init
   #OmitCone: true
-  Group: cpgCrewStationAlien
-  Info: bkiZiraxCommander, display: true
+  Category: Deco Blocks   
+  Group: cpgCrewStationAlien  
+  Material: human
   AllowedInBlueprint: false, display: true
+  RepairToTemplate: false, display: true 
+  Shape: ModelEntity
+  MarketPrice: 5850, display: true 
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  # ModelOffset: "0,0.5,0"  
+  BlockColor: "110,110,110"  
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"    
+  Place: Free
   IsAccessible: true, type: bool
-  ShowBlockName: true
-  # CanPickup: true
-  Model: @models2/Entities/Decorations/DecoNPC/ZiraxCommanderDecoPrefab
-  RpFactor: 2
-  ShowUser: Yes
+  IsOxygenTight: false, display: true  
+  AllowPlacingAt: "Base,MS", display: false 
+  Volume: 40, type: float, display: true, formatter: Liter
+  StackSize: 1
+  EnergyIn: 1, type: int, display: false, formatter: Watt 
+  HitPoints: 250, type: int, display: true
+  XpFactor: 0
+  BlastParticleIndex: 14
+  BlastRadius: 1
+  BlastDamage: 0  
+  Mass: 80, type: float, display: true, formatter: Kilogram
+  ShowBlockName: true  
+#  TemplateRoot: ZiraxCommander
+ # PickupTarget: ZiraxCommander
+  CanPickup: true
+  RpFactor: 0
+  #ShowUser: Yes
 }
 { +Block Id: 1645, Name: DancingAlien2, Ref: NPCAlienTemplate
   Model: @models2/Entities/Decorations/DecoNPC/DancingAlien2Prefab
@@ -24704,7 +24799,7 @@
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Info: bkiBlockGroup, display: true
   SizeInBlocks: "1,1,1", display: true
-  ChildBlocks: "TribalBarrels, TribalBox, TribalBarrow, TribalBoat, TribalBaskets, TribalBed1, TribalBed2, TribalBookcase1, TribalBookcase2, TribalBuckets, TribalCabinet1, TribalCabinet2, TribalCauldron, TribalCauldron2, TribalTub, TribalDryFish, TribalLoom, TribalOven, TribalHearth, TribalSacks, TribalTable1, TribalTable2, TribalChair, TribalWoodSaw, TribalFirewood, TribalTrunkAxe, TribalTorch, TribalFirepit, TribalAnvil"
+  ChildBlocks: "TribalBarrels, TribalBox, TribalBarrow, TribalBoat, TribalBaskets, TribalBed1, TribalBed2, TribalBookcase1, TribalBookcase2, TribalBuckets, TribalCabinet1, TribalCabinet2, TribalCauldron, TribalCauldron2, TribalTub, TribalDryFish, TribalLoom, TribalOven, TribalHearth, TribalSacks, TribalTable1, TribalTable2, TribalChair, TribalWoodSaw, TribalFirewood, TribalTrunkAxe, TribalTorch, TribalFirepit, TribalAnvil"  #29 of 32
 }
 
 { +Block Id: 1740, Name: TribalBarrels, Ref: DecoTemplate  
@@ -27254,58 +27349,58 @@
 # =================================================================================
 
 # ========================= Material Extended 7 ============================
-# 29 free
+# 
 # ==========================================================================
 # BA / CV
 { Block Name: WoodExtended7, Ref: WoodFull
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: ConcreteExtended7, display: true
 }  
 { Block Name: ConcreteExtended7, Ref: ConcreteFull
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: ConcreteArmoredExtended7, display: true
 }
 { Block Name: ConcreteArmoredExtended7, Ref: ConcreteArmoredFull
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
 }
 { Block Name: PlasticExtendedLarge7, Ref: PlasticFullLarge
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: HullExtendedLarge7, display: true
 }
 { Block Name: HullExtendedLarge7, Ref: HullFullLarge
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: HullArmoredExtendedLarge7, display: true
   DowngradeTo: PlasticExtendedLarge7
 }
 { Block Name: HullArmoredExtendedLarge7, Ref: HullArmoredFullLarge
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: HullCombatExtendedLarge7, display: true
 }
 { Block Name: HullCombatExtendedLarge7, Ref: HullCombatFullLarge
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
 }
 { Block Name: AlienExtended7, Ref: AlienFull
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
 }
 { Block Name: AlienExtendedLarge7, Ref: AlienFullLarge
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
 }
 # SV / HV - no corridor shapes 
 { Block Name: PlasticExtendedSmall7, Ref: PlasticFullSmall
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: HullExtendedSmall7, display: true
 }
 { Block Name: HullExtendedSmall7, Ref: HullFullSmall
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: HullArmoredExtendedSmall7, display: true  
   DowngradeTo: PlasticExtendedSmall7
 }
 { Block Name: HullArmoredExtendedSmall7, Ref: HullArmoredFullSmall
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: HullCombatExtendedSmall7, display: true
 }
 { Block Name: HullCombatExtendedSmall7, Ref: HullCombatFullSmall
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
 }
 #===========================
 
@@ -27595,8 +27690,9 @@
   Shape: ModelEntity
   ShowBlockName: true  
   Place: Free
+  #CanPickup: true      #no CanPickup because text is on poster when looking at it!
+  PickupTarget: PosterARest
   Category: Deco Blocks 
-  # PickupTarget: PosterARest
   AllowPlacingAt: "Base,MS", display: true
   SizeInBlocks: "1,1,1", display: true
   SizeInBlocksLocked: "Base,MS"
@@ -27606,67 +27702,83 @@
   Mass: 0, type: float, display: true, formatter: Kilogram
   Volume: 0, type: float, display: true, formatter: Liter
   CPUIn: 0, type: int, display: true
-  # ShowUser: No
+  RpFactor: 0
+  XpFactor: 0
 }
 { Block Name: PosterBiker, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/BikerPosterPrefab
+  PickupTarget: PosterBiker
   Info: bkiPosterBiker, display: true
 }
 { Block Name: PosterBoyband, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/BoybandPosterPrefab
+  PickupTarget: PosterBoyband
   Info: bkiNoInfo, display: true
   ShowUser: No
 }
 { Block Name: PosterDontHide, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/DontHidePosterPrefab
+  PickupTarget: PosterDontHide
   Info: bkiPosterDontHide, display: true
 }
 { Block Name: PosterForeignWorld, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/ForeignWorldPosterPrefab
+  PickupTarget: PosterForeignWorld
   Info: bkiPosterForeignWorld, display: true
 }
 { Block Name: PosterJump, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/JumpPosterPrefab
+  PickupTarget: PosterJump
   Info: bkiPosterJump, display: true
 }
 { Block Name: PosterNewWorld, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/NewWorldPosterPrefab
+  PickupTarget: PosterNewWorld
   Info: bkiPosterNewWorld, display: true
 }
 { Block Name: PosterSoleDesert, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/SoleDesertPosterPrefab
+  PickupTarget: PosterSoleDesert
   Info: bkiPosterSoleDesert, display: true
 }
 { Block Name: PosterStranger, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/StrangerPosterPrefab
+  PickupTarget: PosterStranger
   Info: bkiPosterStranger, display: true
 }
 { Block Name: PosterSurvivor, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/SurvivorPosterPrefab
+  PickupTarget: PosterSurvivor
   Info: bkiPosterSurvivor, display: true
 }
 { Block Name: PosterTakingABreak, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/TakeingaBreakPosterPrefab
+  PickupTarget: PosterTakingABreak
   Info: bkiPosterTakingABreak, display: true
 }
 { Block Name: PosterTalon, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/TalonPosterPrefab
+  PickupTarget: PosterTalon
   Info: bkiPosterTalon, display: true
 }
 { Block Name: PosterTrader, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/TraderPosterPrefab
+  PickupTarget: PosterTrader
   Info: bkiPosterTrader, display: true
 }
 { Block Name: PosterZiraxAlienWorld, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/ZiraxAlienWorldPosterPrefab
+  PickupTarget: PosterZiraxAlienWorld
   Info: bkiPosterZiraxAlienWorld, display: true
 }
 { Block Name: PosterCrystalMoon, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/CrystalMoonPosterPrefab
+  PickupTarget: PosterCrystalMoon
   Info: bkiPosterZiraxAlienWorld, display: true
 }
 { Block Name: PosterOffIntoTheUnknown, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/OffIntoTheUnknownPosterPrefab
+  PickupTarget: PosterOffIntoTheUnknown
   Info: bkiPosterZiraxAlienWorld, display: true
 }
 # === Heavy Windows with ornaments ===
@@ -28156,16 +28268,17 @@
   ShowUser: No
 }
 { +Block Name: AutoMiningDeviceEpic
-  Model: @models/Blocks/Terrain/AutoMiningDeviceT3Prefab
+  Model: @models/Blocks/Devices/AutoMinerT3FWNPrefab  #1.11 update
+  #Model: @models/Blocks/Terrain/AutoMiningDeviceT3Prefab
   CustomIcon: AutoMiningDeviceT3
   Class: AutoMiner
   Material: metalhard
   Shape: ModelEntity
   MarketPrice: 38367, display: true
-  Mesh-Damage-1: Mesh/geo/D0
-  Mesh-Damage-2: Mesh/geo/D1
-  Mesh-Damage-3: Mesh/geo/D2
-  Mesh-Damage-4: Mesh/geo/D3
+  #Mesh-Damage-1: Mesh/geo/D0
+  #Mesh-Damage-2: Mesh/geo/D1
+  #Mesh-Damage-3: Mesh/geo/D2
+  #Mesh-Damage-4: Mesh/geo/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
   Place: NoRotation 
@@ -28188,7 +28301,7 @@
   SizeInBlocks: "3,6,3" 
   # ModelOffset: "0,0.5,0"
   BlockColor: "110,110,110"
-  FuelAccept: "EnergyCell, EnergyCellLarge, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   
   BlastParticleIndex: 4
   BlastRadius: 2
@@ -28959,7 +29072,7 @@
   EnergyIn: 1, type: int, display: true, formatter: Watt
   CPUIn: 75, type: int, display: true
   Category: Devices
-  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel"
+  FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   FuelCapacity: 100, type: int, display: true      #Default: 300
   BlastParticleIndex: 10
   BlastRadius: 3
@@ -29768,7 +29881,7 @@
 # = Destroy per signal =
 { +Block Name: WoodDestroyedRemoteEffectBlocks   
   Material: woodblock
-  CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: WoodBlocks            
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -29794,7 +29907,7 @@
 }
 { +Block Name: WoodFullDestroyedRemoteEffect
   Material: woodblock
-  CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: WoodBlocks            
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -29831,7 +29944,7 @@
 }
 { +Block Name: WoodDestroyedOnTouchEffectBlocks   
   Material: woodblock
-  CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: WoodBlocks           
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -29857,7 +29970,7 @@
 }
 { +Block Name: WoodFullDestroyedOnTouchEffectBlocks
   Material: woodblock
-  CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: WoodBlocks           
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -30140,7 +30253,7 @@
 }
 { +Block Name: XenoDestroyedRemoteEffectBlocks     #Xeno Steel = AlienLargeBlocks = non-radioactive
   Material: alien
-  CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: AlienLargeBlocks            
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30166,7 +30279,7 @@
 }
 { +Block Name: XenoFullDestroyedRemoteEffect
   Material: alien
-  CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: AlienLargeBlocks           
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30202,7 +30315,7 @@
 }
 { +Block Name: XenoDestroyedOnTouchEffect     #Xeno Steel = AlienLargeBlocks = non-radioactive
   Material: alien
-  CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: AlienLargeBlocks            
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30228,7 +30341,7 @@
 }
 { +Block Name: XenoFullDestroyedOnTouchEffect
   Material: alien
-  CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: AlienLargeBlocks           
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30465,6 +30578,294 @@
   BlastRadius: 1
   BlastDamage: 80
 }
+{ +Block Name: TribalSkeletonAnimalChest, Ref: DecoTemplate
+  Material: woodblock
+  Model: @models2/Entities/Decorations/TribalAssets/TribalSkeletonAnimalChestPrefab
+  SizeInBlocks: "1,1,1", display: true
+  TemplateRoot: TribalSkeletonAnimalChest
+  PickupTarget: TribalSkeletonAnimalChest
+}
+{ +Block Name: DeadAnimalBlocks 
+  Info: bkiDeadAnimalBlocks, display: true
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!  
+  DropInventoryEntity: DropContainer  
+  
+  # Class: NPCDialogue    
+  # NPCModelRotation: false
+  Class: Container  
+  IndexName: Container
+  Category: Deco Blocks
+  
+  BlockColor: "110,110,110"
+  Material: human
+  Shape: ModelEntity 
+  Place: Free
+  # ModelOffset: "0,0.5,0"
+  
+  
+  SizeInBlocks: "1,1,1", display: true
+  AllowPlacingAt: "Base,MS", display: false
+  SizeInBlocksLocked: "Base,MS"      
+  AllowedInBlueprint: false, display: true
+  RepairToTemplate: false, display: true
+  IsAccessible: true, type: bool
+  IsOxygenTight: false, display: true
+  
+  StackSize: 1000
+  HitPoints: 250, type: int, display: true
+  Mass: 80, type: float, display: true, formatter: Kilogram
+  Volume: 40, type: float, display: true, formatter: Liter
+  EnergyIn: 1, type: int, display: false, formatter: Watt  
+  VolumeCapacity: 8000, type: float, display: true, formatter: Liter       
+  XpFactor: 0  
+
+  BlastParticleIndex: 14
+  BlastRadius: 1
+  BlastDamage: 0  
+  
+  ChildBlocks: "DeadRipperDog"
+}
+{ +Block Name: DeadRipperDog, Ref: DeadAnimalBlocks  
+  Model: @models2/Entities/Decorations/DeadAnimals/RipperDogDeadStaticPrefab   
+  LootList: 20   
+  Shape: ModelEntity      
+  IsLockable: true
+  Group: cpgCrewStationAlien
+  TemplateRoot: TribalSkeletonAnimalChest
+  PickupTarget: Meat      
+  HitPoints: 50, type: int, display: false    
+}
+{ +Block Name: HoverbikeStatic 
+  Model: @models2/Entities/Decorations/Hoverbikes/HoverbikeStaticPrefab
+  Info: bkiHoverbikeStatic, display: true
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!  
+  DropInventoryEntity: DropContainer  
+  
+  # Class: NPCDialogue    
+  # NPCModelRotation: false
+  Class: PassengerSeat  
+  # IndexName: Container
+  Category: Deco Blocks
+  
+ # TemplateRoot: PlayerBike
+  PickupTarget: PlayerBike    #Gives the player back a usable playerbike
+  
+  BlockColor: "110,110,110"
+  Material: metallight
+  Shape: ModelEntity 
+  Place: Free
+  # ModelOffset: "0,0.5,0"
+  CanPickup: true
+  
+  SizeInBlocks: "1,1,1", display: true
+  AllowPlacingAt: "Base,MS", display: false
+  SizeInBlocksLocked: "Base,MS"      
+  AllowedInBlueprint: false, display: true
+  RepairToTemplate: false, display: true
+  #IsAccessible: true, type: bool
+  IsOxygenTight: false, display: true
+  
+  StackSize: 100
+  HitPoints: 100, type: int, display: true
+  Mass: 60, type: float, display: true, formatter: Kilogram
+  Volume: 40, type: float, display: true, formatter: Liter
+  EnergyIn: 1, type: int, display: false, formatter: Watt  
+  # VolumeCapacity: 8000, type: float, display: true, formatter: Liter       
+  MarketPrice: 1200, display: true
+  XpFactor: 0  
+  RPFactor: 0
+
+  BlastParticleIndex: 11
+  BlastRadius: 2
+  BlastDamage: 80  
+  
+  # ChildBlocks: "HoverbikeStatic"
+}
+{ +Block Name: HoverbikeDestroyedStatic, Ref: HoverbikeStatic  
+  Info: bkiHoverbikeDestroyedStatic, display: true
+  PickupTarget: PlayerBikeKit
+  Model: @models2/Entities/Decorations/Hoverbikes/HoverbikeDestroyedStaticPrefab      
+}
+
+{ +Block Name: HoverbikeHowlerStatic, Ref: HoverbikeStatic  
+  Info: bkiHoverbikeHowlerStatic, display: true
+  PickupTarget: HoverbikeHowler    #Gives the player back a usable playerbike
+  MarketPrice: 1250, display: true
+  Model: @models2/Entities/Decorations/Hoverbikes/HoverbikeHowlerStaticPrefab      
+}
+
+{ +Block Name: HoverbikeHunterStatic, Ref: HoverbikeStatic  
+  Info: bkiHoverbikeHunterStatic, display: true
+  PickupTarget: HoverbikeHunter    #Gives the player back a usable playerbike
+  MarketPrice: 1420, display: true
+  Model: @models2/Entities/Decorations/Hoverbikes/HoverbikeHunterStaticPrefab      
+}
+
+{ +Block Name: HoverbikeSpeedstarStatic, Ref: HoverbikeStatic  
+  Info: bkiHoverbikeSpeedstarStatic, display: true
+  MarketPrice: 1750, display: true
+  PickupTarget: HoverbikeSpeedstar    #Gives the player back a usable playerbike
+  Model: @models2/Entities/Decorations/Hoverbikes/HoverbikeSpeedstarStaticPrefab      
+}
+
+{ +Block Name: HoverbikeWaspStatic, Ref: HoverbikeStatic  
+  Info: bkiHoverbikeWaspStatic, display: true
+  MarketPrice: 2158, display: true
+  PickupTarget: HoverbikeWasp    #Gives the player back a usable playerbike
+  Model: @models2/Entities/Decorations/Hoverbikes/HoverbikeWaspStaticPrefab      
+}
+
+# ======= DECO & Furnishings =====
+
+{ +Block Name: DecoIndoorTrees      # Deco Tree
+  Material: metallight
+  Shape: Invisible
+  BlockColor: "110,110,110"
+  #Model: @models2/Entities/Decorations/Trees/Alien_Plant_01_1DecoPrefab  
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  SizeInBlocks: "1,2,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  Volume: 10, type: float, display: true, formatter: Liter  
+  Mass: 14, type: float, display: true, formatter: Kilogram
+  HitPoints: 15, type: int, display: true
+  Info: bkiDecoTrees, display: true
+  IsAccessible: false, type: bool
+  StackSize: 2000  
+  # ModelOffset: "0,0.5,0"
+  Category: Deco Blocks 
+  
+  MarketPrice: 20, display: true
+  XpFactor: 0  
+  RPFactor: 0
+  
+  CanPickup: true
+  ChildBlocks: "Alien_Plant_01_1Deco, Alien_ShroomTree_01_3Deco, Alien_Shroom_plant2_1Deco, Alien_Plant_12Deco, AlienDesertPlantDeco, Palmetto_Sabal_Desktop_FallDeco, Alien_ShroomTree_02_1Deco, Alien_Tree_09_1Deco, Alien_Plant_06_2Deco, Palm_Coconut_Desktop_2_SpringDeco, Alien_Plant_14Deco, OmicronPalmGreenDeco, Alien_Plant_16Deco, Alien_Plant_04Deco, Cactus2Deco, UmbrellaTreeDeco, Alien_Plant_8_4Deco, Alien_Plant_11_2Deco, Alien_Plant_02_2Deco, Alien_Plant_03_2Deco"  #max 32 entries
+  
+  UnlockCost: 0
+  UnlockLevel: 1 
+  TechTreeNames: ""
+}
+
+{ +Block Name: Alien_Plant_01_1Deco 
+  Material: metallight
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_01_1DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  SizeInBlocks: "1,2,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  Volume: 10, type: float, display: true, formatter: Liter  
+  Mass: 14, type: float, display: true, formatter: Kilogram
+  HitPoints: 15, type: int, display: true
+  Info: bkiDecoTrees, display: true
+  IsAccessible: false, type: bool 
+  # ModelOffset: "0,0.5,0"
+  Category: Deco Blocks 
+  
+  MarketPrice: 20, display: true
+  XpFactor: 0  
+  RPFactor: 0
+}
+{ +Block Name: Alien_ShroomTree_01_3Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_ShroomTree_01_3DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Shroom_plant2_1Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Shroom_plant2_1DecoPrefab
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Plant_12Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_12DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: AlienDesertPlantDeco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/AlienDesertPlantDecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Palmetto_Sabal_Desktop_FallDeco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Palmetto_Sabal_Desktop_FallDecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_ShroomTree_02_1Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_ShroomTree_02_1DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Tree_09_1Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Tree_09_1DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Plant_06_2Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_06_2DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Palm_Coconut_Desktop_2_SpringDeco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Palm_Coconut_Desktop_2_SpringDecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Plant_14Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_14DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: OmicronPalmGreenDeco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/OmicronPalmGreenDecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Plant_16Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_16DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Plant_04Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_04DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Cactus2Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Cactus2DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: UmbrellaTreeDeco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/UmbrellaTreeDecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Plant_8_4Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_8_4DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Plant_11_2Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_11_2DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Plant_02_2Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_02_2DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+{ +Block Name: Alien_Plant_03_2Deco, Ref: Alien_Plant_01_1Deco  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/Trees/Alien_Plant_03_2DecoPrefab    
+  TemplateRoot: DecoIndoorTrees
+}
+
 # ================================ Destroyed blocks Extensions ===================================
 #{ +Block Name: HullExtendedLargeDestroyed, Ref: HullFullLargeDestroyed
 #  #HitPoints: 250, type: int, display: true
@@ -31408,44 +31809,6 @@
   # AllowPlacingAt: "GV", display: true
   # Mass: 50, type: float, display: true, formatter: Kilogram
   # HitPoints: 250, type: int, display: true  
-# }
-# { +Block Id: 2004, Name: GravityGeneratorSV
-  # IndexName: Gravity
-  # Group: cpgGravityGenerator
-  # Material: metal
-  # Shape: ModelEntity
-  # ShowBlockName: true
-  # # ModelOffset: "0,0.5,0"
-  # SizeInBlocks: "2,2,2", display: true
-  # Model: @models/Blocks/Mothership/gravitygeneratorMSPrefab
-  # Mesh-Damage-1: Mesh/D0
-  # Mesh-Damage-2: Mesh/D1
-  # Mesh-Damage-3: Mesh/D2
-  # Mesh-Damage-4: Mesh/D3
-  # DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
-  # Place: Free
-  # AllowPlacingAt: "SS", display: true
-  # IsActivateable: true
-  # IsOxygenTight: false, display: true 
-  # Info: bkiGravityGenerator, display: true
-  # StackSize: 6
-  # BlockColor: "110,110,110"
-  # Category: Devices
-  # HitPoints: 80, type: int, display: true
-  # Mass: 600, type: float, display: true, formatter: Kilogram
-  # EnergyIn: 100, type: int, display: true, formatter: Watt
-
-  # BlastParticleIndex: 4
-  # BlastRadius: 5
-  # BlastDamage: 100
-
-  # UnlockCost: 11, display: true
-  # UnlockLevel: 7, display: true
-  # TechTreeParent: GeneratorSV
-  # TechTreeNames: "Small Vessel"
-  
-  # Radiation: 1, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
-  # Temperature: 35, display: true
 # }
 # { +Block Id: 2005, Name: MedicStationHVT2
   # # IndexName: SpawnPoint   # no spawning in medic station HV
@@ -35659,4 +36022,1006 @@
     Count: "1,1"
     Prob: 1
   }
+}
+
+## Gravity Generators
+{ Block Name: GravityGeneratorBlocksBACV    
+  Info: bkiGravityGeneratorBlocks, display: true
+  
+  IndexName: Gravity
+  Group: cpgGravityGenerator  
+  Category: Devices  
+  
+  Material: metal
+
+  Mass: 9540, type: float, display: true, formatter: Kilogram    #Only relevant for the group item; calculated as an average of devices!
+  Volume: 3240, type: float, display: true, formatter: Liter   #Only relevant for the group item; calculated as an average of devices!
+  MarketPrice: 9205, display: true     #Only relevant for the group item; calculated as an average of devices!
+  
+  IsOxygenTight: false, display: true    #all of the group!
+  StackSize: 250
+  
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  Shape: Invisible    #Blockgroup!
+  ShowBlockName: true
+  BlockColor: "110,110,110"
+ 
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+
+  UnlockCost: 11, display: true
+  UnlockLevel: 7, display: true
+  # TechTreeParent: GeneratorBA
+  TechTreeNames: "Base,Capital Vessel"
+  
+  ChildBlocks: "GravityGeneratorMS, GravityGeneratorBACVMedium, GravityGeneratorBACVSmall, GravityGeneratorBACVVerySmall"
+}
+
+{ Block Name: GravityGeneratorBACVMedium, Ref: GravityGeneratorMS
+  HitPoints: 300, type: int, display: true 
+  EnergyIn: 600, type: int, display: true, formatter: Watt
+  CPUIn: 40, type: int, display: true
+  Mass: 11200, type: float, display: true, formatter: Kilogram
+  
+  GravityGeneratorRadius: 50, type: int, display: true
+  
+  Model: @models/Blocks/GravityGenerators/GravityGeneratorBACVMediumPrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3 
+  
+ # DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  SizeInBlocks: "2,1,2", display: true   
+
+  BlastParticleIndex: 4
+  BlastRadius: 4
+  BlastDamage: 90 
+  
+  Radiation: 4, display: RadiationLevel 
+  Temperature: 32, display: true
+}
+
+{ Block Name: GravityGeneratorBACVSmall, Ref: GravityGeneratorMS 
+  HitPoints: 200, type: int, display: true 
+  EnergyIn: 300, type: int, display: true, formatter: Watt
+  CPUIn: 30, type: int, display: true
+  Mass: 3200, type: float, display: true, formatter: Kilogram
+  
+  GravityGeneratorRadius: 25, type: int, display: true
+  
+  Model: @models/Blocks/GravityGenerators/GravityGeneratorBACVSmallPrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3 
+  
+ # DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  SizeInBlocks: "1,1,1", display: true   
+
+  BlastParticleIndex: 4
+  BlastRadius: 3
+  BlastDamage: 80 
+  
+  Radiation: 3, display: RadiationLevel 
+  Temperature: 32, display: true
+}
+
+{ Block Name: GravityGeneratorBACVVerySmall, Ref: GravityGeneratorMS 
+  HitPoints: 100, type: int, display: true 
+  EnergyIn: 150, type: int, display: true, formatter: Watt
+  CPUIn: 20, type: int, display: true
+  Mass: 960, type: float, display: true, formatter: Kilogram
+  
+  GravityGeneratorRadius: 12, type: int, display: true
+  
+  Model: @models/Blocks/GravityGenerators/GravityGeneratorBACVVerySmallPrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3 
+  
+ # DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  SizeInBlocks: "1,1,1", display: true   
+
+  BlastParticleIndex: 4
+  BlastRadius: 2
+  BlastDamage: 70 
+  
+  Radiation: 2, display: RadiationLevel 
+  Temperature: 32, display: true
+}
+
+## Gravity Generators SVHV
+
+{ Block Name: GravityGeneratorBlocksSVHV   #Block Group
+  Info: bkiGravityGeneratorBlocks, display: true
+  
+  IndexName: Gravity
+  Group: cpgGravityGenerator  
+  Category: Devices  
+  
+  Material: metal
+
+  Mass: 564, type: float, display: true, formatter: Kilogram    #Only relevant for the group item; calculated as an average of devices!
+  Volume: 564, type: float, display: true, formatter: Liter   #Only relevant for the group item; calculated as an average of devices!
+  MarketPrice: 2085, display: true     #Only relevant for the group item; calculated as an average of devices!
+  
+  IsOxygenTight: false, display: true    #all of the group!
+  StackSize: 250
+  
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  Shape: Invisible    #Blockgroup!
+  ShowBlockName: true
+  BlockColor: "110,110,110"
+ 
+  Place: Free
+  AllowPlacingAt: "SS,GV", display: true
+
+  UnlockCost: 11, display: true
+  UnlockLevel: 7, display: true
+  # TechTreeParent: GeneratorBA
+  TechTreeNames: "Small Vessel,Hover Vessel"
+ 
+ ChildBlocks: "GravityGeneratorSVHVLarge, GravityGeneratorSVHVMedium, GravityGeneratorSVHVSmall, GravityGeneratorSVHVVerySmall"
+}
+
+
+{ Block Name: GravityGeneratorSVHVLarge         
+  Class: Generator
+  Info: bkiGravityGeneratorBlocksPreviewInfo, display: true
+  CustomIcon: GravityGeneratorBlocksSVHV
+  
+  IndexName: Gravity
+  Group: cpgGravityGenerator  
+  Category: Devices  
+  TemplateRoot: GravityGeneratorBlocksSVHV
+  
+  Material: metal
+
+  HitPoints: 100, type: int, display: true 
+  EnergyIn: 150, type: int, display: true, formatter: Watt
+  CPUIn: 20, type: int, display: true
+  Mass: 960, type: float, display: true, formatter: Kilogram
+  
+  GravityGeneratorRadius: 12, type: int, display: true
+ 
+  IsActivateable: true
+  IsOxygenTight: false, display: true 
+  
+  Model: @models/Blocks/GravityGenerators/GravityGeneratorSVHVLargePrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
+  
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  Shape: ModelEntity
+  # ModelOffset: "0,0.5,0"    
+  ShowBlockName: true
+  BlockColor: "110,110,110"
+ 
+  Place: Free
+  AllowPlacingAt: "SS,GV", display: true
+  SizeInBlocks: "2,2,2", display: true 
+
+  BlastParticleIndex: 4
+  BlastRadius: 2
+  BlastDamage: 70 
+  
+  Radiation: 2, display: RadiationLevel     
+  Temperature: 32, display: true
+}
+
+{ Block Name: GravityGeneratorSVHVMedium, Ref: GravityGeneratorSVHVLarge     
+
+  HitPoints: 90, type: int, display: true 
+  EnergyIn: 125, type: int, display: true, formatter: Watt
+  CPUIn: 18, type: int, display: true
+  Mass: 672, type: float, display: true, formatter: Kilogram
+  
+  GravityGeneratorRadius: 8, type: int, display: true
+  
+  Model: @models/Blocks/GravityGenerators/GravityGeneratorSVHVMediumPrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3 
+  
+ # DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  SizeInBlocks: "2,1,2", display: true   
+
+  BlastParticleIndex: 4
+  BlastRadius: 2
+  BlastDamage: 60 
+  
+  Radiation: 1, display: RadiationLevel 
+  Temperature: 32, display: true
+}
+{ Block Name: GravityGeneratorSVHVSmall, Ref: GravityGeneratorSVHVLarge    
+
+  HitPoints: 80, type: int, display: true 
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  CPUIn: 16, type: int, display: true
+  Mass: 384, type: float, display: true, formatter: Kilogram
+  
+  GravityGeneratorRadius: 4, type: int, display: true
+  
+  Model: @models/Blocks/GravityGenerators/GravityGeneratorSVHVSmallPrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3 
+  
+ # DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  SizeInBlocks: "1,1,1", display: true   
+
+  BlastParticleIndex: 4
+  BlastRadius: 2
+  BlastDamage: 50 
+  
+  Radiation: 1, display: RadiationLevel 
+  Temperature: 32, display: true
+}
+{ Block Name: GravityGeneratorSVHVVerySmall, Ref: GravityGeneratorSVHVLarge    
+
+  HitPoints: 70, type: int, display: true 
+  EnergyIn: 75, type: int, display: true, formatter: Watt
+  CPUIn: 14, type: int, display: true
+  Mass: 240, type: float, display: true, formatter: Kilogram
+  
+  GravityGeneratorRadius: 2, type: int, display: true
+  
+  Model: @models/Blocks/GravityGenerators/GravityGeneratorSVHVVerySmallPrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3 
+  
+ # DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  
+  SizeInBlocks: "1,1,1", display: true   
+
+  BlastParticleIndex: 4
+  BlastRadius: 2
+  BlastDamage: 40 
+  
+  Radiation: 1, display: RadiationLevel 
+  Temperature: 32, display: true
+}
+
+# New Consoles and Tables [04-2024]
+
+{ Block Name: ComputerStation_C01, Ref: DecoTemplate
+  TemplateRoot: ConsoleBlocks
+  Model: @models2/Entities/Decorations/Consoles/ComputerStation_C01_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: ComputerStation_C02, Ref: DecoTemplate
+  TemplateRoot: ConsoleBlocks
+  Model: @models2/Entities/Decorations/Consoles/ComputerStation_C02_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: ConsoleDesk_C03, Ref: DecoTemplate
+  TemplateRoot: ConsoleBlocks
+  Model: @models2/Entities/Decorations/Consoles/ConsoleDesk_C03_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: ConsoleDesk_C04, Ref: DecoTemplate
+  TemplateRoot: ConsoleBlocks
+  Model: @models2/Entities/Decorations/Consoles/ConsoleDesk_C04_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: ConsoleDesk_C05, Ref: DecoTemplate
+  TemplateRoot: ConsoleBlocks
+  Model: @models2/Entities/Decorations/Consoles/ConsoleDesk_C05_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: StandConsole_C06, Ref: DecoTemplate
+  TemplateRoot: ConsoleBlocks
+  Model: @models2/Entities/Decorations/Consoles/StandConsole_C06_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: StandConsole_C07, Ref: DecoTemplate
+  TemplateRoot: ConsoleBlocks
+  Model: @models2/Entities/Decorations/Consoles/StandConsole_C07_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: StandConsole_C17, Ref: DecoTemplate
+  TemplateRoot: ConsoleBlocks
+  Model: @models2/Entities/Decorations/Consoles/StandConsole_C17_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: ConsoleStation_C18, Ref: DecoTemplate
+  TemplateRoot: ConsoleBlocks
+  Model: @models2/Entities/Decorations/Consoles/ConsoleStation_C18_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+
+# New tables with dedicated group (other DecoBlocks is too filled) [04-2024]
+{ Block Name: DecoTables
+  Material: metallight
+  Shape: Invisible
+  MarketPrice: 10, display: true 
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  SizeInBlocksLocked: "Base,MS"    
+  Volume: 40, type: float, display: true, formatter: Liter  
+  Info: bkiBlockGroup, display: true
+  Mass: 100, type: float, display: true, formatter: Kilogram
+  StackSize: 1000
+  IsAccessible: false, type: bool
+  IsOxygenTight: false, display: true
+  Category: Deco Blocks
+  ChildBlocks: "Table_C09, Table_C12, Table_C13, Table_C15, Table_C16, Table_C19, Table_C21, Table_C27"
+  
+  UnlockCost: 0
+  UnlockLevel: 1 
+  TechTreeNames: ""
+} 
+{ Block Name: Table_C09, Ref: DecoTemplate
+  TemplateRoot: DecoTables
+  Model: @models2/Entities/Decorations/Tables/Table_C09_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: Table_C12, Ref: DecoTemplate
+  TemplateRoot: DecoTables
+  Model: @models2/Entities/Decorations/Tables/Table_C12_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: Table_C13, Ref: DecoTemplate
+  TemplateRoot: DecoTables
+  Model: @models2/Entities/Decorations/Tables/Table_C13_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: Table_C15, Ref: DecoTemplate
+  TemplateRoot: DecoTables
+  Model: @models2/Entities/Decorations/Tables/Table_C15_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: Table_C16, Ref: DecoTemplate
+  TemplateRoot: DecoTables
+  Model: @models2/Entities/Decorations/Tables/Table_C16_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: Table_C19, Ref: DecoTemplate
+  TemplateRoot: DecoTables
+  Model: @models2/Entities/Decorations/Tables/Table_C19_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: Table_C21, Ref: DecoTemplate
+  TemplateRoot: DecoTables
+  Model: @models2/Entities/Decorations/Tables/Table_C21_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+{ Block Name: Table_C27, Ref: DecoTemplate
+  TemplateRoot: DecoTables
+  Model: @models2/Entities/Decorations/Tables/Table_C27_Prefab
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  BlockColor: "110,110,110"
+  ShowUser: Yes
+}
+
+# Lamps and Lights [04-2024]
+
+
+# Light Large Blocks
+
+{ Block Name: CeilingLamp01   #New Floor/Ceiling Lamps
+  Material: metallight
+  Class: Light
+  Group: cpgLight
+  IndexName: Light
+  CanSetColor: true
+  Shape: ModelEntity
+  Place: Face
+  TemplateRoot: LightLargeBlocks
+ # Collide: "bullet,rocket"
+  Model: @models2/Entities/Decorations/Lights/CeilingLamp01Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  BlockColor: "110,110,110"
+  AllowPlacingAt: "Base,MS", display: true
+  IsDuplicateable: false
+  SizeInBlocks: "1,1,1", display: true
+  ModelScaleLocked: false
+  Volume: 1, type: float, display: true, formatter: Liter
+  StackSize: 4000
+  IsActivateable: true
+  # CanPickup: true
+  Category: Devices
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Mass: 0.4, type: float, display: true, formatter: Kilogram
+  RemoveOnSI: true
+  StabilitySupport: false  
+}
+
+{ Block Name: CeilingLamp01Corner, Ref: CeilingLamp01
+  Model: @models2/Entities/Decorations/Lights/CeilingLamp01CornerPrefab 
+  SizeInBlocks: "1,1,1", display: true 
+}
+
+{ Block Name: LampRing, Ref: CeilingLamp01
+  Model: @models2/Entities/Decorations/Lights/LampRingPrefab 
+  SizeInBlocks: "1,1,1", display: true 
+}
+{ Block Name: LampRingB, Ref: CeilingLamp01
+  Model: @models2/Entities/Decorations/Lights/LampRingBPrefab 
+  SizeInBlocks: "1,1,1", display: true 
+  Info: bkiLampRingB, display: true
+}
+
+{ Block Name: FloorLamp04, Ref: CeilingLamp01   
+  Model: @models2/Entities/Decorations/Lights/FloorLamp04Prefab  
+  SizeInBlocks: "1,1,1", display: true 
+ # Collide: "bullet,rocket,melee" 
+}
+
+# Street light blocks 
+
+{ Block Name: StreetLightBlocks    # lights higher than 1 block and/or lamps that would be placed singular or NOT neccessarily at a ceiling but besides walkways, streets etc; All HAVE colliders!
+  Material: metallight
+  Shape: Invisible
+  MarketPrice: 255, display: true
+  # Model: @models/Blocks/Mothership/lightMS01Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  Info: bkiStreetLightBlocks, display: true
+  # ModelOffset: "0,0.5,0"
+  Category: Devices
+  EnergyIn: 1, type: int, display: false, formatter: Watt
+  Mass: 0.4, type: float, display: true, formatter: Kilogram
+  Volume: 1, type: float, display: true, formatter: Liter
+  StackSize: 4000
+  ChildBlocks: "ConstructionLamp02b, ConstructionLamp02, LampPole01, LampPole01b, LampPole02, LampPole02b, FloorLamp03, FloorLamp03Corner, FloorLamp03bCorner, FloorLamp03bEdge, ExplorationLamp01, ExplorationLamp01Quarter, ExplorationLamp01QuarterCorner, ExplorationLamp01QuarterEdge, FloorLamp08"  #max of 32
+
+  UnlockCost: 0, display: true
+  UnlockLevel: 1, display: true
+  TechTreeParent: ""
+  TechTreeNames: "Base,Capital Vessel"
+}
+
+{ Block Name: ConstructionLamp02   #StreetLights
+  Model: @models2/Entities/Decorations/Lights/ConstructionLamp02Prefab  
+  Info: bkiLampBlockClipping, display: true
+  TemplateRoot: StreetLightBlocks
+  Material: metallight
+  Class: Light
+  Group: cpgLight
+  IndexName: Light
+  CanSetColor: true
+  Shape: ModelEntity
+  Place: Free 
+ # Collide: "bullet,rocket" 
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  BlockColor: "110,110,110"
+  AllowPlacingAt: "Base,MS", display: true
+  IsDuplicateable: false
+  SizeInBlocks: "1,1,1", display: true  #1,3,1
+  ModelScaleLocked: false
+  Volume: 1, type: float, display: true, formatter: Liter
+  StackSize: 4000
+  IsActivateable: true
+  # CanPickup: true
+  Category: Devices
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Mass: 0.4, type: float, display: true, formatter: Kilogram
+  RemoveOnSI: true
+  StabilitySupport: false  
+}
+{ Block Name: ConstructionLamp02b, Ref: ConstructionLamp02
+  Model: @models2/Entities/Decorations/Lights/ConstructionLamp02bPrefab
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true #1,5,1
+  Info: bkiLampBlockClipping, display: true
+}
+{ Block Name: LampPole01, Ref: ConstructionLamp02
+  Model: @models2/Entities/Decorations/Lights/LampPole01Prefab
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true #1,5,1
+  Info: bkiLampBlockClipping, display: true
+}
+{ Block Name: LampPole01b, Ref: ConstructionLamp02
+  Model: @models2/Entities/Decorations/Lights/LampPole01bPrefab
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true #1,3,1
+  Info: bkiLampBlockClipping, display: true
+}
+{ Block Name: LampPole02, Ref: ConstructionLamp02
+  Model: @models2/Entities/Decorations/Lights/LampPole02Prefab
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true #1,5,1
+  Info: bkiLampBlockClipping, display: true
+}
+{ Block Name: LampPole02b, Ref: ConstructionLamp02
+  Model: @models2/Entities/Decorations/Lights/LampPole02bPrefab
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true #1,3,1
+  Info: bkiLampBlockClipping, display: true
+}
+{ Block Name: FloorLamp03, Ref: ConstructionLamp02
+  Model: @models2/Entities/Decorations/Lights/FloorLamp03Prefab
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true
+  Info: bkiFloorLightExtention, display: true
+}
+{ Block Name: FloorLamp03Corner, Ref: ConstructionLamp02
+  Model: @models2/Entities/Decorations/Lights/FloorLamp03CornerPrefab
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true
+  Info: bkiFloorLightExtention, display: true
+}
+
+{ Block Name: FloorLamp03bCorner, Ref: ConstructionLamp02
+  Model: @models2/Entities/Decorations/Lights/FloorLamp03bCornerPrefab
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true 
+  Info: bkiFloorLightNormal, display: true
+}
+{ Block Name: FloorLamp03bEdge, Ref: ConstructionLamp02
+  Model: @models2/Entities/Decorations/Lights/FloorLamp03bEdgePrefab
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true 
+  Info: bkiFloorLightNormal, display: true
+}
+{ Block Name: ExplorationLamp01, Ref: ConstructionLamp02   
+  Model: @models2/Entities/Decorations/Lights/ExplorationLamp01Prefab 
+  SizeInBlocks: "1,1,1", display: true 
+  Info: bkiExplorationLamp01, display: true
+}
+{ Block Name: ExplorationLamp01Quarter, Ref: ConstructionLamp02   
+  Model: @models2/Entities/Decorations/Lights/ExplorationLamp01QuarterPrefab 
+  SizeInBlocks: "1,1,1", display: true 
+  Info: bkiExplorationLamp01, display: true
+}
+{ Block Name: ExplorationLamp01QuarterCorner, Ref: ConstructionLamp02   
+  Model: @models2/Entities/Decorations/Lights/ExplorationLamp01QuarterCornerPrefab 
+  SizeInBlocks: "1,1,1", display: true 
+  Info: bkiExplorationLamp01, display: true
+}
+{ Block Name: ExplorationLamp01QuarterEdge, Ref: ConstructionLamp02   
+  Model: @models2/Entities/Decorations/Lights/ExplorationLamp01QuarterEdgePrefab 
+  SizeInBlocks: "1,1,1", display: true 
+  Info: bkiExplorationLamp01, display: true
+}
+{ Block Name: FloorLamp08, Ref: ConstructionLamp02   
+  Model: @models2/Entities/Decorations/Lights/FloorLamp08Prefab 
+  TemplateRoot: StreetLightBlocks
+  SizeInBlocks: "1,1,1", display: true 
+  Info: bkiFloorLamp08, display: true 
+}
+
+
+# Work light blocks
+
+{  Block Name: WorkLightBlocks     
+  Info: bkiWorkLightBlocks, display: true
+  CustomIcon: ConstructionLamp01
+  Material: metallight
+  Shape: Invisible
+  MarketPrice: 255, display: true
+  # Model: @models/Blocks/Mothership/lightMS01Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  # ModelOffset: "0,0.5,0"
+  Category: Devices
+  EnergyIn: 1, type: int, display: false, formatter: Watt
+  Mass: 0.4, type: float, display: true, formatter: Kilogram
+  Volume: 1, type: float, display: true, formatter: Liter
+  StackSize: 4000
+  ChildBlocks: "ConstructionLamp01, ConstructionLamp01Corner, ConstructionLamp01Edge, DeskLamp01, DeskLamp01Corner, DeskLamp01Edge, FloorLamp01, WorkLight01, WorkLight01CornerRotated"  #max of 32
+
+  UnlockCost: 0, display: true
+  UnlockLevel: 1, display: true
+  TechTreeParent: ""
+  TechTreeNames: "Base,Capital Vessel"
+}
+
+{ Block Name: ConstructionLamp01 
+  Model: @models2/Entities/Decorations/Lights/ConstructionLamp01Prefab 
+  Info: bkiWorkLightBlocks, display: true  
+  CanPickup: true
+  TemplateRoot: WorkLightBlocks
+  Material: metallight
+  Class: Light
+  Group: cpgLight
+  IndexName: Light
+  CanSetColor: true
+  Shape: ModelEntity
+  Place: Free 
+ # Collide: "bullet,rocket" 
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  BlockColor: "110,110,110"
+  AllowPlacingAt: "Base,MS", display: true
+  IsDuplicateable: false
+  SizeInBlocks: "1,1,1", display: true
+  ModelScaleLocked: false
+  Volume: 1, type: float, display: true, formatter: Liter
+  StackSize: 4000
+  IsActivateable: true
+  # CanPickup: true
+  Category: Devices
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Mass: 0.4, type: float, display: true, formatter: Kilogram
+  RemoveOnSI: true
+  StabilitySupport: false  
+}
+{ Block Name: ConstructionLamp01Corner, Ref: ConstructionLamp01        
+  Model: @models2/Entities/Decorations/Lights/ConstructionLamp01CornerPrefab  
+  SizeInBlocks: "1,1,1", display: true 
+}
+{ Block Name: ConstructionLamp01Edge, Ref: ConstructionLamp01        
+  Model: @models2/Entities/Decorations/Lights/ConstructionLamp01EdgePrefab  
+  SizeInBlocks: "1,1,1", display: true 
+}
+{ Block Name: DeskLamp01, Ref: ConstructionLamp01        
+  Model: @models2/Entities/Decorations/Lights/DeskLamp01Prefab  
+  SizeInBlocks: "1,1,1", display: true 
+}
+{ Block Name: DeskLamp01Corner, Ref: ConstructionLamp01        
+  Model: @models2/Entities/Decorations/Lights/DeskLamp01CornerPrefab  
+  SizeInBlocks: "1,1,1", display: true 
+}
+{ Block Name: DeskLamp01Edge, Ref: ConstructionLamp01        
+  Model: @models2/Entities/Decorations/Lights/DeskLamp01EdgePrefab  
+  SizeInBlocks: "1,1,1", display: true 
+}
+{ Block Name: FloorLamp01, Ref: ConstructionLamp01     
+  Model: @models2/Entities/Decorations/Lights/FloorLamp01Prefab  
+  SizeInBlocks: "1,1,1", display: true 
+}
+{ Block Name: WorkLight01, Ref: ConstructionLamp01     
+  Model: @models2/Entities/Decorations/Lights/WorkLight01Prefab  
+  SizeInBlocks: "1,1,1", display: true 
+}
+{ Block Name: WorkLight01CornerRotated, Ref: ConstructionLamp01     
+  Model: @models2/Entities/Decorations/Lights/WorkLight01CornerRotatedPrefab  
+  SizeInBlocks: "1,1,1", display: true 
+}
+
+# Outdoor Deco - Trees [04-2024]
+
+{ +Block Name: Acacia_Sapling_Fall_BA 
+  AllowedInBlueprint: false, display: true
+  RepairToTemplate: false, display: true
+  Material: metallight
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/Acacia_Sapling_Fall_BAPrefab    
+ # TemplateRoot: DecoIndoorTrees
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  AllowPlacingAt: Base, display: true
+  SizeInBlocks: "1,1,1", display: true
+  PickupTarget: WoodLogs
+ # SizeInBlocksLocked: "Base,MS"
+  Volume: 10, type: float, display: true, formatter: Liter  
+  Mass: 14, type: float, display: true, formatter: Kilogram 
+  HitPoints: 24, type: int, display: true
+  Info: bkiOutdoorTrees, display: true
+  IsAccessible: false, type: bool 
+  # ModelOffset: "0,0.5,0"
+  Category: Deco Blocks 
+  
+  MarketPrice: 20, display: true
+  XpFactor: 0  
+  RPFactor: 0
+}
+{ +Block Name: Alien_Shroomtree_02_1_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Alien_Shroomtree_02_1_BAPrefab 
+  HitPoints: 87, type: int, display: true   
+}
+{ +Block Name: Alien_Shroomtree_02_2_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Alien_Shroomtree_02_2_BAPrefab
+  HitPoints: 73, type: int, display: true 
+}
+{ +Block Name: Alien_Tree_01_1_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Alien_Tree_01_1_BAPrefab
+  HitPoints: 177, type: int, display: true    
+}
+{ +Block Name: Alien_Tree_01_2_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Alien_Tree_01_2_BAPrefab
+  HitPoints: 119, type: int, display: true  
+}
+{ +Block Name: Alien_Tree_04_3_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Alien_Tree_04_3_BAPrefab
+  HitPoints: 222, type: int, display: true  
+}
+{ +Block Name: Birch_Paper_Desktop_Forest_Fall_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Birch_Paper_Desktop_Forest_Fall_BAPrefab
+  HitPoints: 203, type: int, display: true     
+}
+{ +Block Name: Birch_Paper_Desktop_Forest_Spring_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Birch_Paper_Desktop_Forest_Spring_BAPrefab
+  HitPoints: 203, type: int, display: true     
+}
+{ +Block Name: Birch_Paper_Sapling_Fall_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Birch_Paper_Sapling_Fall_BAPrefab
+  HitPoints: 67, type: int, display: true 
+}
+{ +Block Name: Birch_Paper_Sapling_Spring_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Birch_Paper_Sapling_Spring_BAPrefab
+  HitPoints: 67, type: int, display: true     
+}
+{ +Block Name: ElderberryBushBlue_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/ElderberryBushBlue_BAPrefab
+  HitPoints: 100, type: int, display: true 
+}
+{ +Block Name: ElderberryBushNoFruitPrefab_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/ElderberryBushNoFruitPrefab_BAPrefab
+  HitPoints: 100, type: int, display: true     
+}
+{ +Block Name: Maple_Red_Hero_Field_Fall_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/Maple_Red_Hero_Field_Fall_BAPrefab
+  HitPoints: 144, type: int, display: true 
+}
+{ +Block Name: Oak_White_Desktop_Field_Fall_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/Oak_White_Desktop_Field_Fall_BAPrefab
+  HitPoints: 226, type: int, display: true     
+}
+{ +Block Name: Oak_White_Desktop_Field_Spring_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/Oak_White_Desktop_Field_Spring_BAPrefab
+  HitPoints: 231, type: int, display: true     
+}
+{ +Block Name: Palm_Coconut_Hero_1_Spring_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/Palm_Coconut_Hero_1_Spring_BAPrefab
+  HitPoints: 121, type: int, display: true     
+}
+{ +Block Name: Redwood_Sierra_Hero_Field_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/Redwood_Sierra_Hero_Field_BAPrefab
+  HitPoints: 319, type: int, display: true     
+}
+{ +Block Name: Sycamore_American_Hero_Forest_Fall_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/Sycamore_American_Hero_Forest_Fall_BAPrefab
+  HitPoints: 253, type: int, display: true     
+}
+{ +Block Name: Sycamore_American_Hero_Forest_Spring_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/Sycamore_American_Hero_Forest_Spring_BAPrefab
+  HitPoints: 253, type: int, display: true     
+}
+{ +Block Name: Sycamore_American_Sapling_1_Spring_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/TreesNonPotted/Sycamore_American_Sapling_1_Spring_BAPrefab
+  HitPoints: 78, type: int, display: true     
+}
+
+# NPC Spawners with console/models attached [04-2024]
+
+{ Block Name: EntitySpawnerDeviceBlocks   # ESD
+  CustomIcon: ESD_ComputerStation_C01
+  AllowedInBlueprint: false, display: true
+  RepairToTemplate: false, display: true
+  Material: metal
+  Shape: Invisible
+  # Model: @models2/Entities/NPCSpawners/EntitySpawnerDevice_ParentPrefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  # ModelOffset: "0,0.5,0"
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: false
+  Info: bkiEntitySpawnerDeviceBlocks, display: true
+  Mass: 1, type: float, display: true, formatter: Kilogram
+  EnergyIn: 1, type: int, display: false, formatter: Watt
+  Category: Devices 
+  ChildBlocks: "ESD_ComputerStation_C01, ESD_ComputerStation_C02, ESD_ConsoleDesk_C03, ESD_ConsoleDesk_C04, ESD_ConsoleDesk_C05, ESD_StandConsole_C06, ESD_StandConsole_C07, ESD_StandConsole_C11, ESD_StandConsole_C17, ESD_ConsoleMS01, ESD_ConsoleSmallMS01, ESD_ConsoleLargeMS01, ESD_ConsoleLargeMS01a, ESD_ConsoleLargeMS02, ESD_ConsoleMapMS01, ESD_ScifiComputerTable, ESD_StationConsole, ESD_GeneralPurposeConsole, ESD_ConsoleTrading, ESD_ReceptionTableWorkstation" # 20 of 32
+
+}
+{ Block Name: ESD_ComputerStation_C01
+  Info: bkiEntitySpawnerDeviceBlocks, display: true
+  
+  Class: Spawner
+  Group: cpgNPCSpawner
+  IndexName: EntitySpawner
+  
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1
+  
+  AllowedInBlueprint: false, display: true
+  RepairToTemplate: false, display: true 
+  IsActivateable: true
+  IsAccessible: true, type: bool
+  
+  Model: @models2/Entities/NPCSpawners/ESD_ComputerStation_C01Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab
+  Shape: Config3DCollider
+  Material: metallight
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"    
+ # Texture: 51    
+ # BlockColor: "170,5,5" 
+  IsTextureable: true   # !!!
+  IsGPUInstance: false  # !!!
+  
+  #Collide: "bullet,rocket,melee,sight"      # do not set for this spawner as the device needs to collide!
+ # AllowWander: true    
+ 
+  Place: Free
+  AllowPlacingAt: Base, display: true  
+  RemoveOnSI: true       # avoid to show the dummy block on SI collapse  
+  
+  TemplateRoot: ConsoleBlocks
+  PickupTarget: SteelPlate
+  
+  Volume: 50, type: float, display: true, formatter: Liter
+  Mass: 200, type: float, display: true, formatter: Kilogram
+  HitPoints: 50, type: int, display: true
+  EnergyIn: 1, type: int, display: false, formatter: Watt
+    
+  BlastParticleIndex: 4
+  BlastRadius: 1
+  BlastDamage: 10
+}
+{ Block Name: ESD_ComputerStation_C02, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ComputerStation_C02Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_ConsoleDesk_C03, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleDesk_C03Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_ConsoleDesk_C04, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleDesk_C04Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_ConsoleDesk_C05, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleDesk_C05Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_StandConsole_C06, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_StandConsole_C06Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_StandConsole_C07, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_StandConsole_C07Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_StandConsole_C11, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_StandConsole_C11Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_StandConsole_C17, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_StandConsole_C17Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_ConsoleMS01, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleMS01Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_ConsoleSmallMS01, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleSmallMS01Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_ConsoleLargeMS01, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleLargeMS01Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+  SizeInBlocks: "2,2,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+}
+{ Block Name: ESD_ConsoleLargeMS01a, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleLargeMS01aPrefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_ConsoleLargeMS02, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleLargeMS02Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+  SizeInBlocks: "2,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+}
+{ Block Name: ESD_ConsoleMapMS01, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleMapMS01Prefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+} 
+{ Block Name: ESD_ScifiComputerTable, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ScifiComputerTablePrefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_StationConsole, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_StationConsolePrefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_GeneralPurposeConsole, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_GeneralPurposeConsolePrefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_ConsoleTrading, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ConsoleTradingPrefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+{ Block Name: ESD_ReceptionTableWorkstation, Ref: ESD_ComputerStation_C01
+  Model: @models2/Entities/NPCSpawners/ESD_ReceptionTableWorkstationPrefab 
+  SpawnClass: ServantCyborgStatic
+  SpawnCount: 1 
+}
+
+# Shroom Tree smaller variants
+{ +Block Name: Alien_Shroomtree_02_1_h2_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Alien_Shroomtree_02_1_h2_BAPrefab 
+  HitPoints: 87, type: int, display: true   
+}
+{ +Block Name: Alien_Shroomtree_02_2_h2_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Alien_Shroomtree_02_2_h2_BAPrefab
+  HitPoints: 73, type: int, display: true 
+}
+{ +Block Name: Alien_Shroomtree_02_2_h3_BA, Ref: Acacia_Sapling_Fall_BA  
+  Shape: ModelEntity  
+  Model: @models2/Entities/Decorations/TreesNonPotted/Alien_Shroomtree_02_2_h3_BAPrefab
+  HitPoints: 73, type: int, display: true 
 }
