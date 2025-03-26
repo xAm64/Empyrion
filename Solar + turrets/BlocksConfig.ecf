@@ -29,7 +29,7 @@
 # ==Properties==
 # CustomIcon:  = Use with an existing Icon to show it ingame, f.ex. 'CustomIcon: DetectorSVT1'
 # PickupTarget = defines block, device OR item that will always (!) be placed in player inventory (count: 1) after picking up (deconstruct or retrieve) the block/device -  both (!) for public or private structures! Does NOT work for 'child' groups, but only for parent; eg do not use on HullFullLargeBlocks but only on its parent HullLargeBlocks
-# TemplateRoot: = Defines the crafting template; Usecase: Set for child-groups to allow using a particular crafting template when using UPGRADE functionality! Not required on parent (parent = always uses template name in templates.ecf!); IMPORTANT: Never REF to an entry that is the TemplateRoot in the actual entry, eg: REF IndoorPlants and TemplateRoot: Indoorplants cannot be in the SAME entry! This will lead to a stack overflow in the BP Libary otherwies
+# TemplateRoot: = Defines the crafting template; Usecase: Set for child-groups to allow using a particular crafting template when using UPGRADE functionality! Not required on parent (parent = always uses template name in templates.ecf!); IMPORTANT: Never REF to an entry that is the TemplateRoot in the actual entry, eg: REF IndoorPlants and TemplateRoot: Indoorplants cannot be in the SAME entry! This will lead to a stack overflow in the BP Libary otherwise
 # UpgradeTo: , display: true = Sets the device/blockgroup to upgrade to (set visibility to true or false). Important: when upgrading a child-group, this child group needs to have a TemplateRoot set, otherwise the upgrade will be 'free'; note: UpgradeTo: can also use the value 'null', eg. set when this block ref's another block that upgrades to this block (avoid loop).   
 # DowngradeTo: = same as UpgradeTo but in the other direction.
 #
@@ -64,7 +64,7 @@
 # ExecuteOnActivate: YourDialogState   # Adding a dialogue state from the dialogues.ecf will allow the block/device to activate that dialogue by facing the block and clicking F; Note: Does not require 'IsActivatable' or other properties; Note: If device already has 'IsActivatable' or other activatable-state/Access (F-button, like containers, levers etc) their Access-function will be executed primarily BUT the dialogue will be run (invisible) never the less!
 # ExecuteOnCollide: YourDialogState    # Adding a dialogue state from the dialogues.ecf will allow the block/device to activate that dialogue by touching/pressing against that block. (similar to ExecuteOnActivate!)
 # DialogueSingleUserAccess: true       # Only one player at a time can access the dialogue triggered by the device/blocks
-# DialogueState: YourDialogState       # Allows to specifying a hard coded target dialog. If this is present, this block can be placed by users on PLAYER owned bases and be also triggered using "F".
+# DialogueState: YourDialogState       # Allows to specifying a hard coded target dialog. If this is present, this block can be placed by users on PLAYER owned bases and be also triggered using "F". #ATTENTION! Setting a dialogue state here will overwrite manually set Dialogues for this devices in the blueprints!
 # OmitCone: true                       # default: false; True = hides the yellow dialogue cone (f.ex if the NPC only has a barking dialogue)
 # == Special: Skills ==
 # Use "Player.Skills['skillname']" to set a skill entry in the dialogues.ecf.
@@ -1751,6 +1751,9 @@
 }
 
 { +Block Id: 261, Name: ConsoleMS01
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   Material: metallight
   Shape: ModelEntity
   ShowBlockName: true
@@ -1763,7 +1766,6 @@
   Place: Free
   IsAccessible: false, type: bool
   IsOxygenTight: false, display: true
-  Info: bkiGenNoFunction, display: true
   AllowPlacingAt: "Base,MS", display: true
   SizeInBlocks: "1,1,1", display: true
   SizeInBlocksLocked: "Base,MS"
@@ -2425,7 +2427,7 @@
   Mass: 13510, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 400, type: int, display: true
 }
 { +Block Id: 284, Name: TurretMSRocketRetract, Ref: TurretTemplate   #TurretPlayer CV Rocket
   Model: @models/Blocks/Turrets/TurretMSRocketRetractPrefab
@@ -2442,7 +2444,7 @@
   Mass: 11850, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 400, type: int, display: true
   RotSpeed: 120, type: int, display: true  
   SoundRotate: Weapons/Turret/TurretRotateVeryFast
   CPUIn: 9700, type: int, display: true
@@ -3104,8 +3106,7 @@
 { +Block Id: 328, Name: NPCAlienTemplate
   Material: human           # do not use "alien" because it will show dirt effect
   Shape: ModelEntity
-  Class: NPCDialogue
-  NPCModelRotation: false
+  Class: NPCDialogue 
   Model: @models2/Entities/Decorations/HomeSweetHome/BedPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   BlockColor: "110,110,110"
@@ -3129,8 +3130,7 @@
 
 { +Block Id: 329, Name: NPCHumanTemplate
   Material: human
-  Class: NPCDialogue
-  NPCModelRotation: false
+  Class: NPCDialogue 
   Shape: ModelEntity
   Model: @models2/Entities/Decorations/HomeSweetHome/BedPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
@@ -3312,6 +3312,7 @@
 { Block Id: 337, Name: DecoTemplate
   Material: metallight
   Shape: ModelEntity
+  NPCModelRotation: false
   Model: @models2/Entities/Decorations/HomeSweetHome/BedPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   BlockColor: "110,110,110"
@@ -3466,12 +3467,12 @@
 }
 
 { +Block Id: 344, Name: GeneralPurposeConsole, Ref: DecoTemplate
-  Material: metallight
-  Shape: ModelEntity
-  Info: bkiGeneralPurposeConsole, display: true
-  Model: @models/Blocks/Mothership/GeneralPurposeConsolePrefab
-  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!  
   Class: NPCDialogue    
+  Info: bkiGeneralPurposeConsole, display: true
+  Material: metallight
+  Shape: ModelEntity 
+  Model: @models/Blocks/Mothership/GeneralPurposeConsolePrefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!   
   Group: cpgCrewStationAlien
   Category: Deco Blocks
   NPCModelRotation: false
@@ -5244,6 +5245,7 @@
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   SoundOnEnter: UseActions/DOORMetalCloseGentlyShort
   Place: Cockpit
+  AllowedInBlueprint: false
   AllowPlacingAt: "SS,GV", display: true
   Info: bkiCockpit, display: true
   IsLockable: true
@@ -5434,26 +5436,26 @@
   AllowPlacingAt: MS, display: true
   SizeInBlocks: "1,2,1", display: true
   SizeInBlocksLocked: "Base,MS"
-  Volume: 1600, type: float, display: true, formatter: Liter 
-  Mass: 9496, type: float, display: true, formatter: Kilogram
+ # Volume: 1600, type: float, display: true, formatter: Liter    #Grouped block; Volume not relevant
+  Mass: 4407, type: float, display: true, formatter: Kilogram
   IsDuplicateable: false
   IsActivateable: true
   IsOxygenTight: true, display: true
   IsIgnoreLC: true
   TemplateRoot: ThrusterMSRoundBlocks
   Info: bkiThruster, display: true
-  HitPoints: 750, type: int, display: true
-  ThrusterForce: 18100, type: int, display: true, formatter: Newton
-  EnergyIn: 720, type: int, display: true, formatter: Watt
+  HitPoints: 933, type: int, display: true
+  ThrusterForce: 16726, type: int, display: true, formatter: Newton
+  EnergyIn: 797, type: int, display: true, formatter: Watt
   EnergyDynamicGroup: Thruster
-  CPUIn: 13340, type: int, display: true
+  CPUIn: 9659, type: int, display: true
   Category: Devices
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 100
   
-  Radiation: 5, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
-  Temperature: 892, display: true
+  Radiation: 7, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
+  Temperature: 807, display: true
 }
 { +Block Id: 454, Name: ThrusterMSRoundSlant, Ref: ThrusterMSRoundArmored
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterCVRoundSlantPrefab
@@ -5512,6 +5514,7 @@
   Temperature: 203, display: true
 }
 { +Block Id: 457, Name: ThrusterMSDirectional
+  Info: bkiThrusterDirectional, display: true
   Class: Thruster
   IndexName: Thruster
   Group: cpgThruster
@@ -5541,13 +5544,12 @@
   IsActivateable: true
   IsOxygenTight: true, display: true
   IsIgnoreLC: true
-  Info: bkiThrusterDirectional, display: true
   Mass: 2361, type: float, display: true, formatter: Kilogram
   HitPoints: 500, type: int, display: true
   ThrusterForce: 7200, type: int, display: true, formatter: Newton
   EnergyIn: 450, type: int, display: true, formatter: Watt
   EnergyDynamicGroup: Thruster
-  CPUIn: 5336, type: int, display: true
+  CPUIn: 5000, type: int, display: true
   Category: Devices
   BlastParticleIndex: 11
   BlastRadius: 2
@@ -5588,26 +5590,26 @@
   AllowPlacingAt: MS, display: true
   SizeInBlocks: "2,4,2", display: true
   SizeInBlocksLocked: "Base,MS"
-  Volume: 2560, type: float, display: true, formatter: Liter 
-  Mass: 14833, type: float, display: true, formatter: Kilogram
+ # Volume: 2560, type: float, display: true, formatter: Liter   #Grouped Block; Volume not relevant here
+  Mass: 22530, type: float, display: true, formatter: Kilogram
   IsDuplicateable: false
   IsActivateable: true
   IsOxygenTight: true, display: true
   IsIgnoreLC: true
   TemplateRoot: ThrusterMSRound2x2Blocks
   Info: bkiThruster, display: true
-  HitPoints: 3000, type: int, display: true
-  ThrusterForce: 192100, type: int, display: true, formatter: Newton
-  EnergyIn: 4608, type: int, display: true, formatter: Watt
+  HitPoints: 5675, type: int, display: true
+  ThrusterForce: 209673, type: int, display: true, formatter: Newton
+  EnergyIn: 4464, type: int, display: true, formatter: Watt
   EnergyDynamicGroup: Thruster
-  CPUIn: 133400, type: int, display: true
+  CPUIn: 69644, type: int, display: true
   Category: Devices
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 100
   
-  Radiation: 8, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
-  Temperature: 977, display: true
+  Radiation: 12, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
+  Temperature: 962, display: true
 }
 { +Block Id: 459, Name: CockpitSV_ShortRange
   Class: CockpitSS
@@ -6038,14 +6040,20 @@
 { +Block Id: 474, Name: GamblingTableTwoPerson, Ref: NPCAlienTemplate
   # AllowedInBlueprint: false, display: true
   # CanPickup: true
+  Class: NPCDialogue
+  #DialogueState: BJ_Start #ATTENTION! Setting a dialogue state here will overwrite manually set Dialogues for this devices in the blueprints!
+  NPCModelRotation: false
   Info: bkiGamblingTableTwoPerson, display: true
   Group: cpgCrewStationAlien
-  IsAccessible: true, type: bool
+  IsAccessible: true, type: bool 
   Model: @models2/Entities/Decorations/DecoNPC/ScifiGamblingTableSingleNPCPrefab
   EnergyIn: 0, type: int, display: true, formatter: Watt
   ShowUser: Yes
 }
 { +Block Id: 475, Name: GamblingTableMultiplePeople, Ref: NPCAlienTemplate
+  Class: NPCDialogue
+  #DialogueState: BJ_Start  #ATTENTION! Setting a dialogue state here will overwrite manually set Dialogues for this devices in the blueprints!
+  NPCModelRotation: false
   Info: bkiGamblingTableMultiplePeople, display: true
   Group: cpgCrewStationAlien
   IsAccessible: true, type: bool
@@ -6428,10 +6436,10 @@
   TemplateRoot: ThrusterMSRound3x3Blocks
   Info: bkiThruster, display: true
   HitPoints: 16750, type: int, display: true
-  ThrusterForce: 920000, type: int, display: true, formatter: Newton
+  ThrusterForce: 920287, type: int, display: true, formatter: Newton
   EnergyIn: 12442, type: int, display: true, formatter: Watt
   EnergyDynamicGroup: Thruster
-  CPUIn: 533600, type: int, display: true
+  CPUIn: 221179, type: int, display: true
   Category: Devices
   BlastParticleIndex: 11
   BlastRadius: 3
@@ -7386,7 +7394,7 @@
   IsActivateableInCP: true
   #IsAccessible: true
   StackSize: 500
-  # MaxCount: 4, type: int, display: true
+  # MaxCount: 40, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -9344,6 +9352,9 @@
   ShowUser: NoButCSV
 }
 { +Block Id: 635, Name: ConsoleSmallMS01
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   Group: cpgEquipment
   Material: metallight
   Shape: ModelEntity
@@ -9358,7 +9369,6 @@
   SizeInBlocksLocked: "Base,MS"
   Volume: 50, type: float, display: true, formatter: Liter
   Mass: 100, type: float, display: true, formatter: Kilogram
-  Info: bkiGenNoFunction, display: true
   IsAccessible: true, type: bool
   IsOxygenTight: false, display: true
   BlockColor: "110,110,110"
@@ -9370,6 +9380,10 @@
   TemplateRoot: ConsoleBlocks
 }
 { +Block Id: 636, Name: ConsoleLargeMS01 
+  Class: NPCDialogue    
+  Info: bkiGeneralPurposeConsole, display: true 
+  NPCModelRotation: false
+  Group: cpgEquipment
   Material: metallight
   Shape: ModelEntity
   Model: @models/Blocks/Mothership/ConsoleLargeMS01Prefab
@@ -9382,9 +9396,9 @@
   SizeInBlocks: "2,2,1", display: true
   SizeInBlocksLocked: "Base,MS"
   Volume: 200, type: float, display: true, formatter: Liter
-  Mass: 300, type: float, display: true, formatter: Kilogram
-  Info: bkiGenNoFunction, display: true
-  IsAccessible: false, type: bool
+  Mass: 300, type: float, display: true, formatter: Kilogram  
+  IsAccessible: true, type: bool
+  IsActivateable: true 
   IsOxygenTight: false, display: true
   BlockColor: "110,110,110"
   Category: Deco Blocks
@@ -9395,11 +9409,17 @@
   TemplateRoot: ConsoleBlocks
 }
 { +Block Id: 637, Name: ConsoleLargeMS02, Ref: ConsoleLargeMS01
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   Model: @models/Blocks/Mothership/ConsoleLargeMS02Prefab
   SizeInBlocks: "2,1,1", display: true
   Volume: 100, type: float, display: true, formatter: Liter
 }
 { +Block Id: 638, Name: ConsoleMapMS01, Ref: ConsoleLargeMS01
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   Model: @models/Blocks/Mothership/ConsoleMapMS01Prefab
   SizeInBlocks: "1,1,1", display: true
   Volume: 50, type: float, display: true, formatter: Liter
@@ -9647,7 +9667,7 @@
   BlockColor: "110,110,110"
   # ModelOffset: "0,0.5,0"
   StackSize: 500
-  MaxCount: 4, type: int, display: true
+  MaxCount: 40, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -9695,7 +9715,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 6, type: int, display: true
+  MaxCount: 60, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -9967,7 +9987,7 @@
   Place: Free
   TemplateRoot: DecoBlocks
   PickupTarget: SteelPlate
-  AllowPlacingAt: Base, display: true
+  AllowPlacingAt: "Base,MS", display: true
   SizeInBlocks: "1,1,1", display: true
   SizeInBlocksLocked: "Base,MS"
   Volume: 50, type: float, display: true, formatter: Liter
@@ -10079,6 +10099,7 @@
   IsGPUInstance: false  # !!!
   AllowWander: true
   RemoveOnSI: true       # avoid to show the dummy block on SI collapse 
+  AllowPlacingAt: "Base,MS", display: true
 }
 { +Block Id: 669, Name: SawAttachment
   LootList: 37   #  still used?  
@@ -10297,7 +10318,7 @@
   EnergyInIdle: 1, type: int, display: true, formatter: Watt
   HitPoints: 500, type: int, display: true
   StackSize: 1000
-  MaxCount: 6, type: int, display: true
+  MaxCount: 60, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -10457,7 +10478,7 @@
   IsActivateable: true
   IsOxygenTight: true, display: true
   IsIgnoreLC: true
-  Info: bkiThruster, display: true
+  Info: bkiThrusterJetMS, display: true
   HitPoints: 3200, type: int, display: true
   ThrusterForce: 7240, type: int, display: true, formatter: Newton
   ThrusterBoosterFactor: 1.5, type: float, display: true
@@ -12275,7 +12296,7 @@
 }
 { +Block Id: 772, Name: ThrusterMSRoundBlocks
   IndexName: Thruster
-  MarketPrice: 14638, display: true
+  MarketPrice: 10982, display: true
   Material: metalhard
   Shape: Invisible
   Place: Free
@@ -12292,16 +12313,16 @@
   AllowPlacingAt: MS, display: true
   SizeInBlocks: "1,2,1", display: true
   SizeInBlocksLocked: "Base,MS"
-  Volume: 1600, type: float, display: true, formatter: Liter
-  Mass: 9496, type: float, display: true, formatter: Kilogram
+  Volume: 1216, type: float, display: true, formatter: Liter
+  Mass: 4407, type: float, display: true, formatter: Kilogram
   Info: bkiBlockGroup, display: true  
   IsOxygenTight: true, display: true
-  HitPoints: 1550, type: int, display: true
-  ThrusterForce: 18100, type: int, display: true, formatter: Newton
-  EnergyIn: 720, type: int, display: true, formatter: Watt
-  CPUIn: 13340, type: int, display: true
-  Temperature: 892, display: true
-  Radiation: 6, display: RadiationLevel
+  HitPoints: 933, type: int, display: true
+  ThrusterForce: 16726, type: int, display: true, formatter: Newton
+  EnergyIn: 797, type: int, display: true, formatter: Watt
+  CPUIn: 9659, type: int, display: true
+  Temperature: 807, display: true
+  Radiation: 7, display: RadiationLevel
 
   UnlockCost: 10, display: true
   UnlockLevel: 10, display: true
@@ -12369,7 +12390,7 @@
   Material: metalhard
   Shape: Invisible
   Place: Free
-  MarketPrice: 92396, display: true
+  MarketPrice: 55400, display: true
   # Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterCVRoundNormal2x2Prefab
   # Mesh-Damage-1: Mesh/D0
   # Mesh-Damage-2: Mesh/D1
@@ -12384,16 +12405,16 @@
   AllowPlacingAt: MS, display: true
   SizeInBlocks: "2,4,2", display: true
   SizeInBlocksLocked: "Base,MS"
-  Volume: 2560, type: float, display: true, formatter: Liter
-  Mass: 14833, type: float, display: true, formatter: Kilogram
+  Volume: 4192, type: float, display: true, formatter: Liter
+  Mass: 22530, type: float, display: true, formatter: Kilogram
   Info: bkiBlockGroup, display: true 
   IsOxygenTight: true, display: true 
-  HitPoints: 3000, type: int, display: true
-  ThrusterForce: 192100, type: int, display: true, formatter: Newton
-  EnergyIn: 4608, type: int, display: true, formatter: Watt
-  CPUIn: 133400, type: int, display: true
-  Temperature: 977, display: true
-  Radiation: 8, display: RadiationLevel
+  HitPoints: 5675, type: int, display: true
+  ThrusterForce: 209673, type: int, display: true, formatter: Newton
+  EnergyIn: 4464, type: int, display: true, formatter: Watt
+  CPUIn: 69644, type: int, display: true
+  Temperature: 962, display: true
+  Radiation: 12, display: RadiationLevel
 
   UnlockCost: 17, display: true
   UnlockLevel: 15, display: true
@@ -12785,9 +12806,9 @@
   Info: bkiBlockGroup, display: true  
   IsOxygenTight: true, display: true
   HitPoints: 16750, type: int, display: true
-  ThrusterForce: 920000, type: int, display: true, formatter: Newton
+  ThrusterForce: 920287, type: int, display: true, formatter: Newton
   EnergyIn: 12442, type: int, display: true, formatter: Watt
-  CPUIn: 533600, type: int, display: true
+  CPUIn: 221179, type: int, display: true
   Temperature: 1080, display: true
   Radiation: 15, display: RadiationLevel
 
@@ -15621,11 +15642,12 @@
   Material: metalhard
   Shape: ModelEntity
   ShowBlockName: true
-  Model: @models/Blocks/AIDrone/AIDroneBay2Prefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  #Model: @models/Blocks/AIDrone/AIDroneBay2Prefab
+  Model: @models/Blocks/AIDrone/AIDroneBay3Prefab  
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
   StackSize: 50
@@ -15965,6 +15987,10 @@
 { +Block Id: 1074, Name: ScifiNightstand, Ref: DecoTemplate
   Class: Container
   IndexName: Container
+  IsLockable: true
+  IsAccessible: true, type: bool
+  Group: cpgFurniture
+  IsActivateableInCP: true
   DropInventoryEntity: DropContainer
   LootList: 65   
   Model: @models2/Entities/Decorations/Sci-Fi_InteriorPack/ScifiNightstandPrefab
@@ -16082,6 +16108,8 @@
   Class: Container
   IndexName: Container
   DropInventoryEntity: DropContainer
+  Group: cpgEquipment
+  IsAccessible: true, type: bool
   LootList: 61
   Model: @models2/Entities/Decorations/Sci-Fi_InteriorPack/ScifiContainerEnergyPrefab
   SizeInBlocks: "1,2,1"
@@ -16126,6 +16154,9 @@
   ShowUser: Yes
 }
 { +Block Id: 1087, Name: ScifiComputerTable, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Sci-Fi_InteriorPack/ScifiComputerTablePrefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -16133,6 +16164,9 @@
   ShowUser: Yes
 }
 { +Block Id: 1088, Name: ScifiMediaCenter, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Sci-Fi_InteriorPack/ScifiMediaCenterPrefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -16451,7 +16485,7 @@
   # Temperature: 40, display: true
 }
 { +Block Id: 1111, Name: RepairBayBA
-  Group: cpgEquipment
+  Group: cpgRepair
   Class: RepairBay
   IndexName: RepairBay
   MarketPrice: 81602, display: true
@@ -16490,7 +16524,7 @@
 
   UnlockCost: 14, display: true
   UnlockLevel: 12, display: true
-  TechTreeParent: RepairStation
+  TechTreeParent: FieldRepairStation
   TechTreeNames: Base
 }
 { +Block Id: 1112, Name: DoorArmoredBlocks
@@ -16834,9 +16868,9 @@
   Volume: 800, type: float, display: true, formatter: Liter
   StackSize: 250
 
-  UnlockCost: 17, display: true
-  UnlockLevel: 15, display: true
-  TechTreeParent: RepairStation
+  UnlockCost: 12, display: true
+  UnlockLevel: 12, display: true
+  TechTreeParent: FieldRepairStation
   TechTreeNames: Capital Vessel  
   
 }
@@ -18266,6 +18300,7 @@
 { +Block Id: 1252, Name: ConsoleSmallHuman, Ref: NPCHumanTemplate
   Group: cpgCrewStationHuman
   IsAccessible: true, type: bool
+  NPCModelRotation: false
   # AllowedInBlueprint: false, display: true
   # CanPickup: true
   Model: @models2/Entities/Decorations/DecoNPC/ConsoleSmallHumanPrefab
@@ -18921,6 +18956,10 @@
   TemplateRoot: DecoBlocks2
   Class: Container
   IndexName: Container
+  Group: cpgCargoBox  
+  IsAccessible: true, type: bool
+  IsActivateableInCP: true
+  IsLockable: true
   DropInventoryEntity: DropContainer
   LootList: 60   
   Model: @models2/Entities/Decorations/LaboratoryPack/Tank1Prefab
@@ -18933,7 +18972,11 @@
 { +Block Id: 1298, Name: Tank2, Ref: DecoTemplate
   TemplateRoot: DecoBlocks2
   Class: Container
-  IndexName: Container
+  IsAccessible: true, type: bool
+  IndexName: Container 
+  Group: cpgCargoBox
+  IsActivateableInCP: true
+  IsLockable: true
   DropInventoryEntity: DropContainer
   LootList: 60   
   Model: @models2/Entities/Decorations/LaboratoryPack/Tank2Prefab
@@ -20434,6 +20477,7 @@
   Texture: "62,63,62,62,62,62"
 }
 { +Block Id: 1417, Name: ThrusterGVJetRound1x3x1, Ref: ThrusterGVRoundNormal
+  Info: bkiThrusterJetMS, display: true
   Model: @models/Blocks/Thrusters/ThrusterJetRound1x3x1Prefab
   MarketPrice: 1315, display: true
   Mass: 743, type: float, display: true, formatter: Kilogram
@@ -21001,7 +21045,6 @@
 { +Block Id: 1465, Name: AlienNPCBlocks
   Material: human
   Class: NPCDialogue
-  NPCModelRotation: false  
   MarketPrice: 5850, display: true 
   Shape: Invisible
   # Model: @models2/Entities/Decorations/DecoNPC/ControlStationNPCPrefab
@@ -21020,8 +21063,7 @@
 }
 { +Block Id: 1466, Name: HumanNPCBlocks
   Material: human
-  Class: NPCDialogue
-  NPCModelRotation: false 
+  Class: NPCDialogue 
   Shape: Invisible
   MarketPrice: 5850, display: true
   # Model: @models2/Entities/Decorations/DecoNPC/ConsoleSmallHumanPrefab
@@ -21062,6 +21104,7 @@
   ShowUser: Yes
 }
 { +Block Id: 1469, Name: CommandingOfficerAlien, Ref: NPCAlienTemplate
+  NPCModelRotation: true
   Group: cpgCrewStationAlien
   Info: bkiCommandingOfficerAlien, display: true
   IsAccessible: true, type: bool
@@ -21371,7 +21414,7 @@
   SizeInBlocks: "2,2,2", display: true
 }
 { +Block Id: 1490, Name: RepairBayConsole
-  Group: cpgEquipment
+  Group: cpgRepair
   Class: RepairBayConsole
   Material: metallight
   MarketPrice: 97615, display: true
@@ -21452,7 +21495,7 @@
   Volume: 55, type: float, display: true, formatter: Liter
   StackSize: 500
   MaxCount: 1000, type: int, display: true
-  CPUIn: 5, type: int, display: true
+  CPUIn: 45, type: int, display: true
   ChildBlocks: "SolarPanelSlope, SolarPanelSlope2, SolarPanelSlope3, SolarPanelHorizontal, SolarPanelHorizontal2, SolarPanelHorizontalMount, SolarPanelHorizontalStand"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21526,7 +21569,7 @@
   HitPoints: 150, type: int, display: true
   Mass: 730, type: float, display: true, formatter: Kilogram
   MaxCount: 1000, type: int, display: true
-  CPUIn: 1, type: int, display: true
+  CPUIn: 45, type: int, display: true
   TemplateRoot: SolarPanelBlocks
   IsOxygenTight: false, display: true
   BlockColor: "110,110,110"  
@@ -21555,6 +21598,7 @@
 
 { +Block Id: 1500, Name: ForcefieldEmitterBlocks
   Material: metallight
+  #Group: cpgForcefieldEmitter
   ShowBlockName: true
   Shape: Invisible
   MarketPrice: 1578, display: true
@@ -21685,7 +21729,7 @@
   Volume: 50, type: float, display: true, formatter: Liter
   StackSize: 1000
   MaxCount: 1000, type: int, display: true
-  CPUIn: 5, type: int, display: true
+  CPUIn: 20, type: int, display: true
   ChildBlocks: "SolarPanelSlopeSmall, SolarPanelSlope3Small, SolarPanelHorizontalSmall"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21712,7 +21756,7 @@
   HitPoints: 100, type: int, display: true
   Mass: 350, type: float, display: true, formatter: Kilogram
   MaxCount: 1000, type: int, display: true
-  CPUIn: 2, type: int, display: true
+  CPUIn: 20, type: int, display: true
   TemplateRoot: SolarPanelSmallBlocks
   IsOxygenTight: true, display: true 
   BlockColor: "110,110,110"    
@@ -22529,6 +22573,7 @@
 }
 
 { +Block Id: 1585, Name: ThrusterJetRound2x5x2V2, Ref: ThrusterJetRound2x5x2
+  Info: bkiThrusterJetMSvariant, display: true
   Model: @models/Blocks/Thrusters/ThrusterJetRound2x5x2V2Prefab
   MarketPrice: 2390, display: true
   
@@ -22621,6 +22666,7 @@
   BlastDamage: 50
 }
 { +Block Id: 1591, Name: ThrusterJetRound3x10x3V2, Ref: ThrusterJetRound3x10x3
+  Info: bkiThrusterJetMSvariant, display: true
   Model: @models/Blocks/Thrusters/ThrusterJetRound3x10x3V2Prefab
   MarketPrice: 4350, display: true
   
@@ -22630,6 +22676,7 @@
   TechTreeNames: Small Vessel
 }
 { +Block Id: 1592, Name: ThrusterJetRound3x13x3V2, Ref: ThrusterJetRound3x13x3
+  Info: bkiThrusterJetMSvariant, display: true
   Model: @models/Blocks/Thrusters/ThrusterJetRound3x13x3V2Prefab
   MarketPrice: 5400, display: true
   
@@ -25463,19 +25510,24 @@
 }
 
 { +Block Id: 1808, Name: ShieldGeneratorBA
+  Info: bkiShieldGenerator, display: true
   Class: ShieldGenerator
   IndexName: ShieldGenerator
   EnergyDynamicGroup: Shield
   MarketPrice: 165345, display: true
-  Group: cpgEquipment
+  #Group: cpgEquipment
+  Group: cpgForcefieldEmitter
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
-  Model: @models/Blocks/Misc/ShieldGeneratorLargePrefab
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  #Model: @models/Blocks/Misc/ShieldGeneratorLargePrefab     #Old T1 model; round rotating
+  #Model: @models/Blocks/Devices/ShieldGeneratorT0FWNPrefab  #Full block type T1
+  Model: @models/Blocks/Devices/ShieldGeneratorT1_v2_FWNPrefab  #New T1
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
+  BlocokColor: "110,110,110"
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
   IsActivateable: true
@@ -25509,12 +25561,14 @@
   TechTreeNames: "Base"
 }
 { +Block Id: 1809, Name: ShieldGeneratorCV, Ref: ShieldGeneratorBA
-  Model: @models/Blocks/Misc/ShieldGeneratorLargePrefab
+  #Model: @models/Blocks/Misc/ShieldGeneratorLargePrefab     #Old T1 model; round rotating
+  #Model: @models/Blocks/Devices/ShieldGeneratorT0FWNPrefab  #Full block type T1
+  Model: @models/Blocks/Devices/ShieldGeneratorT1_v2_FWNPrefab  #New T1
   MarketPrice: 186675, display: true
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   AllowPlacingAt: "MS", display: true
   HitPoints: 500, type: int, display: true
@@ -25558,12 +25612,14 @@
   TechTreeNames: "Small Vessel"
 }
 { +Block Id: 1811, Name: ShieldGeneratorCVT2, Ref: ShieldGeneratorCV
-  Model: @models/Blocks/Misc/ShieldGeneratorLargeT2Prefab
+  #Model: @models/Blocks/Misc/ShieldGeneratorLargeT2Prefab   #old T2 model
+  #Model: @models/Blocks/Devices/ShieldGeneratorT1FWNPrefab   #cubic T2 model
+  Model: @models/Blocks/Devices/ShieldGeneratorT0_v2_FWNPrefab  #T2  (bulkier version of T1)
   MarketPrice: 260796, display: true
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Info: bkiShieldGeneratorT2, display: true
   Mass: 14635, type: float, display: true, formatter: Kilogram
@@ -25583,12 +25639,14 @@
   # TechTreeNames: Hidden
 }
 { +Block Id: 1812, Name: ShieldGeneratorBAT2, Ref: ShieldGeneratorBA
-  Model: @models/Blocks/Misc/ShieldGeneratorLargeT2Prefab
+  #Model: @models/Blocks/Misc/ShieldGeneratorLargeT2Prefab   #old T2 model
+  #Model: @models/Blocks/Devices/ShieldGeneratorT1FWNPrefab   #cubic T2 model
+  Model: @models/Blocks/Devices/ShieldGeneratorT0_v2_FWNPrefab  #T2  (bulkier version of T1)
   MarketPrice: 229245, display: true
-  Mesh-Damage-1: Mesh/D0
-  Mesh-Damage-2: Mesh/D1
-  Mesh-Damage-3: Mesh/D2
-  Mesh-Damage-4: Mesh/D3
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Info: bkiShieldGeneratorT2, display: true
   Mass: 14635, type: float, display: true, formatter: Kilogram
@@ -25608,6 +25666,9 @@
   # TechTreeNames: Hidden
 }
 { +Block Id: 1813, Name: ShieldGeneratorPOI, Ref: ShieldGeneratorBA
+  #Model: @models/Blocks/Misc/ShieldGeneratorLargeT2Prefab   #old T2 model
+  #Model: @models/Blocks/Devices/ShieldGeneratorT1FWNPrefab   #cubic T2 model
+  Model: @models/Blocks/Devices/ShieldGeneratorT0_v2_FWNPrefab  #T2  (bulkier version of T1)
   AllowedInBlueprint: false, display: true     
   AllowPlacingAt: "Base,MS", display: true
   PickupTarget: ShieldGeneratorBA   # Avoid getting back POI shield generator 
@@ -28335,7 +28396,7 @@
   IndexName: Turret
   Group: cpgAlien     # Indicates non-player origin; default cpgTurret
   Category: Weapons/Items
-  RepairToTemplate: false                   #Blocks can be placed, but not R2T when destroyed
+  RepairToTemplate: false, display: true                    #Blocks can be placed, but not R2T when destroyed
   AllowedInBlueprint: false, display: true  #Struct with these blocks cannot be blueprinted to avoid easy multiplication of these blocks!
   Place: Face                               # If turret is retractable: Free; other: Face
   # AllowPlacingAt: MS, display: true
@@ -28362,7 +28423,7 @@
   # IsRetractable: true
   # AboveTerrainCheck: false                 # Required?
   StackSize: 500
-  # MaxCount: 4, type: int, display: true
+  # MaxCount: 40, type: int, display: true
   # MarketPrice: 2200, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
@@ -28600,7 +28661,7 @@
   # IsRetractable: true
   # AboveTerrainCheck: false                 # Required?
   StackSize: 500
-  # MaxCount: 4, type: int, display: true
+  # MaxCount: 40, type: int, display: true
   # MarketPrice: 2200, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
@@ -29881,7 +29942,7 @@
 # = Destroy per signal =
 { +Block Name: WoodDestroyedRemoteEffectBlocks   
   Material: woodblock
-  #CustomIcon: WoodBlocks            
+  #CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -29907,7 +29968,7 @@
 }
 { +Block Name: WoodFullDestroyedRemoteEffect
   Material: woodblock
-  #CustomIcon: WoodBlocks            
+  #CustomIcon: WoodBlocks 
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -29944,7 +30005,7 @@
 }
 { +Block Name: WoodDestroyedOnTouchEffectBlocks   
   Material: woodblock
-  #CustomIcon: WoodBlocks           
+  #CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -29970,7 +30031,7 @@
 }
 { +Block Name: WoodFullDestroyedOnTouchEffectBlocks
   Material: woodblock
-  #CustomIcon: WoodBlocks           
+  #CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -30253,7 +30314,7 @@
 }
 { +Block Name: XenoDestroyedRemoteEffectBlocks     #Xeno Steel = AlienLargeBlocks = non-radioactive
   Material: alien
-  #CustomIcon: AlienLargeBlocks            
+  #CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30279,7 +30340,7 @@
 }
 { +Block Name: XenoFullDestroyedRemoteEffect
   Material: alien
-  #CustomIcon: AlienLargeBlocks           
+  #CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30315,7 +30376,7 @@
 }
 { +Block Name: XenoDestroyedOnTouchEffect     #Xeno Steel = AlienLargeBlocks = non-radioactive
   Material: alien
-  #CustomIcon: AlienLargeBlocks            
+  #CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30341,7 +30402,7 @@
 }
 { +Block Name: XenoFullDestroyedOnTouchEffect
   Material: alien
-  #CustomIcon: AlienLargeBlocks           
+  #CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -31396,6 +31457,7 @@
 #   Model: @models/Blocks/Windows/Railing/RailingVertGlassModularInvPrefab
 #   SymType: 1
 # }
+
 
 
 #### ================= MATERIAL TEST SHAPES 
@@ -36301,6 +36363,9 @@
 # New Consoles and Tables [04-2024]
 
 { Block Name: ComputerStation_C01, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Consoles/ComputerStation_C01_Prefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -36308,6 +36373,9 @@
   ShowUser: Yes
 }
 { Block Name: ComputerStation_C02, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Consoles/ComputerStation_C02_Prefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -36315,6 +36383,9 @@
   ShowUser: Yes
 }
 { Block Name: ConsoleDesk_C03, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Consoles/ConsoleDesk_C03_Prefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -36322,6 +36393,9 @@
   ShowUser: Yes
 }
 { Block Name: ConsoleDesk_C04, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Consoles/ConsoleDesk_C04_Prefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -36329,6 +36403,9 @@
   ShowUser: Yes
 }
 { Block Name: ConsoleDesk_C05, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Consoles/ConsoleDesk_C05_Prefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -36336,13 +36413,19 @@
   ShowUser: Yes
 }
 { Block Name: StandConsole_C06, Ref: DecoTemplate
-  TemplateRoot: ConsoleBlocks
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
+  TemplateRoot: ConsoleBlocks 
   Model: @models2/Entities/Decorations/Consoles/StandConsole_C06_Prefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
   BlockColor: "110,110,110"
   ShowUser: Yes
 }
 { Block Name: StandConsole_C07, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Consoles/StandConsole_C07_Prefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -36350,6 +36433,9 @@
   ShowUser: Yes
 }
 { Block Name: StandConsole_C17, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Consoles/StandConsole_C17_Prefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -36357,6 +36443,9 @@
   ShowUser: Yes
 }
 { Block Name: ConsoleStation_C18, Ref: DecoTemplate
+  Class: NPCDialogue    
+  NPCModelRotation: false
+  Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
   Model: @models2/Entities/Decorations/Consoles/ConsoleStation_C18_Prefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
@@ -36894,7 +36983,7 @@
  # AllowWander: true    
  
   Place: Free
-  AllowPlacingAt: Base, display: true  
+  AllowPlacingAt: "Base,MS", display: true
   RemoveOnSI: true       # avoid to show the dummy block on SI collapse  
   
   TemplateRoot: ConsoleBlocks
@@ -37024,4 +37113,703 @@
   Shape: ModelEntity  
   Model: @models2/Entities/Decorations/TreesNonPotted/Alien_Shroomtree_02_2_h3_BAPrefab
   HitPoints: 73, type: int, display: true 
+}
+# New NPC Spawners 
+{ Block Name: EntitySpawnerPlateThinOffsetBack, Ref: EntitySpawnerPlateThin  #2648
+  Texture: 51    
+  BlockColor: "170,5,5"
+  Model: @models/Blocks/Misc/EntitySpawnerPlateThinOffsetBackPrefab
+  Collide: "bullet,rocket,melee,sight"     #  for AI pathfinding: do not consider this block as collide with movements  
+  SpawnClass: UCHGuard01Female
+  SpawnCount: 1
+  IsTextureable: true   # !!!
+  IsGPUInstance: false  # !!!
+  AllowWander: true
+  RemoveOnSI: true       # avoid to show the dummy block on SI collapse 
+}
+
+{ Block Name: EntitySpawnerPlateThinOffsetFront, Ref: EntitySpawnerPlateThin  #2649
+  Texture: 51    
+  BlockColor: "170,5,5"
+  Model: @models/Blocks/Misc/EntitySpawnerPlateThinOffsetFrontPrefab
+  Collide: "bullet,rocket,melee,sight"     #  for AI pathfinding: do not consider this block as collide with movements  
+  SpawnClass: UCHCivilianFemale01
+  SpawnCount: 1
+  IsTextureable: true   # !!!
+  IsGPUInstance: false  # !!!
+  AllowWander: true
+  RemoveOnSI: true       # avoid to show the dummy block on SI collapse 
+}
+
+{ Block Name: EntitySpawnerPlateThinEdgeInwards, Ref: EntitySpawnerPlateThin  #2649
+  Texture: 51    
+  BlockColor: "170,5,5"
+  Model: @models/Blocks/Misc/EntitySpawnerPlateThinEdgeInwardsPrefab
+  Collide: "bullet,rocket,melee,sight"     #  for AI pathfinding: do not consider this block as collide with movements  
+  SpawnClass: UCHCivilianFemale01
+  SpawnCount: 1
+  IsTextureable: true   # !!!
+  IsGPUInstance: false  # !!!
+  AllowWander: true
+  RemoveOnSI: true       # avoid to show the dummy block on SI collapse 
+}
+
+{ Block Name: EntitySpawnerPlateThinEdgeOutwards, Ref: EntitySpawnerPlateThin  #2649
+  Texture: 51    
+  BlockColor: "170,5,5"
+  Model: @models/Blocks/Misc/EntitySpawnerPlateThinEdgeOutwardsPrefab
+  Collide: "bullet,rocket,melee,sight"     #  for AI pathfinding: do not consider this block as collide with movements  
+  SpawnClass: UCHCivilianFemale01
+  SpawnCount: 1
+  IsTextureable: true   # !!!
+  IsGPUInstance: false  # !!!
+  AllowWander: true
+  RemoveOnSI: true       # avoid to show the dummy block on SI collapse 
+}
+
+# Shield and Walkway Emitter blocks
+# Shield: Player and NPC can walk through but not shoot through 
+
+{ Block Name: ForcefieldShieldEmitterBlocks
+  Material: forcefield
+  Info: "Force fields take damage from being shot at, but you can walk through them. They are not airtight. Note: Force fields higher than 1 block can extend into other block areas without colliding.", display: true
+  ShowBlockName: true
+  Shape: Invisible
+  MarketPrice: 2600, display: true
+  # Model: @models2/Entities/Forcefields/ForcefieldEmitter1x1Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  IsOxygenTight: false, display: true
+  # IsActivateable: true
+  Category: Devices
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 800, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram 
+  Volume: 10, type: float, display: true, formatter: Liter
+  CPUIn: 200, type: int, display: true  
+  StackSize: 2000
+  BlockColor: "110,110,110"
+  ChildBlocks: "ForcefieldShieldEmitter1x1, ForcefieldShieldEmitter1x1_Half, ForcefieldShieldEmitter1x2, ForcefieldShieldEmitter1x3, ForcefieldShieldEmitter2x3, ForcefieldShieldEmitter2x4, ForcefieldShieldEmitter3x5, ForcefieldShieldEmitter4x5, ForcefieldShieldEmitter5x5, ForcefieldShieldEmitter6x7, ForcefieldShieldEmitter7x7"
+  
+  UnlockCost: 10, display: true
+  UnlockLevel: 15, display: true
+  # TechTreeNames: "Small Vessel,Hover Vessel,Base,Capital Vessel"
+  TechTreeNames: Misc
+  TechTreeParent: ForcefieldWalkwayEmitterBlocks
+}
+{ +Block Name: ForcefieldShieldEmitter1x1
+  Group: cpgForcefieldEmitter
+  Category: Devices
+  Info: bkiForcefieldShieldEmitterBlocks, display: true
+  Material: forcefield
+  ShowBlockName: true
+  Shape: ModelEntity
+  SizeInBlocks: "1,1,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield1x1Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  TemplateRoot: ForcefieldShieldEmitterBlocks
+  AllowPlacingAt: "Base,MS", display: true
+  IsOxygenTight: false, display: true
+  IsActivateable: true
+  IsAccessible: true, type: bool      
+  EnergyIn: 350, type: int, display: true, formatter: Watt
+  #EnergyDynamicGroup: Shield
+  #EnergyInIdle: 1000, type: int, display: true, formatter: Watt
+  CPUIn: 150, type: int, display: true  
+  HitPoints: 300, type: int, display: true    #for testing!
+  Mass: 40, type: float, display: true, formatter: Kilogram
+  BlockColor: "110,110,110" 
+}
+{ +Block Name: ForcefieldShieldEmitter1x1_Half, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "1,1,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield1x1_Half_Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 180, type: int, display: true, formatter: Watt 
+  CPUIn: 80, type: int, display: true  
+  HitPoints: 150, type: int, display: true 
+}
+{ +Block Name: ForcefieldShieldEmitter1x2, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "1,2,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield1x2Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 525, type: int, display: true, formatter: Watt 
+  CPUIn: 225, type: int, display: true  
+  HitPoints: 621, type: int, display: true 
+}
+{ +Block Name: ForcefieldShieldEmitter1x3, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "1,3,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield1x3Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 700, type: int, display: true, formatter: Watt 
+  CPUIn: 300, type: int, display: true  
+  HitPoints: 937, type: int, display: true 
+}
+{ +Block Name: ForcefieldShieldEmitter2x3, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "2,3,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield2x3Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 1225, type: int, display: true, formatter: Watt 
+  CPUIn: 525, type: int, display: true  
+  HitPoints: 1887, type: int, display: true 
+}
+{ +Block Name: ForcefieldShieldEmitter2x4, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "2,4,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield2x4Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 1575, type: int, display: true, formatter: Watt 
+  CPUIn: 675, type: int, display: true  
+  HitPoints: 2523, type: int, display: true 
+}
+{ +Block Name: ForcefieldShieldEmitter3x5, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "3,5,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield3x5Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 2800, type: int, display: true, formatter: Watt 
+  CPUIn: 1200, type: int, display: true  
+  HitPoints: 4751, type: int, display: true 
+}
+{ +Block Name: ForcefieldShieldEmitter4x5, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "4,5,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield4x5Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 3675, type: int, display: true, formatter: Watt 
+  CPUIn: 1575, type: int, display: true  
+  HitPoints: 6346, type: int, display: true 
+}
+{ +Block Name: ForcefieldShieldEmitter5x5, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "5,5,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield5x5Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 4550, type: int, display: true, formatter: Watt 
+  CPUIn: 1950, type: int, display: true  
+  HitPoints: 7943, type: int, display: true 
+}
+{ +Block Name: ForcefieldShieldEmitter6x7, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "6,7,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield6x7Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 7525, type: int, display: true, formatter: Watt 
+  CPUIn: 3225, type: int, display: true  
+  HitPoints: 13382, type: int, display: true 
+}
+{ +Block Name: ForcefieldShieldEmitter7x7, Ref: ForcefieldShieldEmitter1x1 
+  SizeInBlocks: "7,7,1", display: true
+  Model: @models2/Entities/Forcefields/ForcefieldShield7x7Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3 
+  EnergyIn: 8750, type: int, display: true, formatter: Watt 
+  CPUIn: 3750, type: int, display: true  
+  HitPoints: 15625, type: int, display: true 
+}
+
+{ Block Name: ForcefieldWalkwayEmitterBlocks
+  Material: forcefield
+  Info: bkiForcefieldWalkwayEmitterBlocks, display: true
+  ShowBlockName: true
+  Shape: Invisible
+  MarketPrice: 2600, display: true
+  # Model: @models2/Entities/Forcefields/ForcefieldEmitter1x1Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  IsOxygenTight: false, display: true
+  # IsActivateable: true
+  Category: Devices
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram 
+  Volume: 10, type: float, display: true, formatter: Liter
+  StackSize: 2000
+  BlockColor: "110,110,110"
+  ChildBlocks: "ForcefieldWalkwayEmitter1x1,ForcefieldWalkwayEmitter1x1_HalfHeight, ForcefieldWalkwayEmitter1x1_QuarterHeight,ForcefieldWalkwayEmitter1x1_Half,ForcefieldWalkwayEmitter1x1_Ramp,ForcefieldWalkwayEmitter1x1_RampHalf,ForcefieldWalkwayEmitter1x1_RampQuarterToHalf,ForcefieldWalkwayEmitter1x1_RampQuarter,ForcefieldWalkwayEmitter1x2_Ramp,ForcefieldWalkwayEmitter1x3_Ramp,ForcefieldWalkwayEmitter1x5_Ramp"
+  
+  UnlockCost: 7, display: true
+  UnlockLevel: 10, display: true
+  # TechTreeNames: "Small Vessel,Hover Vessel,Base,Capital Vessel"
+  TechTreeNames: Misc
+  TechTreeParent: ForcefieldEmitterBlocks
+}
+{ +Block Name: ForcefieldWalkwayEmitter1x1       #White
+  Group: cpgForcefieldEmitter
+  Info: bkiForcefieldWalkwayEmitterBlocks, display: true
+  Material: forcefield
+  ShowBlockName: true
+  Shape: ModelEntity
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x1Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  TemplateRoot: ForcefieldWalkwayEmitterBlocks
+  AllowPlacingAt: "Base,MS", display: true
+  IsOxygenTight: false, display: true
+  IsActivateable: true
+  IsAccessible: true, type: bool      
+  Category: Devices
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+  BlockColor: "110,110,110"
+  SizeInBlocks: "1,1,1", display: true
+  #OccupySizeInBlocks: true    # shape has no collider so don't voxelize it   NEW: we added a special O2 collider so voxelize it now
+  #Collide: "movement,sight"  #Only for walkway. Does not stop bullets
+}
+{ +Block Name: ForcefieldWalkwayEmitter1x1_HalfHeight, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x1_HalfHeight_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+} 
+{ +Block Name: ForcefieldWalkwayEmitter1x1_QuarterHeight, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x1_QuarterHeight_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+} 
+{ +Block Name: ForcefieldWalkwayEmitter1x1_Half, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x1_Half_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+} 
+{ +Block Name: ForcefieldWalkwayEmitter1x1_Ramp, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x1_Ramp_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+} 
+{ +Block Name: ForcefieldWalkwayEmitter1x1_RampHalf, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x1_RampHalf_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+} 
+{ +Block Name: ForcefieldWalkwayEmitter1x1_RampQuarterToHalf, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x1_RampQuarterToHalf_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+} 
+{ +Block Name: ForcefieldWalkwayEmitter1x1_RampQuarter, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x1_RampQuarter_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+} 
+{ +Block Name: ForcefieldWalkwayEmitter1x2_Ramp, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x2_Ramp_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+  SizeInBlocks: "1,2,1", display: true
+} 
+{ +Block Name: ForcefieldWalkwayEmitter1x3_Ramp, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x3_Ramp_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+  SizeInBlocks: "1,3,1", display: true
+} 
+{ +Block Name: ForcefieldWalkwayEmitter1x5_Ramp, Ref: ForcefieldWalkwayEmitter1x1
+  Model: @models2/Entities/Forcefields/ForcefieldWalkway1x5_Ramp_Prefab
+  EnergyIn: 100, type: int, display: true, formatter: Watt
+  HitPoints: 80, type: int, display: true
+  Mass: 40, type: float, display: true, formatter: Kilogram
+  SizeInBlocks: "1,5,3", display: true
+}
+
+# Field RepairBay
+
+{ +Block Name: FieldRepairStation
+  Class: FieldRepairStation
+  Info: bkiFieldRepairStation, display: true
+  IndexName: Container
+  Group: cpgRepair
+  Category: Devices
+  MarketPrice: 120538, display: true
+  GridSize: "4,4"
+  Material: metallight
+  Shape: ModelEntity
+  Model: @models2/Devices/FieldRepairStationPrefab
+  #Mesh-Damage-1: Mesh/D0
+  #Mesh-Damage-2: Mesh/D1
+  #Mesh-Damage-3: Mesh/D2
+  #Mesh-Damage-4: Mesh/D3
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  DropInventoryEntity: DropContainer 
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  BlockColor: "110,110,110"
+  IsActivateable: true
+  IsActivateableInCP: false
+  IsAccessible: true, type: bool
+  IsLockable: true
+  IsDuplicateable: false
+  IsOxygenTight: false, display: true 
+  StackSize: 500 
+  Mass: 630, type: float, display: true, formatter: Kilogram
+  Volume: 800, type: float, display: true, formatter: Liter
+ # VolumeCapacity: 200, type: float, display: true, formatter: Liter 
+  CPUIn: 10000, type: int, display: true
+  HitPoints: 500, type: int, display: true
+  EnergyIn: 1500, type: int, display: true, formatter: Watt
+  SoundOpen: UseActions/LightBarrier
+  SoundClose: UseActions/LightBarrier
+  MaxCount: 1, type: int, display: true
+  ForceMaxCount: true 
+
+  UnlockCost: 10, display: true
+  UnlockLevel: 10, display: true
+  TechTreeParent: RepairStation
+  TechTreeNames: "Base,Capital Vessel"
+} 
+
+# Shield Extenders
+
+{ Block Name: ShieldExtenderBA
+  Info: bkiShieldExtender, display: true
+  Group: cpgForcefieldEmitter
+  IndexName: ShieldExtender
+  Category: Devices
+  Material: metal
+  Shape: ModelEntity
+  ShowBlockName: true
+  Model: @models/Blocks/Devices/CapacitorFWNPrefab
+  DropMeshfile: Entities/Misc/BagSmallPrefab
+  Place: Free
+  AllowPlacingAt: "Base", display: true
+  SizeInBlocks: "1,1,1", display: true
+  BlockColor: "110,110,110"
+  # SizeInBlocksLocked: "Base"
+  StackSize: 250
+  MaxCount: 1, type: int, display: true
+  ForceMaxCount: true     
+  IsAccessible: true, type: bool
+  IsActivatedOnPlace: true
+  IsDuplicateable: false
+  EnergyIn: 3125, type: int, display: true, formatter: Watt
+  HitPoints: 500, type: int, display: true 
+  Mass: 6460, type: float, display: true, formatter: Kilogram
+  Volume: 2160, type: float, display: true, formatter: Liter
+  CPUIn: 16055, type: int, display: true 
+  ShieldCapacityBonus: 12500, type: int, display: true
+  ShieldRechargeBonus: 0, type: int, display: true
+  MarketPrice: 82672, display: true 
+
+  ShowUser: Yes
+
+  UnlockCost: 20, display: true
+  UnlockLevel: 25, display: true
+  TechTreeParent: ShieldGeneratorBA
+  TechTreeNames: "Base" 
+}
+
+{ Block Name: ShieldExtenderCV, Ref: ShieldExtenderBA 
+  AllowPlacingAt: "MS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  BlockColor: "110,110,110"
+  # SizeInBlocksLocked: "MS"
+  EnergyIn: 2250, type: int, display: true, formatter: Watt  
+  HitPoints: 500, type: int, display: true 
+  Mass: 6460, type: float, display: true, formatter: Kilogram
+  Volume: 2160, type: float, display: true, formatter: Liter
+  CPUIn: 11765, type: int, display: true 
+  ShieldCapacityBonus: 9000, type: int, display: true
+  ShieldRechargeBonus: 0, type: int, display: true
+  MarketPrice: 82672, display: true 
+
+  ShowUser: Yes
+
+  TechTreeParent: ShieldGeneratorCV
+  TechTreeNames: "Capital Vessel" 
+}
+
+{ Block Name: ShieldExtenderSV, Ref: ShieldExtenderBA 
+  AllowPlacingAt: "SS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  BlockColor: "110,110,110"
+  # SizeInBlocksLocked: "SS"
+  MaxCount: 1, type: int, display: true
+  EnergyIn: 450, type: int, display: true, formatter: Watt  
+  HitPoints: 250, type: int, display: true 
+  Mass: 815, type: float, display: true, formatter: Kilogram
+  Volume: 93.75, type: float, display: true, formatter: Liter
+  CPUIn: 10595, type: int, display: true 
+  ShieldCapacityBonus: 2000, type: int, display: true
+  ShieldRechargeBonus: 0, type: int, display: true
+  MarketPrice: 11411, display: true 
+
+  ShowUser: Yes
+
+  UnlockLevel: 12, display: true
+  TechTreeParent: ShieldGeneratorSV
+  TechTreeNames: "Small Vessel" 
+}
+
+{ Block Name: ShieldExtenderHV, Ref: ShieldExtenderBA 
+  AllowPlacingAt: "GV", display: true
+  SizeInBlocks: "1,1,1", display: true
+  BlockColor: "110,110,110"
+  # SizeInBlocksLocked: "GV" 
+  MaxCount: 1, type: int, display: true
+  EnergyIn: 450, type: int, display: true, formatter: Watt  
+  HitPoints: 250, type: int, display: true 
+  Mass: 815, type: float, display: true, formatter: Kilogram
+  Volume: 93.75, type: float, display: true, formatter: Liter
+  CPUIn: 10010, type: int, display: true 
+  ShieldCapacityBonus: 3000, type: int, display: true
+  ShieldRechargeBonus: 0, type: int, display: true
+  MarketPrice: 8877, display: true 
+
+  ShowUser: Yes
+
+  UnlockLevel: 12, display: true
+  TechTreeParent: ShieldGeneratorHV
+  TechTreeNames: "Hover Vessel" 
+}
+
+{ +Block Name: ThrusterJetMSRound1x3x1   
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Class: Thruster
+  IndexName: Thruster
+  Group: cpgThruster
+  EssentialCategory: cpgThruster
+  Category: Devices
+  Place: Free
+  Material: metalhard
+  Shape: ModelEntity
+  ShowBlockName: true
+  # ModelOffset: "0,0.5,0"
+  ParticleOffset: "-1.3,0.5,0.5"
+  BlockColor: "110,110,110"
+  AllowPlacingAt: MS, display: true                 
+  OccupySizeInBlocks: true     # do not allow to place blocks in the middle 
+  IsDuplicateable: false
+  IsActivateable: true
+  IsOxygenTight: true, display: true
+  IsIgnoreLC: true
+  StackSize: 500
+  Info: bkiThrusterJetMS, display: true
+  #CustomIcon: ThrusterJetRound1x3x1
+  Model: @models/Blocks/Thrusters/ThrusterJetMSRound1x3x1Prefab
+  SizeInBlocks: "1,3,1", display: true
+  MarketPrice: 8609, display: true
+  Volume: 1140, type: float, display: true, formatter: Liter
+  Mass: 2733, type: float, display: true, formatter: Kilogram
+  HitPoints: 1225, type: int, display: true
+  ThrusterForce: 19301, type: int, display: true, formatter: Newton
+  ThrusterBoosterFactor: 1.25, type: float, display: true
+  EnergyIn: 1096, type: int, display: true, formatter: Watt
+  CPUIn: 10803, type: int, display: true
+  Temperature: 1017, display: true
+  Radiation: 4, display: true
+  BlastParticleIndex: 4
+  BlastRadius: 2
+  BlastDamage: 113
+  UnlockCost: 10, display: true
+  UnlockLevel: 10, display: true
+  TechTreeParent: ThrusterMSDirectional
+  TechTreeNames: Capital Vessel
+}
+{ +Block Name: ThrusterJetMSRound2x5x2, Ref: ThrusterJetMSRound1x3x1 
+  Info: bkiThrusterJetMS, display: true
+  #CustomIcon: ThrusterJetRound2x5x2
+  Model: @models/Blocks/Thrusters/ThrusterJetMSRound2x5x2Prefab
+  SizeInBlocks: "2,5,2", display: true
+  MarketPrice: 39272, display: true
+  Volume: 3343, type: float, display: true, formatter: Liter
+  Mass: 11128, type: float, display: true, formatter: Kilogram
+  HitPoints: 6503, type: int, display: true
+  ThrusterForce: 193847, type: int, display: true, formatter: Newton
+  ThrusterBoosterFactor: 1.25, type: float, display: true
+  EnergyIn: 5496, type: int, display: true, formatter: Watt
+  CPUIn: 65502, type: int, display: true
+  Temperature: 1205, display: true
+  Radiation: 6, display: true
+  BlastParticleIndex: 4
+  BlastRadius: 3
+  BlastDamage: 150
+  UnlockCost: 12, display: true
+  UnlockLevel: 12, display: true
+  TechTreeParent: ThrusterJetMSRound1x3x1
+  TechTreeNames: Capital Vessel
+  UpgradeTo: ThrusterJetMSRound2x5x2V2, display: true
+}
+{ +Block Name: ThrusterJetMSRound2x5x2V2, Ref: ThrusterJetMSRound1x3x1 
+  Info: bkiThrusterJetMSvariant, display: true
+  #CustomIcon: ThrusterJetRound2x5x2V2
+  Model: @models/Blocks/Thrusters/ThrusterJetMSRound2x5x2V2Prefab
+  SizeInBlocks: "2,5,2", display: true
+  MarketPrice: 39272, display: true
+  Volume: 3343, type: float, display: true, formatter: Liter
+  Mass: 11128, type: float, display: true, formatter: Kilogram
+  HitPoints: 6503, type: int, display: true
+  ThrusterForce: 193847, type: int, display: true, formatter: Newton
+  ThrusterBoosterFactor: 1.25, type: float, display: true
+  EnergyIn: 5496, type: int, display: true, formatter: Watt
+  CPUIn: 65502, type: int, display: true
+  Temperature: 1205, display: true
+  Radiation: 6, display: true
+  BlastParticleIndex: 4
+  BlastRadius: 3
+  BlastDamage: 150
+  UnlockCost: 12, display: true
+  UnlockLevel: 12, display: true
+  TechTreeParent: ThrusterJetMSRound1x3x1
+  TechTreeNames: Capital Vessel
+  DowngradeTo: ThrusterJetMSRound2x5x2, display: true
+}
+{ +Block Name: ThrusterJetMSRound3x7x3, Ref: ThrusterJetMSRound1x3x1 
+  Info: bkiThrusterJetMS, display: true
+  #CustomIcon: ThrusterJetRound3x7x3
+  Model: @models/Blocks/Thrusters/ThrusterJetMSRound3x7x3Prefab
+  SizeInBlocks: "3,7,3", display: true
+  MarketPrice: 98341, display: true
+  Volume: 6408, type: float, display: true, formatter: Liter
+  Mass: 26010, type: float, display: true, formatter: Kilogram
+  HitPoints: 17849, type: int, display: true
+  ThrusterForce: 782357, type: int, display: true, formatter: Newton
+  ThrusterBoosterFactor: 1.25, type: float, display: true
+  EnergyIn: 14575, type: int, display: true, formatter: Watt
+  CPUIn: 194828, type: int, display: true
+  Temperature: 1336, display: true
+  Radiation: 7, display: true
+  BlastParticleIndex: 4
+  BlastRadius: 3
+  BlastDamage: 178
+  UnlockCost: 15, display: true
+  UnlockLevel: 15, display: true
+  TechTreeParent: ThrusterJetMSRound2x5x2
+  TechTreeNames: Capital Vessel
+}
+{ +Block Name: ThrusterJetMSRound3x10x3, Ref: ThrusterJetMSRound1x3x1 
+  Info: bkiThrusterJetMS, display: true
+  #CustomIcon: ThrusterJetRound3x10x3
+  Model: @models/Blocks/Thrusters/ThrusterJetMSRound3x10x3Prefab
+  SizeInBlocks: "3,10,3", display: true
+  MarketPrice: 130814, display: true
+  Volume: 7844, type: float, display: true, formatter: Liter
+  Mass: 33867, type: float, display: true, formatter: Kilogram
+  HitPoints: 24431, type: int, display: true
+  ThrusterForce: 1207163, type: int, display: true, formatter: Newton
+  ThrusterBoosterFactor: 1.25, type: float, display: true
+  EnergyIn: 19737, type: int, display: true, formatter: Watt
+  CPUIn: 273406, type: int, display: true
+  Temperature: 1379, display: true
+  Radiation: 8, display: true
+  BlastParticleIndex: 4
+  BlastRadius: 3
+  BlastDamage: 188
+  UnlockCost: 20, display: true
+  UnlockLevel: 20, display: true
+  TechTreeParent: ThrusterJetMSRound3x7x3
+  TechTreeNames: Capital Vessel
+  UpgradeTo: ThrusterJetMSRound3x10x3V2, display: true
+}
+{ +Block Name: ThrusterJetMSRound3x10x3V2, Ref: ThrusterJetMSRound1x3x1 
+  Info: bkiThrusterJetMSvariant, display: true
+  #CustomIcon: ThrusterJetRound3x10x3V2
+  Model: @models/Blocks/Thrusters/ThrusterJetMSRound3x10x3V2Prefab
+  SizeInBlocks: "3,10,3", display: true
+  MarketPrice: 130814, display: true
+  Volume: 7844, type: float, display: true, formatter: Liter
+  Mass: 33867, type: float, display: true, formatter: Kilogram
+  HitPoints: 24431, type: int, display: true
+  ThrusterForce: 1207163, type: int, display: true, formatter: Newton
+  ThrusterBoosterFactor: 1.25, type: float, display: true
+  EnergyIn: 19737, type: int, display: true, formatter: Watt
+  CPUIn: 273406, type: int, display: true
+  Temperature: 1379, display: true
+  Radiation: 8, display: true
+  BlastParticleIndex: 4
+  BlastRadius: 3
+  BlastDamage: 188
+  UnlockCost: 20, display: true
+  UnlockLevel: 20, display: true
+  TechTreeParent: ThrusterJetMSRound2x5x2V2
+  TechTreeNames: Capital Vessel
+  DowngradeTo: ThrusterJetMSRound3x10x3, display: true
+}
+{ +Block Name: ThrusterJetMSRound3x13x3, Ref: ThrusterJetMSRound1x3x1 
+  Info: bkiThrusterJetMS, display: true
+  #CustomIcon: ThrusterJetRound3x13x3
+  Model: @models/Blocks/Thrusters/ThrusterJetMSRound3x13x3Prefab
+  SizeInBlocks: "3,13,3", display: true
+  MarketPrice: 161365, display: true
+  Volume: 9102, type: float, display: true, formatter: Liter
+  Mass: 41124, type: float, display: true, formatter: Kilogram
+  HitPoints: 30776, type: int, display: true
+  ThrusterForce: 1660814, type: int, display: true, formatter: Newton
+  ThrusterBoosterFactor: 1.25, type: float, display: true
+  EnergyIn: 24667, type: int, display: true, formatter: Watt
+  CPUIn: 350796, type: int, display: true
+  Temperature: 1412, display: true
+  Radiation: 8, display: true
+  BlastParticleIndex: 4
+  BlastRadius: 3
+  BlastDamage: 196
+  UnlockCost: 25, display: true
+  UnlockLevel: 25, display: true
+  TechTreeParent: ThrusterJetMSRound3x10x3
+  TechTreeNames: Capital Vessel
+  UpgradeTo: ThrusterJetMSRound3x13x3V2, display: true
+}
+{ +Block Name: ThrusterJetMSRound3x13x3V2, Ref: ThrusterJetMSRound1x3x1 
+  Info: bkiThrusterJetMSvariant, display: true
+  #CustomIcon: ThrusterJetRound3x13x3V2
+  Model: @models/Blocks/Thrusters/ThrusterJetMSRound3x13x3V2Prefab
+  SizeInBlocks: "3,13,3", display: true
+  MarketPrice: 161365, display: true
+  Volume: 9102, type: float, display: true, formatter: Liter
+  Mass: 41124, type: float, display: true, formatter: Kilogram
+  HitPoints: 30776, type: int, display: true
+  ThrusterForce: 1660814, type: int, display: true, formatter: Newton
+  ThrusterBoosterFactor: 1.25, type: float, display: true
+  EnergyIn: 24667, type: int, display: true, formatter: Watt
+  CPUIn: 350796, type: int, display: true
+  Temperature: 1412, display: true
+  Radiation: 8, display: true
+  BlastParticleIndex: 4
+  BlastRadius: 3
+  BlastDamage: 196
+  UnlockCost: 25, display: true
+  UnlockLevel: 25, display: true
+  TechTreeParent: ThrusterJetMSRound3x10x3V2
+  TechTreeNames: Capital Vessel
+  DowngradeTo: ThrusterJetMSRound3x13x3, display: true
 }
