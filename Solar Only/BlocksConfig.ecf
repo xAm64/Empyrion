@@ -1574,7 +1574,7 @@
     Prob: 0.2
   }
 }
-# available free 136
+# available free NOT! 136 used by DF Scenario (Symelite Resource)
 
 #  136 - 255 available free BUT NEED TO BE KEPT FREE for TEXTURES only!!! (adding any other block or device will break textures)
 
@@ -3328,6 +3328,7 @@
   Mass: 100, type: float, display: true, formatter: Kilogram  
   StackSize: 1000
   ShowUser: No
+  RepFac: 0.01
 }
 
 # Still needed?
@@ -3468,6 +3469,7 @@
 
 { +Block Id: 344, Name: GeneralPurposeConsole, Ref: DecoTemplate
   Class: NPCDialogue    
+  NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   Material: metallight
   Shape: ModelEntity 
@@ -3475,7 +3477,6 @@
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!   
   Group: cpgCrewStationAlien
   Category: Deco Blocks
-  NPCModelRotation: false
   SizeInBlocks: "1,1,1", display: true
   SizeInBlocksLocked: "Base,MS"
   Place: Free
@@ -3956,12 +3957,12 @@
   BlockSizeScale: 2   
   ChildShapes: "Cube, CutCornerE, CutCornerB, SlicedCornerA1, CornerHalfB, CornerSmallC, CornerC, CornerHalfA3, RampCMedium, RampA, RampC, CornerRoundB, CornerRoundADouble, RoundCornerA, CubeRoundConnectorA, EdgeRound, Cylinder, RampRoundFTriple, RampRoundF, SmallCornerRoundB, SmallCornerRoundA, SphereHalf, Cone, ConeB, CutCornerC, Cylinder6Way, CornerRoundATriple, CornerA, CornerHalfA1, CornerDoubleA3, CornerSmallB, PyramidA"
   UpgradeTo: HullArmoredFullSmall, display: true  
-  DowngradeTo: PlasticFullSmall
+  DowngradeTo: PlasticFullSmall, display: true 
 }
 { +Block Id: 382, Name: HullThinSmall, Ref: HullFullSmall
   ChildShapes: "Wall, WallLShape, WallSloped, WallSloped3Corner, WallSlopedC, WallSlopedCMediumright, WallSlopedAright, WallSlopedCMediumleft, WallSlopedAleft, WallCornerRoundB, WallSlopedRound, WallEdgeRound, WallEdgeRound3Way, WallCornerRoundA, WallCornerRoundC, WallSloped3CornerLow, WallCorner, WallLow, CubeHalf, RampADouble, RampCLow, RampBMedium, RampD, CutCornerEMedium, Beam, CylinderThin, CylinderThinTJoint, CylinderL, PipesFence, FenceTop, RampCHalf, CornerHalfA3Medium"
   UpgradeTo: HullArmoredThinSmall, display: true
-  DowngradeTo: PlasticThinSmall
+  DowngradeTo: PlasticThinSmall, display: true 
 }
 
 # ChildBlocks of HullArmoredSmallBlocks
@@ -4258,13 +4259,13 @@
   BlockSizeScale: 8 
   ChildShapes: "Cube, CutCornerE, CutCornerB, SlicedCornerA1, CornerHalfB, CornerSmallC, CornerC, CornerHalfA3, RampCMedium, RampA, RampC, CornerRoundB, CornerRoundADouble, RoundCornerA, CubeRoundConnectorA, EdgeRound, Cylinder, RampRoundFTriple, RampRoundF, SmallCornerRoundB, SmallCornerRoundA, SphereHalf, Cone, ConeB, CutCornerC, Cylinder6Way, CornerRoundATriple, CornerA, CornerHalfA1, CornerDoubleA3, CornerSmallB, PyramidA"
   UpgradeTo: ConcreteArmoredFull, display: true
-  DowngradeTo: WoodFull
+  DowngradeTo: WoodFull, display: true 
 }
 
 { +Block Id: 401, Name: ConcreteThin, Ref: ConcreteFull
   ChildShapes: "Wall, WallLShape, WallSloped, WallSloped3Corner, WallSlopedC, WallSlopedCMediumright, WallSlopedAright, WallSlopedCMediumleft, WallSlopedAleft, WallCornerRoundB, WallSlopedRound, WallEdgeRound, WallEdgeRound3Way, WallCornerRoundA, WallCornerRoundC, WallSloped3CornerLow, WallCorner, WallLow, CubeHalf, RampADouble, RampCLow, RampBMedium, RampD, CutCornerEMedium, Beam, CylinderThin, CylinderThinTJoint, CylinderL, PipesFence, FenceTop, RampCHalf, CornerHalfA3Medium"
   UpgradeTo: ConcreteArmoredThin, display: true
-  DowngradeTo: WoodThin
+  DowngradeTo: WoodThin, display: true 
 }
 
 #  Steel Block (large) - block group  
@@ -4308,13 +4309,13 @@
   BlockSizeScale: 8    
   ChildShapes: "Cube, CutCornerE, CutCornerB, SlicedCornerA1, CornerHalfB, CornerSmallC, CornerC, CornerHalfA3, RampCMedium, RampA, RampC, CornerRoundB, CornerRoundADouble, RoundCornerA, CubeRoundConnectorA, EdgeRound, Cylinder, RampRoundFTriple, RampRoundF, SmallCornerRoundB, SmallCornerRoundA, SphereHalf, Cone, ConeB, CutCornerC, Cylinder6Way, CornerRoundATriple, CornerA, CornerHalfA1, CornerDoubleA3, CornerSmallB, PyramidA"
   UpgradeTo: HullArmoredFullLarge, display: true
-  DowngradeTo: PlasticFullLarge
+  DowngradeTo: PlasticFullLarge, display: true 
 }
 
 { +Block Id: 404, Name: HullThinLarge, Ref: HullFullLarge
   ChildShapes: "Wall, WallLShape, WallSloped, WallSloped3Corner, WallSlopedC, WallSlopedCMediumright, WallSlopedAright, WallSlopedCMediumleft, WallSlopedAleft, WallCornerRoundB, WallSlopedRound, WallEdgeRound, WallEdgeRound3Way, WallCornerRoundA, WallCornerRoundC, WallSloped3CornerLow, WallCorner, WallLow, CubeHalf, RampADouble, RampCLow, RampBMedium, RampD, CutCornerEMedium, Beam, CylinderThin, CylinderThinTJoint, CylinderL, PipesFence, FenceTop, RampCHalf, CornerHalfA3Medium"
   UpgradeTo: HullArmoredThinLarge, display: true
-  DowngradeTo: PlasticThinLarge
+  DowngradeTo: PlasticThinLarge, display: true 
 }
 
 #  Hardened Steel Block (large) - block group  
@@ -5395,7 +5396,7 @@
   BlastParticleIndex: 4
   BlastRadius: 3
   BlastDamage: 100
-  UpgradeTo: ThrusterSVRoundNormalT2, display: false
+  UpgradeTo: ThrusterSVRoundNormalT2, display: true
 }
 { +Block Id: 450, Name: ThrusterSVRoundArmored, Ref: ThrusterSVRoundNormal
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterSSRoundArmoredPrefab
@@ -5543,7 +5544,7 @@
   IsDuplicateable: false
   IsActivateable: true
   IsOxygenTight: true, display: true
-  IsIgnoreLC: true
+  IsIgnoreLC: true 
   Mass: 2361, type: float, display: true, formatter: Kilogram
   HitPoints: 500, type: int, display: true
   ThrusterForce: 7200, type: int, display: true, formatter: Newton
@@ -7238,7 +7239,7 @@
   TechTreeParent: ThrusterSVRoundBlocks
   TechTreeNames: Small Vessel
   UpgradeTo: null, display: false
-  DowngradeTo: ThrusterSVRoundNormal
+  DowngradeTo: ThrusterSVRoundNormal, display: true 
 }  
 { +Block Id: 547, Name: ThrusterSVRoundLarge, Ref: ThrusterSVRoundNormal
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterGVRoundLargePrefab
@@ -7466,9 +7467,9 @@
   Model: @models2/Entities/Decorations/HolographicAIConsole/HolographicAIConsolePrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!  
   Class: NPCDialogue    
+  NPCModelRotation: false
   Group: cpgCrewStationAlien
   Category: Deco Blocks
-  NPCModelRotation: false
   SizeInBlocks: "1,1,1", display: true
   SizeInBlocksLocked: "Base,MS"
   Place: Free
@@ -9722,6 +9723,7 @@
   EnergyIn: 25, type: int, display: true, formatter: Watt
   CPUIn: 7200, type: int, display: true
   HitPoints: 3000, type: int, display: true
+  # UpgradeTo: WeaponMSLaserFactionTalonar
   # Damage: 53, display: true
   # AmmoCapacity: 150, display: true
   # AmmoType: PulseLaserChargeMSWeapon, display: true
@@ -11046,7 +11048,7 @@
   UnlockLevel: 10, display: true
   TechTreeParent: ConstructorT1V2
   TechTreeNames: "Base,Capital Vessel"
-  DowngradeTo: ConstructorT1V2
+  DowngradeTo: ConstructorT1V2, display: true 
 }
 # open passenger seat 
 { +Block Id: 715, Name: PassengerSeat2SV
@@ -11246,7 +11248,7 @@
   StackSize: 250
   BlockColor: "110,110,110"
   Category: Devices
-  UpgradeTo: WarpDriveCVEpic
+  UpgradeTo: WarpDriveT2, display: true
   Info: bkiWarpDrive, display: true
   EnergyIn: 25, type: int, display: true, formatter: Watt
   CPUIn: 40000, type: int, display: true
@@ -11257,9 +11259,9 @@
   BlastDamage: 200
 
   ItemPerAU: PentaxidCrystal, display: true
-  CostPerAU: 1, display: true
+  CostPerAU: 2, display: true
   CostPerLY: 1, display: true
-  RangeAU: 50, display: true
+  RangeAU: 24, display: true
   RangeLY: 30, display: true
       
   Radiation: 25, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
@@ -13169,7 +13171,7 @@
   }
 }
 
-# available free  865, 866
+# available free NOT  865, 866 used by DF Scenario (Symelite Blocks)
 
 { Block Id: 867, Name: OmicronWaterleaf
   Material: woodsoft
@@ -13879,7 +13881,7 @@
   IsAccessible: false, type: bool
   IsOxygenTight: false, display: true
   Category: Deco Blocks
-  ChildBlocks: "ScifiBed, Bed, BunkBed, BunkBed02, Sofa, ScifiSofa, ScifiLargeSofa, KitchenTable, ScifiTable, ScifiTableV2, ReceptionTable, ReceptionTableCorner, ReceptionTableThin, ReceptionTableCornerThin, SmallTable, ControlStation, TableTV, ScifiChair, ScifiNightstand, ScifiStorage, Bookshelf, KitchenCounter, BathroomCounter, Toilet, Shower, ScifiShower, ToiletModern, Closet, ReceptionTableWorkstation"  #29 of 32
+  ChildBlocks: "ScifiBed, Bed, BunkBed, BunkBed02, Sofa, ScifiSofa, ScifiLargeSofa, KitchenTable, ScifiTable, ScifiTableV2, ReceptionTable, ReceptionTableCorner, ReceptionTableThin, ReceptionTableCornerThin, SmallTable, ControlStation, TableTV, ScifiChair, ScifiNightstand, ScifiStorage, Bookshelf, KitchenCounter, BathroomCounter, Toilet, Shower, ScifiShower, ToiletModern, Closet, ReceptionTableWorkstation"   
   
   UnlockCost: 0
   UnlockLevel: 1 
@@ -13905,7 +13907,7 @@
   BlastRadius: 3
   BlastDamage: 80
   EnergyIn: 1, type: int, display: false, formatter: Watt
-  ChildBlocks: "ConsoleMS01, ConsoleSmallMS01, ConsoleLargeMS01, ConsoleLargeMS01a, ConsoleLargeMS02, ConsoleMapMS01, ScifiMediaCenter, ScifiComputerTable, HoloScreen01, HoloScreen02, HoloScreen03, HoloScreen04, HoloScreen05, StationConsole, GeneralPurposeConsole, ConsoleTrading, ComputerStation_C01, ComputerStation_C02, ConsoleDesk_C03, ConsoleDesk_C04, ConsoleDesk_C05, StandConsole_C06, StandConsole_C07, StandConsole_C17, ConsoleStation_C18"  #25 of 32
+  ChildBlocks: "ConsoleMS01, ConsoleSmallMS01, ConsoleLargeMS01, ConsoleLargeMS01a, ConsoleLargeMS02, ConsoleMapMS01, ScifiMediaCenter, ScifiComputerTable, HoloScreen01, HoloScreen02, HoloScreen03, HoloScreen04, HoloScreen05, StationConsole, GeneralPurposeConsole, ConsoleTrading, ComputerStation_C01, ComputerStation_C02, ConsoleDesk_C03, ConsoleDesk_C04, ConsoleDesk_C05, StandConsole_C06, StandConsole_C07, StandConsole_C17, ConsoleStation_C18"  
   
   UnlockCost: 0
   UnlockLevel: 1 
@@ -14412,12 +14414,23 @@
 }
 { +Block Id: 952, Name: HoloScreen03, Ref: HoloScreen01
   Model: @models2/Entities/Decorations/HolographicScreens/HolographicScreen03Prefab
+  Group: cpgEquipment
+  IsActivateable: true
+  IsActivateableInCP: true
+  IsAccessible: true, type: bool
 }
 { +Block Id: 953, Name: HoloScreen04, Ref: HoloScreen01
   Model: @models2/Entities/Decorations/HolographicScreens/HolographicScreen04Prefab
 }
 { +Block Id: 954, Name: HoloScreen05, Ref: HoloScreen01
   Model: @models2/Entities/Decorations/HolographicScreens/HolographicScreen05Prefab
+  Group: cpgEquipment
+  IsActivateable: true
+  IsActivateableInCP: true
+  IsAccessible: true, type: bool
+
+  Class: NPCDialogue
+  NPCModelRotation: false
 }
 { Block Id: 955, Name: Cactus1
   Class: CropsGrown
@@ -18208,6 +18221,7 @@
 { +Block Id: 1241, Name: ScifiTableNPC3, Ref: NPCAlienTemplate
   # AllowedInBlueprint: false, display: true
   # CanPickup: true
+  NPCModelRotation: false
   Model: @models2/Entities/Decorations/DecoNPC/ScifiTableNPC3Prefab
   EnergyIn: 0, type: int, display: true, formatter: Watt
   ShowUser: Yes
@@ -18215,6 +18229,7 @@
 { +Block Id: 1242, Name: ScifiLargeSofaNPC, Ref: NPCAlienTemplate
   # AllowedInBlueprint: false, display: true
   # CanPickup: true
+  NPCModelRotation: false  
   Model: @models2/Entities/Decorations/DecoNPC/ScifiLargeSofaNPCPrefab
   EnergyIn: 0, type: int, display: true, formatter: Watt
   ShowUser: Yes
@@ -18222,6 +18237,7 @@
 { +Block Id: 1243, Name: ConsoleSmallNPC, Ref: NPCAlienTemplate
   Group: cpgCrewStationAlien
   IsAccessible: true, type: bool
+  NPCModelRotation: false
   # AllowedInBlueprint: false, display: true
   # CanPickup: true
   Model: @models2/Entities/Decorations/DecoNPC/ConsoleSmallNPCPrefab
@@ -18263,6 +18279,7 @@
   # AllowedInBlueprint: false, display: true
   # CanPickup: true
   BlockColor: "170,170,170"
+  NPCModelRotation: false    
   Model: @models2/Entities/Decorations/DecoNPC/ControlStationNPCPrefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
   ShowUser: Yes
@@ -18273,6 +18290,7 @@
   Model: @models2/Entities/Decorations/DecoNPC/ReceptionTableNPCPrefab
   EnergyIn: 1, type: int, display: true, formatter: Watt
   ShowUser: Yes
+  IsAccessible: true, type: bool 
 }
 { +Block Id: 1249, Name: ScifiSofaNPC, Ref: NPCAlienTemplate
   # AllowedInBlueprint: false, display: true
@@ -18286,6 +18304,7 @@
   # AllowedInBlueprint: false, display: true
   # Group: cpgEquipment
   # CanPickup: true
+  NPCModelRotation: false
   Model: @models2/Entities/Decorations/DecoNPC/ScifiTableNPCPrefab
   EnergyIn: 0, type: int, display: true, formatter: Watt
   ShowUser: Yes
@@ -18539,7 +18558,7 @@
   Category: Devices
   ChildBlocks: "ExplosiveBlockFull, ExplosiveBlockThin"
   
-  BlastParticleIndex: 4
+  BlastParticleIndex: 8 #4
   BlastRadius: 1, display: Radius 
   BlastDamage: 5000 
 }
@@ -19049,7 +19068,7 @@
   ForceMaxCount: true
   # SymType: 4
   StackSize: 1000
-  UpgradeTo: DetectorCVEpic
+  UpgradeTo: DetectorCVEpic, display: true
   EnergyIn: 320, type: int, display: true, formatter: Watt
   HitPoints: 300, type: int, display: true
   Mass: 3520, type: float, display: true, formatter: Kilogram
@@ -19224,8 +19243,8 @@
   
   ChildBlocks: "ExplosiveBlock2Full, ExplosiveBlock2Thin"
   
-  BlastParticleIndex: 4
-  BlastRadius: 4, display: Radius
+  BlastParticleIndex: 8 #4
+  BlastRadius: 4, display: Radius   #4
   BlastDamage: 30000 
 }
 
@@ -19982,7 +20001,7 @@
   SizeInBlocks: "1,1,1", display: true
   SizeInBlocksLocked: "Base,MS"
   StackSize: 1000
-  UpgradeTo: TeleporterBAEpic
+  UpgradeTo: TeleporterBAEpic, display: true
   Mass: 3200, type: float, display: true, formatter: Kilogram
   EnergyIn: 12000, type: int, display: true, formatter: Watt
   CPUIn: 35000, type: int, display: true
@@ -20886,6 +20905,7 @@
   Group: cpgCrewStationAlien
   #CustomIcon: StandingHexapod                       #Icon required
   # DialogueState: Barking_Military_Random_Init     #create matching barking text
+  Class: NPCDialogue
   NPCModelRotation: true
   AllowedInBlueprint: false, display: true
   IsAccessible: true, type: bool
@@ -21059,7 +21079,7 @@
   HitPoints: 250, type: int, display: true
   StackSize: 1000
   Category: Devices 
-  ChildBlocks: "CommandingOfficerAlien, SecurityGuardAlien, ControlStationNPC, ReceptionTableNPC, ScifiTableV2NPC, ScifiSofaNPC, ScifiTableNPC, ConsoleSmallNPC, SofaNPC, StandingNPC, StandingNPC2, ScifiLargeSofaNPC, ScifiTableNPC2, ScifiTableNPC3, DancingAlien1, DancingAlien2, GamblingTableTwoPerson, GamblingTableMultiplePeople"
+  ChildBlocks: "CommandingOfficerAlien, SecurityGuardAlien, ControlStationNPC, ReceptionTableNPC, ScifiTableV2NPC, ScifiSofaNPC, ScifiTableNPC, ConsoleSmallNPC, SofaNPC, StandingNPC, StandingNPC2, ScifiLargeSofaNPC, ScifiTableNPC2, ScifiTableNPC3, DancingAlien1, DancingAlien2, GamblingTableTwoPerson, GamblingTableMultiplePeople, StandingNPCAlienCivilian1, ZiraxCommander, SecurityGuardZirax"
 }
 { +Block Id: 1466, Name: HumanNPCBlocks
   Material: human
@@ -21081,6 +21101,8 @@
   ChildBlocks: "ConsoleSmallHuman, StandingHuman, StandingHuman2, ControlStationHuman, ControlStationHuman2, ReceptionTableHuman, ScifiTableHuman, ScifiLargeSofaHuman, TacticalOfficer, CommandingOfficer, CommandingOfficer2, SecurityGuard, SecurityGuard2, OperatorPilot, EngineerMainStation, DancingHuman1, DancingHuman2, DancingHuman3, CommandingOfficerMale"
 }
 { +Block Id: 1467, Name: CommandingOfficer2, Ref: NPCHumanTemplate
+  Class: NPCDialogue
+  NPCModelRotation: false
   Group: cpgCrewStationHuman
   Info: bkiCommandingOfficer2, display: true
   IsAccessible: true, type: bool
@@ -21104,6 +21126,7 @@
   ShowUser: Yes
 }
 { +Block Id: 1469, Name: CommandingOfficerAlien, Ref: NPCAlienTemplate
+  Class: NPCDialogue
   NPCModelRotation: true
   Group: cpgCrewStationAlien
   Info: bkiCommandingOfficerAlien, display: true
@@ -21116,6 +21139,7 @@
   ShowUser: Yes
 }
 { +Block Id: 1470, Name: SecurityGuardAlien , Ref: NPCAlienTemplate
+  Class: NPCDialogue
   NPCModelRotation: true
   Group: cpgCrewStationAlien
   Info: bkiSecurityGuardAlien, display: true
@@ -21494,8 +21518,8 @@
   Mass: 730, type: float, display: true, formatter: Kilogram
   Volume: 55, type: float, display: true, formatter: Liter
   StackSize: 500
-  MaxCount: 1000, type: int, display: true
-  CPUIn: 45, type: int, display: true
+  MaxCount: 500, type: int, display: true
+  CPUIn: 5, type: int, display: true
   ChildBlocks: "SolarPanelSlope, SolarPanelSlope2, SolarPanelSlope3, SolarPanelHorizontal, SolarPanelHorizontal2, SolarPanelHorizontalMount, SolarPanelHorizontalStand"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21568,8 +21592,8 @@
   Category: Devices
   HitPoints: 150, type: int, display: true
   Mass: 730, type: float, display: true, formatter: Kilogram
-  MaxCount: 1000, type: int, display: true
-  CPUIn: 45, type: int, display: true
+  MaxCount: 500, type: int, display: true
+  CPUIn: 5, type: int, display: true
   TemplateRoot: SolarPanelBlocks
   IsOxygenTight: false, display: true
   BlockColor: "110,110,110"  
@@ -21728,8 +21752,8 @@
   Mass: 350, type: float, display: true, formatter: Kilogram
   Volume: 50, type: float, display: true, formatter: Liter
   StackSize: 1000
-  MaxCount: 1000, type: int, display: true
-  CPUIn: 20, type: int, display: true
+  MaxCount: 500, type: int, display: true
+  CPUIn: 2, type: int, display: true
   ChildBlocks: "SolarPanelSlopeSmall, SolarPanelSlope3Small, SolarPanelHorizontalSmall"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21755,8 +21779,8 @@
   Category: Devices
   HitPoints: 100, type: int, display: true
   Mass: 350, type: float, display: true, formatter: Kilogram
-  MaxCount: 1000, type: int, display: true
-  CPUIn: 20, type: int, display: true
+  MaxCount: 500, type: int, display: true
+  CPUIn: 2, type: int, display: true
   TemplateRoot: SolarPanelSmallBlocks
   IsOxygenTight: true, display: true 
   BlockColor: "110,110,110"    
@@ -21801,6 +21825,7 @@
   AboveTerrainCheck: false
 }
 { +Block Id: 1519, Name: CommandingOfficerMale, Ref: NPCHumanTemplate
+  Class: NPCDialogue
   NPCModelRotation: true
  # CustomIcon: CommandingOfficer
   Group: cpgCrewStationHuman
@@ -22355,7 +22380,7 @@
   RangeSpace: 10000, type: int, display: true
   CPUIn: 50, type: int, display: true
   Category: Devices
-  UpgradeTo: DetectorHVEpic
+  UpgradeTo: DetectorHVEpic, display: true
   
   BlastParticleIndex: 11
   BlastRadius: 3
@@ -22398,7 +22423,7 @@
   Category: Devices
   ChildShapes: "Cube, CutCornerE, CutCornerB, SlicedCornerA1, CornerHalfB, CornerSmallC, CornerC, CornerHalfA3, RampCMedium, RampA, RampC, CornerRoundB, CornerRoundADouble, RoundCornerA, CubeRoundConnectorA, EdgeRound, Cylinder, RampRoundFTriple, RampRoundF, SmallCornerRoundB, SmallCornerRoundA, SphereHalf, Cone, ConeB, CutCornerC, Cylinder6Way, CornerRoundATriple, CornerA, CornerHalfA1, CornerDoubleA3, CornerSmallB, PyramidA"
   
-  BlastParticleIndex: 4
+  BlastParticleIndex: 8
   BlastRadius: 1, display: Radius 
   BlastDamage: 5000 
 }
@@ -25229,7 +25254,7 @@
   TechTreeParent: ThrusterGVRoundBlocks
   TechTreeNames: Hover Vessel
   UpgradeTo: null, display: false
-  DowngradeTo: ThrusterGVRoundNormal
+  DowngradeTo: ThrusterGVRoundNormal, display: true 
 }  
 { +Block Id: 1775, Name: ThrusterGVRoundLarge, Ref: ThrusterGVRoundNormal
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterGVRoundLargePrefab
@@ -25342,7 +25367,7 @@
 { +Block Id: 1786, Name: HullExtendedLarge, Ref: HullFullLarge
   ChildShapes: "CornerCMedium, CornerSmallCMedium, CornerSmallA, SmallCornerRoundC, RampRoundDDouble, NotchedC, NotchedA, NotchedCMedium, CubeQuarter, CylinderThinXJoint, CornerDoubleA1, CutCornerA, CornerDoubleB3, SlicedCornerD, EdgeRoundMedium, RampB, CornerRoundBMedium, CornerRoundBLow, CornerRoundAMedium, CornerRoundALow, EdgeRoundMediumHalf, EdgeRoundLow, PipesFenceDiagonal, FenceTopDiagonal, CubeRoundConnectorBleft, CubeRoundConnectorBright, CylinderRoundTransition, WallEdge, RampRoundConnectorBleft, RampRoundConnectorBright, RampRoundConnectorAleft, RampRoundConnectorAright"
   UpgradeTo: HullArmoredExtendedLarge, display: true
-  DowngradeTo: PlasticExtendedLarge
+  DowngradeTo: PlasticExtendedLarge, display: true
 }
 { +Block Id: 1787, Name: HullArmoredExtendedLarge, Ref: HullArmoredFullLarge
   ChildShapes: "CornerCMedium, CornerSmallCMedium, CornerSmallA, SmallCornerRoundC, RampRoundDDouble, NotchedC, NotchedA, NotchedCMedium, CubeQuarter, CylinderThinXJoint, CornerDoubleA1, CutCornerA, CornerDoubleB3, SlicedCornerD, EdgeRoundMedium, RampB, CornerRoundBMedium, CornerRoundBLow, CornerRoundAMedium, CornerRoundALow, EdgeRoundMediumHalf, EdgeRoundLow, PipesFenceDiagonal, FenceTopDiagonal, CubeRoundConnectorBleft, CubeRoundConnectorBright, CylinderRoundTransition, WallEdge, RampRoundConnectorBleft, RampRoundConnectorBright, RampRoundConnectorAleft, RampRoundConnectorAright"
@@ -25362,7 +25387,7 @@
 { +Block Id: 1791, Name: HullExtendedSmall, Ref: HullFullSmall
   ChildShapes: "CornerCMedium, CornerSmallCMedium, CornerSmallA, SmallCornerRoundC, RampRoundDDouble, NotchedC, NotchedA, NotchedCMedium, CubeQuarter, CylinderThinXJoint, CornerDoubleA1, CutCornerA, CornerDoubleB3, SlicedCornerD, EdgeRoundMedium, RampB, CornerRoundBMedium, CornerRoundBLow, CornerRoundAMedium, CornerRoundALow, EdgeRoundMediumHalf, EdgeRoundLow, PipesFenceDiagonal, FenceTopDiagonal, CubeRoundConnectorBleft, CubeRoundConnectorBright, CylinderRoundTransition, WallEdge, RampRoundConnectorBleft, RampRoundConnectorBright, RampRoundConnectorAleft, RampRoundConnectorAright"
   UpgradeTo: HullArmoredExtendedSmall, display: true  
-  DowngradeTo: PlasticExtendedSmall
+  DowngradeTo: PlasticExtendedSmall, display: true
 }
 { +Block Id: 1792, Name: HullArmoredExtendedSmall, Ref: HullArmoredFullSmall
   ChildShapes: "CornerCMedium, CornerSmallCMedium, CornerSmallA, SmallCornerRoundC, RampRoundDDouble, NotchedC, NotchedA, NotchedCMedium, CubeQuarter, CylinderThinXJoint, CornerDoubleA1, CutCornerA, CornerDoubleB3, SlicedCornerD, EdgeRoundMedium, RampB, CornerRoundBMedium, CornerRoundBLow, CornerRoundAMedium, CornerRoundALow, EdgeRoundMediumHalf, EdgeRoundLow, PipesFenceDiagonal, FenceTopDiagonal, CubeRoundConnectorBleft, CubeRoundConnectorBright, CylinderRoundTransition, WallEdge, RampRoundConnectorBleft, RampRoundConnectorBright, RampRoundConnectorAleft, RampRoundConnectorAright"
@@ -25526,8 +25551,7 @@
   #Mesh-Damage-1: Mesh/D0
   #Mesh-Damage-2: Mesh/D1
   #Mesh-Damage-3: Mesh/D2
-  #Mesh-Damage-4: Mesh/D3
-  BlocokColor: "110,110,110"
+  #Mesh-Damage-4: Mesh/D3 
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
   IsActivateable: true
@@ -25817,7 +25841,7 @@
 { +Block Id: 1828, Name: HullExtendedLarge2, Ref: HullFullLarge
   ChildShapes: "WallLShapeMedium, WallLShapeLow, RampDLow, RampE, RampCMediumQuarter, RampConnectorBleft, RampConnectorBright, CubeEighth, SlicedCornerA2, SlicedCornerA1Medium, SlicedCornerDMedium, NotchedB, BeamQuarter, WallCornerSloped, RampADoubleHalf, RampBDoubleHalf, WallUShape, WallDouble, WallSlopedCDoubleMedium, WallSlopedCDoubleLow, CorridorPillarD, CubeDummy, RampCMediumHalfright, RampCMediumHalfleft, WallSlopedCDouble, WallSlopedBDouble, WallSlopedBDoubleMedium, WallSlopedADouble, RampAHalfright, RampAHalfleft, CylinderFramed, CubeFramed"  
   UpgradeTo: HullArmoredExtendedLarge2, display: true
-  DowngradeTo: PlasticExtendedLarge2
+  DowngradeTo: PlasticExtendedLarge2, display: true
 }
 { +Block Id: 1829, Name: HullArmoredExtendedLarge2, Ref: HullArmoredFullLarge
   ChildShapes: "WallLShapeMedium, WallLShapeLow, RampDLow, RampE, RampCMediumQuarter, RampConnectorBleft, RampConnectorBright, CubeEighth, SlicedCornerA2, SlicedCornerA1Medium, SlicedCornerDMedium, NotchedB, BeamQuarter, WallCornerSloped, RampADoubleHalf, RampBDoubleHalf, WallUShape, WallDouble, WallSlopedCDoubleMedium, WallSlopedCDoubleLow, CorridorPillarD, CubeDummy, RampCMediumHalfright, RampCMediumHalfleft, WallSlopedCDouble, WallSlopedBDouble, WallSlopedBDoubleMedium, WallSlopedADouble, RampAHalfright, RampAHalfleft, CylinderFramed, CubeFramed"  
@@ -25837,7 +25861,7 @@
 { +Block Id: 1833, Name: HullExtendedSmall2, Ref: HullFullSmall
   ChildShapes: "WallLShapeMedium, WallLShapeLow, RampDLow, RampE, RampCMediumQuarter, RampConnectorBleft, RampConnectorBright, CubeEighth, SlicedCornerA2, SlicedCornerA1Medium, SlicedCornerDMedium, NotchedB, BeamQuarter, WallCornerSloped, RampADoubleHalf, RampBDoubleHalf, WallUShape, WallDouble, WallSlopedCDoubleMedium, WallSlopedCDoubleLow, CorridorPillarD, CubeDummy, RampCMediumHalfright, RampCMediumHalfleft, WallSlopedCDouble, WallSlopedBDouble, WallSlopedBDoubleMedium, WallSlopedADouble, RampAHalfright, RampAHalfleft, CylinderFramed, CubeFramed"  
   UpgradeTo: HullArmoredExtendedSmall2, display: true  
-  DowngradeTo: PlasticExtendedSmall2
+  DowngradeTo: PlasticExtendedSmall2, display: true
 }
 { +Block Id: 1834, Name: HullArmoredExtendedSmall2, Ref: HullArmoredFullSmall
   ChildShapes: "WallLShapeMedium, WallLShapeLow, RampDLow, RampE, RampCMediumQuarter, RampConnectorBleft, RampConnectorBright, CubeEighth, SlicedCornerA2, SlicedCornerA1Medium, SlicedCornerDMedium, NotchedB, BeamQuarter, WallCornerSloped, RampADoubleHalf, RampBDoubleHalf, WallUShape, WallDouble, WallSlopedCDoubleMedium, WallSlopedCDoubleLow, CorridorPillarD, CubeDummy, RampCMediumHalfright, RampCMediumHalfleft, WallSlopedCDouble, WallSlopedBDouble, WallSlopedBDoubleMedium, WallSlopedADouble, RampAHalfright, RampAHalfleft, CylinderFramed, CubeFramed"  
@@ -25871,7 +25895,7 @@
 { +Block Id: 1841, Name: HullExtendedLarge3, Ref: HullFullLarge
   ChildShapes: "CubeSliced, CubeStepped, RampConnectorDleft, RampConnectorDright, RampConnectorEleft, RampConnectorFright, CubeDummy, CubeDummy, CornerDoubleA2, CornerDoubleB2, CornerDoubleB1, CornerSmallBMedium, CornerSmallBLow, CornerHalfA3Low, CornerSmallCLow, CornerB, CornerHalfA2, CornerCLow, CornerHalfC, CornerRoundBMediumQuarter, CornerRoundBLowQuarter, PipesX, PipesFenceKinked, CubeDummy, PipesL, PipesT, CylinderThin6Way, CornerRoundAMediumQuarter, CornerRoundALowQuarter, EdgeRoundLowHalf, EdgeRoundLowQuarter, EdgeRoundLowEighth"
   UpgradeTo: HullArmoredExtendedLarge3, display: true
-  DowngradeTo: PlasticExtendedLarge3
+  DowngradeTo: PlasticExtendedLarge3, display: true
 }
 { +Block Id: 1842, Name: HullArmoredExtendedLarge3, Ref: HullArmoredFullLarge
   ChildShapes: "CubeSliced, CubeStepped, RampConnectorDleft, RampConnectorDright, RampConnectorEleft, RampConnectorFright, CubeDummy, CubeDummy, CornerDoubleA2, CornerDoubleB2, CornerDoubleB1, CornerSmallBMedium, CornerSmallBLow, CornerHalfA3Low, CornerSmallCLow, CornerB, CornerHalfA2, CornerCLow, CornerHalfC, CornerRoundBMediumQuarter, CornerRoundBLowQuarter, PipesX, PipesFenceKinked, CubeDummy, PipesL, PipesT, CylinderThin6Way, CornerRoundAMediumQuarter, CornerRoundALowQuarter, EdgeRoundLowHalf, EdgeRoundLowQuarter, EdgeRoundLowEighth"
@@ -25891,7 +25915,7 @@
 { +Block Id: 1846, Name: HullExtendedSmall3, Ref: HullFullSmall
   ChildShapes: "CubeSliced, CubeStepped, RampConnectorDleft, RampConnectorDright, RampConnectorEleft, RampConnectorFright, CubeDummy, CubeDummy, CornerDoubleA2, CornerDoubleB2, CornerDoubleB1, CornerSmallBMedium, CornerSmallBLow, CornerHalfA3Low, CornerSmallCLow, CornerB, CornerHalfA2, CornerCLow, CornerHalfC, CornerRoundBMediumQuarter, CornerRoundBLowQuarter, PipesX, PipesFenceKinked, CubeDummy, PipesL, PipesT, CylinderThin6Way, CornerRoundAMediumQuarter, CornerRoundALowQuarter, EdgeRoundLowHalf, EdgeRoundLowQuarter, EdgeRoundLowEighth"
   UpgradeTo: HullArmoredExtendedSmall3, display: true  
-  DowngradeTo: PlasticExtendedSmall3
+  DowngradeTo: PlasticExtendedSmall3, display: true
 }
 { +Block Id: 1847, Name: HullArmoredExtendedSmall3, Ref: HullArmoredFullSmall
   ChildShapes: "CubeSliced, CubeStepped, RampConnectorDleft, RampConnectorDright, RampConnectorEleft, RampConnectorFright, CubeDummy, CubeDummy, CornerDoubleA2, CornerDoubleB2, CornerDoubleB1, CornerSmallBMedium, CornerSmallBLow, CornerHalfA3Low, CornerSmallCLow, CornerB, CornerHalfA2, CornerCLow, CornerHalfC, CornerRoundBMediumQuarter, CornerRoundBLowQuarter, PipesX, PipesFenceKinked, CubeDummy, PipesL, PipesT, CylinderThin6Way, CornerRoundAMediumQuarter, CornerRoundALowQuarter, EdgeRoundLowHalf, EdgeRoundLowQuarter, EdgeRoundLowEighth"
@@ -25924,7 +25948,7 @@
 { +Block Id: 1854, Name: HullExtendedLarge4, Ref: HullFullLarge
   ChildShapes: "EdgeRoundThin, EdgeRoundMediumHalfDouble, RampRoundE, EdgeRoundThin, EdgeRoundMediumHalfDouble, CubeRoundTransitionleft, CubeDummy, CubeDummy, PipesL, CubeDummy, CubeRoundTransitionright, EdgeRoundHalf, EdgeRoundDoubleA, EdgeRoundDoubleAHalf, EdgeRoundMediumQuarter, RampEHalf, RampRoundADouble, RampRoundADoubleHalf, RampRoundBDouble, RampRoundC, RampConnectorAleft, RampConnectorAright, SlicedCornerA1Low, SlicedCornerB1, SlicedCornerB2, SlicedCornerB1Medium, SlicedCornerB2Medium, CylinderThin3Way, CylinderThin4Way, CylinderThin5Way, CubeDummy"
   UpgradeTo: HullArmoredExtendedLarge4, display: true
-  DowngradeTo: PlasticExtendedLarge4
+  DowngradeTo: PlasticExtendedLarge4, display: true
 }
 { +Block Id: 1855, Name: HullArmoredExtendedLarge4, Ref: HullArmoredFullLarge
   ChildShapes: "EdgeRoundThin, EdgeRoundMediumHalfDouble, RampRoundE, EdgeRoundThin, EdgeRoundMediumHalfDouble, CubeRoundTransitionleft, CubeDummy, CubeDummy, PipesL, CubeDummy, CubeRoundTransitionright, EdgeRoundHalf, EdgeRoundDoubleA, EdgeRoundDoubleAHalf, EdgeRoundMediumQuarter, RampEHalf, RampRoundADouble, RampRoundADoubleHalf, RampRoundBDouble, RampRoundC, RampConnectorAleft, RampConnectorAright, SlicedCornerA1Low, SlicedCornerB1, SlicedCornerB2, SlicedCornerB1Medium, SlicedCornerB2Medium, CylinderThin3Way, CylinderThin4Way, CylinderThin5Way, CubeDummy"
@@ -25944,7 +25968,7 @@
 { +Block Id: 1859, Name: HullExtendedSmall4, Ref: HullFullSmall
   ChildShapes: "EdgeRoundThin, EdgeRoundMediumHalfDouble, RampRoundE, EdgeRoundThin, EdgeRoundMediumHalfDouble, CubeRoundTransitionleft, CubeDummy, CubeDummy, PipesL, CubeDummy, CubeRoundTransitionright, EdgeRoundHalf, EdgeRoundDoubleA, EdgeRoundDoubleAHalf, EdgeRoundMediumQuarter, RampEHalf, RampRoundADouble, RampRoundADoubleHalf, RampRoundBDouble, RampRoundC, RampConnectorAleft, RampConnectorAright, SlicedCornerA1Low, SlicedCornerB1, SlicedCornerB2, SlicedCornerB1Medium, SlicedCornerB2Medium, CylinderThin3Way, CylinderThin4Way, CylinderThin5Way, CubeDummy"
   UpgradeTo: HullArmoredExtendedSmall4, display: true  
-  DowngradeTo: PlasticExtendedSmall4
+  DowngradeTo: PlasticExtendedSmall4, display: true
 }
 { +Block Id: 1860, Name: HullArmoredExtendedSmall4, Ref: HullArmoredFullSmall
   ChildShapes: "EdgeRoundThin, EdgeRoundMediumHalfDouble, RampRoundE, EdgeRoundThin, EdgeRoundMediumHalfDouble, CubeRoundTransitionleft, CubeDummy, CubeDummy, PipesL, CubeDummy, CubeRoundTransitionright, EdgeRoundHalf, EdgeRoundDoubleA, EdgeRoundDoubleAHalf, EdgeRoundMediumQuarter, RampEHalf, RampRoundADouble, RampRoundADoubleHalf, RampRoundBDouble, RampRoundC, RampConnectorAleft, RampConnectorAright, SlicedCornerA1Low, SlicedCornerB1, SlicedCornerB2, SlicedCornerB1Medium, SlicedCornerB2Medium, CylinderThin3Way, CylinderThin4Way, CylinderThin5Way, CubeDummy"
@@ -25979,7 +26003,7 @@
 { +Block Id: 1867, Name: HullExtendedLarge5, Ref: HullFullLarge
   ChildShapes: "CubeLShape, CubeRoundTransitionleft, CubeRoundTransitionright, RampEHalf, CutCornerDLow, RampConnectorCleft, RampConnectorCright, NotchedBMedium, NotchedCLow, CutCornerD, CutCornerDMedium, CorridorWallA, CorridorEdgeA, CorridorPillarA, CorridorWallB, CorridorEdgeB, CorridorEdgeC, CorridorPillarB, CorridorPillarC, CorridorRoof, CorridorRoofCorner, CorridorRoofCornerRound, CorridorBulkyWallA, CorridorBulkyWallAWindowed, CorridorBulkyWallB, CorridorBulkyWallBWindowed, CorridorRampA, CorridorRampB, DoorframeA, DoorframeB, DoorframeC, CorridorRoofCornerInverted"
   UpgradeTo: HullArmoredExtendedLarge5, display: true
-  DowngradeTo: PlasticExtendedLarge5
+  DowngradeTo: PlasticExtendedLarge5, display: true
 }
 { +Block Id: 1868, Name: HullArmoredExtendedLarge5, Ref: HullArmoredFullLarge
   ChildShapes: "CubeLShape, CubeRoundTransitionleft, CubeRoundTransitionright, RampEHalf, CutCornerDLow, RampConnectorCleft, RampConnectorCright, NotchedBMedium, NotchedCLow, CutCornerD, CutCornerDMedium, CorridorWallA, CorridorEdgeA, CorridorPillarA, CorridorWallB, CorridorEdgeB, CorridorEdgeC, CorridorPillarB, CorridorPillarC, CorridorRoof, CorridorRoofCorner, CorridorRoofCornerRound, CorridorBulkyWallA, CorridorBulkyWallAWindowed, CorridorBulkyWallB, CorridorBulkyWallBWindowed, CorridorRampA, CorridorRampB, DoorframeA, DoorframeB, DoorframeC, CorridorRoofCornerInverted"
@@ -25999,7 +26023,7 @@
 { +Block Id: 1872, Name: HullExtendedSmall5, Ref: HullFullSmall
   ChildShapes: "CubeLShape, CubeRoundTransitionleft, CubeRoundTransitionright, RampEHalf, CutCornerDLow, RampConnectorCleft, RampConnectorCright, NotchedBMedium, NotchedCLow, CutCornerD, CutCornerDMedium, CorridorWallA, CorridorEdgeA, CorridorPillarA, CorridorWallB, CorridorEdgeB, CorridorEdgeC, CorridorPillarB, CorridorPillarC, CorridorRoof, CorridorRoofCorner, CorridorRoofCornerRound, CorridorBulkyWallA, CorridorBulkyWallAWindowed, CorridorBulkyWallB, CorridorBulkyWallBWindowed, CorridorRampA, CorridorRampB, DoorframeA, DoorframeB, DoorframeC, CorridorRoofCornerInverted"
   UpgradeTo: HullArmoredExtendedSmall5, display: true  
-  DowngradeTo: PlasticExtendedSmall5
+  DowngradeTo: PlasticExtendedSmall5, display: true
 }
 { +Block Id: 1873, Name: HullArmoredExtendedSmall5, Ref: HullArmoredFullSmall
   ChildShapes: "CubeLShape, CubeRoundTransitionleft, CubeRoundTransitionright, RampEHalf, CutCornerDLow, RampConnectorCleft, RampConnectorCright, NotchedBMedium, NotchedCLow, CutCornerD, CutCornerDMedium, CorridorWallA, CorridorEdgeA, CorridorPillarA, CorridorWallB, CorridorEdgeB, CorridorEdgeC, CorridorPillarB, CorridorPillarC, CorridorRoof, CorridorRoofCorner, CorridorRoofCornerRound, CorridorBulkyWallA, CorridorBulkyWallAWindowed, CorridorBulkyWallB, CorridorBulkyWallBWindowed, CorridorRampA, CorridorRampB, DoorframeA, DoorframeB, DoorframeC, CorridorRoofCornerInverted"
@@ -26437,7 +26461,7 @@
 
   UnlockCost: 3, display: true
   UnlockLevel: 3, display: true
-  TechTreeparent: Core
+  # TechTreeparent: Core
   TechTreeNames: Misc
 }
 { +Block Id: 1957, Name: VentilatorCubeHalf, Ref: Ventilator
@@ -26967,7 +26991,7 @@
   CPUExtenderLevel: 3, type: int, display: true
   HitPoints: 300, type: int, display: true
   AllowWander: true
-  UpgradeTo: CPUExtenderHVT4
+  UpgradeTo: CPUExtenderHVT4, display: true 
 
   UnlockCost: 12, display: true
   UnlockLevel: 12, display: true
@@ -27085,7 +27109,7 @@
   CPUExtenderLevel: 3, type: int, display: true
   HitPoints: 300, type: int, display: true
   AllowWander: true
-  UpgradeTo: CPUExtenderSVT4
+  UpgradeTo: CPUExtenderSVT4, display: true 
 
   UnlockCost: 12, display: true
   UnlockLevel: 12, display: true
@@ -27203,7 +27227,7 @@
   CPUExtenderLevel: 3, type: int, display: true
   HitPoints: 900, type: int, display: true
   AllowWander: true
-  UpgradeTo: CPUExtenderCVT4
+  UpgradeTo: CPUExtenderCVT4, display: true 
 
   UnlockCost: 15, display: true
   UnlockLevel: 15, display: true
@@ -27321,7 +27345,7 @@
   CPUExtenderLevel: 3, type: int, display: true
   HitPoints: 900, type: int, display: true
   AllowWander: true
-  UpgradeTo: CPUExtenderBAT4
+  UpgradeTo: CPUExtenderBAT4, display: true 
 
   UnlockCost: 12, display: true
   UnlockLevel: 12, display: true
@@ -27373,7 +27397,7 @@
 { +Block Id: 2039, Name: HullExtendedLarge6, Ref: HullFullLarge
   ChildShapes: "WallMediumDouble, RampBDouble, SmallCornerRoundB2, CubeSteppedEdge, CubeQuarterEdge, CubeHalfRamp, CubeHalfCubeConnector, CornerSmallCMediumLow, WallLowDouble, CubeRoundConnectorAMedium, CubeRoundConnectorALow, CornerSmallBMediumLow, WallSlopedBold, CylinderCubeConnector, CylinderCubeHalfConnector, CylinderWallConnector, CubeHalfEdge, CutCornerFL, CutCornerFR, RoundedRampBLeft, RoundedRampBRight, HalfCylinder90Degree, HalfCylinderConnectorA, Cylinder90Degree, HalfCylinderEdge, HalfCylinderConnectorB, RampRoundMediumTransitionLeft, RampRoundMediumTransitionRight, RampRoundConnectorCLeft, RampRoundConnectorCRight, NotchedDright, NotchedDleft"
   UpgradeTo: HullArmoredExtendedLarge6, display: true
-  DowngradeTo: PlasticExtendedLarge6
+  DowngradeTo: PlasticExtendedLarge6, display: true
 }
 { +Block Id: 2040, Name: HullArmoredExtendedLarge6, Ref: HullArmoredFullLarge
   ChildShapes: "WallMediumDouble, RampBDouble, SmallCornerRoundB2, CubeSteppedEdge, CubeQuarterEdge, CubeHalfRamp, CubeHalfCubeConnector, CornerSmallCMediumLow, WallLowDouble, CubeRoundConnectorAMedium, CubeRoundConnectorALow, CornerSmallBMediumLow, WallSlopedBold, CylinderCubeConnector, CylinderCubeHalfConnector, CylinderWallConnector, CubeHalfEdge, CutCornerFL, CutCornerFR, RoundedRampBLeft, RoundedRampBRight, HalfCylinder90Degree, HalfCylinderConnectorA, Cylinder90Degree, HalfCylinderEdge, HalfCylinderConnectorB, RampRoundMediumTransitionLeft, RampRoundMediumTransitionRight, RampRoundConnectorCLeft, RampRoundConnectorCRight, NotchedDright, NotchedDleft"
@@ -27396,7 +27420,7 @@
 { +Block Id: 2045, Name: HullExtendedSmall6, Ref: HullFullSmall
   ChildShapes: "WallMediumDouble, RampBDouble, SmallCornerRoundB2, CubeSteppedEdge, CubeQuarterEdge, CubeHalfRamp, CubeHalfCubeConnector, CornerSmallCMediumLow, WallLowDouble, CubeRoundConnectorAMedium, CubeRoundConnectorALow, CornerSmallBMediumLow, WallSlopedBold, CylinderCubeConnector, CylinderCubeHalfConnector, CylinderWallConnector, CubeHalfEdge, CutCornerFL, CutCornerFR, RoundedRampBLeft, RoundedRampBRight, HalfCylinder90Degree, HalfCylinderConnectorA, Cylinder90Degree, HalfCylinderEdge, HalfCylinderConnectorB, RampRoundMediumTransitionLeft, RampRoundMediumTransitionRight, RampRoundConnectorCLeft, RampRoundConnectorCRight, NotchedDright, NotchedDleft"
   UpgradeTo: HullArmoredExtendedSmall6, display: true  
-  DowngradeTo: PlasticExtendedSmall6
+  DowngradeTo: PlasticExtendedSmall6, display: true
 }
 { +Block Id: 2046, Name: HullArmoredExtendedSmall6, Ref: HullArmoredFullSmall
   ChildShapes: "WallMediumDouble, RampBDouble, SmallCornerRoundB2, CubeSteppedEdge, CubeQuarterEdge, CubeHalfRamp, CubeHalfCubeConnector, CornerSmallCMediumLow, WallLowDouble, CubeRoundConnectorAMedium, CubeRoundConnectorALow, CornerSmallBMediumLow, WallSlopedBold, CylinderCubeConnector, CylinderCubeHalfConnector, CylinderWallConnector, CubeHalfEdge, CutCornerFL, CutCornerFR, RoundedRampBLeft, RoundedRampBRight, HalfCylinder90Degree, HalfCylinderConnectorA, Cylinder90Degree, HalfCylinderEdge, HalfCylinderConnectorB, RampRoundMediumTransitionLeft, RampRoundMediumTransitionRight, RampRoundConnectorCLeft, RampRoundConnectorCRight, NotchedDright, NotchedDleft"
@@ -27431,7 +27455,7 @@
 { Block Name: HullExtendedLarge7, Ref: HullFullLarge
   ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: HullArmoredExtendedLarge7, display: true
-  DowngradeTo: PlasticExtendedLarge7
+  DowngradeTo: PlasticExtendedLarge7, display: true
 }
 { Block Name: HullArmoredExtendedLarge7, Ref: HullArmoredFullLarge
   ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
@@ -27454,7 +27478,7 @@
 { Block Name: HullExtendedSmall7, Ref: HullFullSmall
   ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
   UpgradeTo: HullArmoredExtendedSmall7, display: true  
-  DowngradeTo: PlasticExtendedSmall7
+  DowngradeTo: PlasticExtendedSmall7, display: true
 }
 { Block Name: HullArmoredExtendedSmall7, Ref: HullArmoredFullSmall
   ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
@@ -28148,7 +28172,7 @@
   SizeInBlocks: "1,1,1", display: true
   SizeInBlocksLocked: "Base,MS"
   StackSize: 1000
-  DowngradeTo: TeleporterBA
+  DowngradeTo: TeleporterBA, display: true 
   PickupTarget: TeleporterBAEpicUpgradeKit  
   IsDuplicateable: false
   Mass: 320, type: float, display: true, formatter: Kilogram
@@ -28171,8 +28195,7 @@
 }
 { +Block Name: WarpDriveCVEpic
   Info: bkiWarpDriveCVEpic, display: true
-  Class: WarpDrive
-  CustomIcon: WarpDrive
+  Class: WarpDrive 
   Group: cpgWarp
   IndexName: WarpDrive
   Material: metal
@@ -28195,8 +28218,7 @@
   Mass: 82200, type: float, display: true, formatter: Kilogram
   IsDuplicateable: false
   MaxCount: 1, type: int, display: true
-  ForceMaxCount: true
-  DowngradeTo: WarpDrive
+  ForceMaxCount: true  
   PickupTarget: WarpDriveCVEpicUpgradeKit
   IsOxygenTight: false, display: true
   # ModelOffset: "0,0.5,0"
@@ -28213,9 +28235,9 @@
   BlastDamage: 200
 
   ItemPerAU: PentaxidCrystal, display: true
-  CostPerAU: 1, display: true
+  CostPerAU: 2, display: true
   CostPerLY: 1, display: true
-  RangeAU: 500, display: true
+  RangeAU: 250, display: true
   RangeLY: 150, display: true
       
   Radiation: 25, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
@@ -28225,6 +28247,8 @@
   # UnlockLevel: 10, display: true
   # TechTreeParent: PentaxidTank
   # TechTreeNames: Capital Vessel
+   
+  DowngradeTo: WarpDriveT2, display: true 
   
   ShowUser: No
 }
@@ -28253,7 +28277,7 @@
   SizeInBlocks: "1,1,1", display: true
   MaxCount: 1, type: int, display: true
   ForceMaxCount: true
-  DowngradeTo: DetectorHVT1  
+  DowngradeTo: DetectorHVT1, display: true   
   IsDuplicateable: false
   PickupTarget: DetectorHVEpicUpgradeKit
   # SymType: 4
@@ -28303,7 +28327,7 @@
   SizeInBlocks: "1,1,1", display: true  
   MaxCount: 1, type: int, display: true
   ForceMaxCount: true
-  DowngradeTo: DetectorCV  
+  DowngradeTo: DetectorCV, display: true   
   IsDuplicateable: false
   PickupTarget: DetectorCVEpicUpgradeKit
   # SymType: 4
@@ -29942,7 +29966,7 @@
 # = Destroy per signal =
 { +Block Name: WoodDestroyedRemoteEffectBlocks   
   Material: woodblock
-  #CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: WoodBlocks
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -30005,7 +30029,7 @@
 }
 { +Block Name: WoodDestroyedOnTouchEffectBlocks   
   Material: woodblock
-  #CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: WoodBlocks
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -30031,7 +30055,7 @@
 }
 { +Block Name: WoodFullDestroyedOnTouchEffectBlocks
   Material: woodblock
-  #CustomIcon: WoodBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: WoodBlocks  
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 70
   TextureTable: 1    #  2 = concrete table  
@@ -30314,7 +30338,7 @@
 }
 { +Block Name: XenoDestroyedRemoteEffectBlocks     #Xeno Steel = AlienLargeBlocks = non-radioactive
   Material: alien
-  #CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: AlienLargeBlocks
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30340,7 +30364,7 @@
 }
 { +Block Name: XenoFullDestroyedRemoteEffect
   Material: alien
-  #CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: AlienLargeBlocks          
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30376,7 +30400,7 @@
 }
 { +Block Name: XenoDestroyedOnTouchEffect     #Xeno Steel = AlienLargeBlocks = non-radioactive
   Material: alien
-  #CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: AlienLargeBlocks
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30402,7 +30426,7 @@
 }
 { +Block Name: XenoFullDestroyedOnTouchEffect
   Material: alien
-  #CustomIcon: AlienLargeBlocks            #NEEDS an adapted Icon!
+  #CustomIcon: AlienLargeBlocks
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 36
   TextureTable: 3  
@@ -30612,7 +30636,7 @@
   CustomIcon: ConsoleTrading
   Class: NPCDialogue    
   DialogueState: GIN_Console_Initialize
-  NPCModelRotation: false
+  NPCModelRotation: false 
   Group: cpgCrewStationAlien
   Material: metallight
   Shape: ModelEntity
@@ -30986,8 +31010,7 @@
 
 # Model: @models/Blocks/Misc/SecurityCamera01Prefab   (non-functional/non-textured)
 # Model: @models/Blocks/Misc/SecurityCamera02Prefab   (non-functional/non-textured)
-# Model: @models/Blocks/Misc/SecurityCamera03Prefab   (non-functional/non-textured)
-# Model: @models/Blocks/Misc/TechPortal   (non-functional: missing effect field/animation)
+# Model: @models/Blocks/Misc/SecurityCamera03Prefab   (non-functional/non-textured) 
 #
 #
 
@@ -37635,6 +37658,7 @@
   ThrusterForce: 19301, type: int, display: true, formatter: Newton
   ThrusterBoosterFactor: 1.25, type: float, display: true
   EnergyIn: 1096, type: int, display: true, formatter: Watt
+  EnergyDynamicGroup: Thruster
   CPUIn: 10803, type: int, display: true
   Temperature: 1017, display: true
   Radiation: 4, display: true
@@ -37812,4 +37836,371 @@
   TechTreeParent: ThrusterJetMSRound3x10x3V2
   TechTreeNames: Capital Vessel
   DowngradeTo: ThrusterJetMSRound3x13x3, display: true
+}
+
+
+##===== Cockpits for Racing and Event starter checks (PDA) ======
+## Do not use in regular Blueprints!
+##=====
+## HVSV
+
+{ +Block Name: CockpitSV06_Event, Ref: CockpitSV07
+  CustomIcon: CockpitSV06
+  Info: bkiCockpitSV06_Event, display: true
+  Model: @models/Blocks/Cockpits/CockpitSS06Prefab
+  Mass: 835, type: float, display: true, formatter: Kilogram
+  HitPoints: 800, type: int, display: true   
+ # UpgradeTo: CockpitSV06T2, display: true     #Single Use, no up-/downgrade for now!
+  ShowUser: No
+}
+{ +Block Name: CockpitSV06T2_Event, Ref: CockpitSV06
+  CustomIcon: CockpitSV06T2
+  Model: @models/Blocks/Cockpits/CockpitSS06T2Prefab
+  TemplateRoot: CockpitBlocksSVT2
+  Mass: 1140, type: float, display: true, formatter: Kilogram
+  HitPoints: 1700, type: int, display: true
+ # UpgradeTo: null
+  ShowUser: No
+}
+
+## ===================
+## New "tech portal" variant
+
+
+{ +Block Name: TechPortal      
+  Info: bkiTechPortal, display: true
+  Class: Portal
+  Group: cpgTransportation
+  IndexName: Portal
+  Shape: ModelEntity
+  Material: metalhard
+  Model: @models/Blocks/Misc/TechPortalPrefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  BlockColor: "110,110,110"
+  AllowedInBlueprint: false, display: true
+  AllowPlacingAt: Base, display: true
+  SizeInBlocks: "3,2,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  IsActivateable: true
+  IsAccessible: true, type: bool
+  IsOxygenTight: false, display: true
+  ShowBlockName: true
+  StackSize: 1000
+  HitPoints: 500, type: int, display: true
+  Mass: 1000, type: float, display: true, formatter: Kilogram
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Category: Devices
+}
+
+
+## Portal Devices withouth Frame + allowing to clip into blocks (except center block)
+
+ 
+{ +Block Name: PortalRing3x3     # Center exit!
+  Info: bkiPortalRing, display: true
+  Class: Portal
+  Group: cpgTransportation
+  IndexName: Portal
+  Shape: ModelEntity
+  Material: metalhard
+  Model: @models/Blocks/Misc/PortalRing3x3Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  BlockColor: "110,110,110"
+  AllowedInBlueprint: false, display: true
+  AllowPlacingAt: Base, display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  IsActivateable: true
+  IsAccessible: true, type: bool
+  IsOxygenTight: false, display: true
+  ShowBlockName: true
+  StackSize: 1000
+  Mass: 1000, type: float, display: true, formatter: Kilogram
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Category: Devices
+}
+{ +Block Name: PortalRing5x5     # Center exit!
+  Class: Portal
+  Info: bkiPortalRing, display: true
+  Group: cpgTransportation
+  IndexName: Portal
+  Shape: ModelEntity
+  Material: metalhard
+  Model: @models/Blocks/Misc/PortalRing5x5Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  BlockColor: "110,110,110"
+  AllowedInBlueprint: false, display: true
+  AllowPlacingAt: Base, display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  IsActivateable: true
+  IsAccessible: true, type: bool
+  IsOxygenTight: false, display: true
+  ShowBlockName: true
+  StackSize: 1000
+  Mass: 1000, type: float, display: true, formatter: Kilogram
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Category: Devices
+}
+{ +Block Name: PortalRing10x10     # Center exit!
+  Class: Portal
+  Info: bkiPortalRing, display: true
+  Group: cpgTransportation
+  IndexName: Portal
+  Shape: ModelEntity
+  Material: metalhard
+  Model: @models/Blocks/Misc/PortalRing10x10Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  BlockColor: "110,110,110"
+  AllowedInBlueprint: false, display: true
+  AllowPlacingAt: Base, display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  IsActivateable: true
+  IsAccessible: true, type: bool
+  IsOxygenTight: false, display: true
+  ShowBlockName: true
+  StackSize: 1000
+  Mass: 1000, type: float, display: true, formatter: Kilogram
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Category: Devices
+}
+{ +Block Name: PortalRing87x87     # Center exit!
+  Class: Portal
+  Info: bkiPortalRing, display: true
+  Group: cpgTransportation
+  IndexName: Portal
+  Shape: ModelEntity
+  Material: metalhard
+  Model: @models/Blocks/Misc/PortalRing87x87Prefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  BlockColor: "110,110,110"
+  AllowedInBlueprint: false, display: true
+  AllowPlacingAt: Base, display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  IsActivateable: true
+  IsAccessible: true, type: bool
+  IsOxygenTight: false, display: true
+  ShowBlockName: true
+  StackSize: 1000
+  Mass: 1000, type: float, display: true, formatter: Kilogram
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Category: Devices
+}
+
+#Terminal Nexus Devices
+
+{ +Block Name: VisionBox 
+  Info: bkiVisionBox, display: true  
+  Class: PassengerSeat
+  Category: Devices  
+  Group: cpgPassengerSeat
+  Material: metallight
+  Shape: ModelEntity
+  MarketPrice: 1230, display: true
+  ShowBlockName: true
+  Model: @models2/Entities/Decorations/LaboratoryPack/VisionBoxPrefab 
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  AllowPlacingAt: "Base,MS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  Mass: 172, type: float, display: true, formatter: Kilogram
+  Volume: 132, type: float, display: true, formatter: Liter
+  IsActivateable: true
+  IsLockable: true
+  IsOxygenTight: false, display: true 
+  YawRotation: 150          # how far in degrees head of player can be rotated (default 75°)
+  StackSize: 1000
+  BlockColor: "110,110,110"
+  
+  BuffNameActivate: DecreaseBodyTemp, display: StatusEffect
+
+  BlastParticleIndex: 4
+  BlastRadius: 2
+  BlastDamage: 50
+}
+
+{ +Block Name: CryoPodTalonAr 
+  Info: bkiCryoPodTalonAr, display: true  
+  Class: Container
+  Group: cpgEquipment   
+  Category: Deco Blocks
+  Material: metallight
+  Shape: ModelEntity 
+  Model: @models2/Entities/Decorations/LaboratoryPack/CryoPodTalonArPrefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  BlockColor: "110,110,110"
+  Place: Free   
+  CModelRotation: false
+  IsOxygenTight: false, display: true 
+  AllowPlacingAt: "Base,MS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"    
+  StackSize: 1000 
+  IsActivateable: true
+  IsAccessible: true, type: bool
+  IsLockable: true
+  # CanPickup: true
+  ShowUser: Yes
+  
+  Mass: 170, type: float, display: true, formatter: Kilogram
+  Volume: 250, type: float, display: true, formatter: Liter 
+  LootList: 76 
+}
+
+## Talon Faction weapon - fixed Pulse Laser with higher frequency but same dps; additional shield damage; available for players as upgrade for MSWeapon02.
+
+{ +Block Name: WeaponMSLaserFactionTalonar
+  Info: bkiWeaponMSLaserFactionTalonar, display: true 
+  Class: Weapon
+  IndexName: WeaponShip
+  Group: cpgWeapon
+  MarketPrice: 109244, display: true
+  Material: metalhard
+  Shape: ModelEntity
+  ShowBlockName: true
+  WeaponItem: PulseLaserMSFactionTalonar
+  Model: @models/Blocks/WeaponsShip/WeaponMSPulseLaserT2RetractPrefab   ## Modify prefab texture? 
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!  
+  IsTextureable: true   # !!!
+  IsGPUInstance: false  # !!!
+  Texture: 50 
+  SoundOpen: UseActions/WeaponOpenClose
+  SoundClose: UseActions/WeaponOpenClose
+  IsActivateable: true
+  IsRetractable: true, display: true  
+  Place: WeaponDir
+  AllowPlacingAt: MS, display: true
+  SizeInBlocks: "1,6,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  Volume: 1600, type: float, display: true, formatter: Liter
+  Mass: 2715, type: float, display: true, formatter: Kilogram
+  Category: Weapons/Items
+  BlockColor: "110,110,110"
+  StackSize: 500
+  MaxCount: 6, type: int, display: true
+  BlastParticleIndex: 4
+  BlastRadius: 2
+  BlastDamage: 50
+  EnergyIn: 25, type: int, display: true, formatter: Watt
+  CPUIn: 7200, type: int, display: true
+  HitPoints: 3000, type: int, display: true
+  # DowngradeTo: WeaponMS02
+  # Damage: 53, display: true
+  # AmmoCapacity: 150, display: true
+  # AmmoType: PulseLaserChargeMSWeapon, display: true
+  # ReloadDelay: 1, display: true
+  # ROF: 0.6, type: float, display: true, formatter: ROF
+
+ # UnlockCost: 27, display: true
+ # UnlockLevel: 25, display: true
+ # TechTreeParent: WeaponMS01
+ # TechTreeNames: Capital Vessel
+}
+
+## Talon Hologram on station
+
+
+{ +Block Name: StationConsoleTalonAr, Ref: DecoTemplate
+  Material: metallight
+  Shape: ModelEntity
+  Info: bkiStationConsoleTalonAr, display: true
+  Model: @models2/Entities/Decorations/HolographicAIConsole/HolographicAIConsoleTalonArPrefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!  
+  Class: NPCDialogue    
+  Group: cpgCrewStationAlien
+  Category: Deco Blocks
+  NPCModelRotation: false
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  Place: Free
+  AllowPlacingAt: "Base,MS", display: true
+  IsAccessible: true, type: bool
+  IsActivateable: true
+  
+  IsOxygenTight: false, display: true
+  # AllowedInBlueprint: false, display: true
+  # CanPickup: true
+  Volume: 22, type: float, display: true, formatter: Liter
+  Mass: 300, type: float, display: true, formatter: Kilogram  
+  HitPoints: 150, type: int, display: true
+  EnergyIn: 0, type: int, display: true, formatter: Watt
+  BlastParticleIndex: 11
+  BlastRadius: 2
+  BlastDamage: 80
+  TemplateRoot: ConsoleBlocks
+  
+  
+  ShowUser: Yes
+}
+
+# == Static NPC
+
+
+{ +Block Name: StandingNPCAlienCivilian1, Ref: ZiraxCommander #Ref: NPCAlienTemplate
+  Model: @models2/Entities/Decorations/DecoNPC/StandingNPCAlienCivilian1Prefab    
+}
+
+# == Warp Drive T2
+
+{ +Block Name: WarpDriveT2  
+  Info: bkiWarpDriveT2, display: true
+  Class: WarpDrive
+  Group: cpgWarp
+  IndexName: WarpDrive
+  Material: metal
+  Shape: ModelEntity
+  MarketPrice: 120000, display: true
+  ShowBlockName: true
+  Model: @models/Blocks/Mothership/WarpDriveT2Prefab
+  Mesh-Damage-1: Mesh/D0
+  Mesh-Damage-2: Mesh/D1
+  Mesh-Damage-3: Mesh/D2
+  Mesh-Damage-4: Mesh/D3
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  AllowPlacingAt: MS, display: true
+  SizeInBlocks: "3,2,5", display: true
+  SizeInBlocksLocked: "Base,MS"
+  Volume: 4800, type: float, display: true, formatter: Liter
+  Mass: 82200, type: float, display: true, formatter: Kilogram
+  IsDuplicateable: false
+  MaxCount: 1, type: int, display: true
+  ForceMaxCount: true
+  IsOxygenTight: false, display: true
+  # ModelOffset: "0,0.5,0"
+  # BlockColor: "26,50,89"
+  StackSize: 250
+  BlockColor: "110,110,110"
+  Category: Devices
+  UpgradeTo: WarpDriveCVEpic, display: true
+  DowngradeTo: WarpDrive, display: true 
+  EnergyIn: 25, type: int, display: true, formatter: Watt
+  CPUIn: 60000, type: int, display: true
+  HitPoints: 1150, type: int, display: true
+
+  BlastParticleIndex: 4
+  BlastRadius: 5
+  BlastDamage: 200
+
+  ItemPerAU: PentaxidCrystal, display: true
+  CostPerAU: 3, display: true
+  CostPerLY: 1, display: true
+  RangeAU: 48, display: true
+  RangeLY: 60, display: true
+      
+  Radiation: 25, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
+  Temperature: 40, display: true
+  
+
+  UnlockCost: 15, display: true
+  UnlockLevel: 20, display: true
+  TechTreeParent: WarpDrive
+  TechTreeNames: Capital Vessel
 }
