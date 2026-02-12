@@ -10,6 +10,7 @@
 # - if used for Large Grid (BA,CV): Mass * 8 (2^3)  
 # 
 #  AllowPlacingAt: "Base,MS,SS,GV,Terrain", display: true     
+#  Collide: "movement,bullet,rocket,melee"
 #  EnergyIn: 1, type: int, display: true, formatter: Watt  Value is given in kW
 # EnergyOut: 1, type: int, display: true, formatter: Watt  Value is given in kW  
 # 
@@ -49,9 +50,12 @@
 # IsActivatedOnPlace: determines whether device is switched on when placed 
 # IsDuplicateable: defines whether block can be used for plane / line drawing tool
 # ForceMaxCount: will force the MaxCount even if difficulty level deactivated it (needed for Core, Warp Drive etc but not for weapons)
+# BlockSizeScale: 2 (=SV/HV) or 8 (=CV/BA) with this Mass and HitPoints will be scaled according to its voxels
+# Voxelize: determines whether a block is voxelized in small cubes to not occupy a full voxel space (Default Voxelize: true)
 # IsAntiInfantryWeapon: true   = Device properties (DMG, HP) are only computed for Infantry and Entity Attack-Defense values, but not for Artillery AD
 # IsKeepContainers: true   = ONLY USE FOR CORES. If set to true, pre-placed items will be saved with the blueprint and be available as loot in their specific location. Do ONLY use with NPC cores.  
 # VolumeCapacity: 125, type: float, display: true, formatter: Liter  ; Gives the SU available for this container. 
+# OccupySizeInBlocks: true    > for block that should not be voxelized because of an animation, specific shader, etc pp.. so the full SizeInBlocks is occupied
 # ShieldMultiplier: AnyStringPossible   > only for Class:ShieldGenerator devices; Allows to set a parameter that can be used in the DamageMultiplier of a weapon in the ItemsConfig.ecf
 # RepairToTemplate: false > allow excluding (rare or special) blocks from reparing to template to avoid exploits.
 # DropOnDeath:   > If set to 'False'  this item or block is not dropped on player death. Use for important story items that players shall not lose on death. Default is set to 'True'.
@@ -114,6 +118,8 @@
 # 411	HullCombatLargeBlocks	Combat Steel Blocks L
 # 1395	AlienLargeBlocks 		Xeno Steel Blocks L 
 # 408	AlienBlocks				Radioactive; for POI building only; Same Texture range than 1395 
+# 865	FleshLargeBlocks		BLOCKED FOR DF > Flesh blocks > Symelite Blocks (for DF)
+# 866	SymelitArmorLargeBlocks	BLOCKED FOR DF > Symelite Armor Blocks (for Player)
 # 
 # SV / HV:
 # 1478	PlasticSmallBlocks		Carbon Composite Blocks S
@@ -1574,7 +1580,7 @@
     Prob: 0.2
   }
 }
-# available free NOT! 136 used by DF Scenario (Symelite Resource)
+# BLOCKED  > 136 used by DF Scenario (Symelite Resource)
 
 #  136 - 255 available free BUT NEED TO BE KEPT FREE for TEXTURES only!!! (adding any other block or device will break textures)
 
@@ -6345,6 +6351,8 @@
 }
 
 { +Block Id: 492, Name: TurretEnemyLaser, Ref: TurretIONCannon           #TurretAlienGeneric Laser OLD
+  Group: cpgTurret
+  IndexName: Turret
   Model: @models/Blocks/Turrets/TurretsEnemy/TurretEnemyLaserPrefab
   Mesh-Damage-1: Mesh/D0
   Mesh-Damage-2: Mesh/D1
@@ -11263,7 +11271,13 @@
   CostPerLY: 1, display: true
   RangeAU: 24, display: true
   RangeLY: 30, display: true
-      
+  
+  # Short Range Warp  (Microwarp)
+  CostPerKM: 2, display: true
+  RangeKM: 20000, display: true
+  #RangeKMuseDetector: true, display: true
+  MicroWarpCooldown: 25, dipslay: true # INT in real time seconds; Set to 0 or comment out to have SRW without a cooldown
+  
   Radiation: 25, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
   Temperature: 40, display: true
 
@@ -13171,7 +13185,7 @@
   }
 }
 
-# available free NOT  865, 866 used by DF Scenario (Symelite Blocks)
+# BLOCKED >  865, 866 used by DF Scenario (Symelite Blocks)
 
 { Block Id: 867, Name: OmicronWaterleaf
   Material: woodsoft
@@ -20632,6 +20646,12 @@
   CostPerLY: 0, display: true
   RangeAU: 15, display: true
   RangeLY: 0, display: true
+  
+  # Short Range Warp  
+  CostPerKM: 1, display: true
+  RangeKM: 15000, display: true
+  #RangeKMuseDetector: true, display: true
+  MicroWarpCooldown: 25, dipslay: true
 
   UnlockCost: 12, display: true
   UnlockLevel: 10, display: true
@@ -21115,6 +21135,7 @@
 }
 { +Block Id: 1468, Name: SecurityGuard2, Ref: NPCHumanTemplate
   NPCModelRotation: true
+  Class: NPCDialogue
   Group: cpgCrewStationHuman
   Info: bkiSecurityGuard2, display: true
   IsAccessible: true, type: bool
@@ -21519,7 +21540,7 @@
   Volume: 55, type: float, display: true, formatter: Liter
   StackSize: 500
   MaxCount: 500, type: int, display: true
-  CPUIn: 5, type: int, display: true
+  CPUIn: 15, type: int, display: true
   ChildBlocks: "SolarPanelSlope, SolarPanelSlope2, SolarPanelSlope3, SolarPanelHorizontal, SolarPanelHorizontal2, SolarPanelHorizontalMount, SolarPanelHorizontalStand"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21564,7 +21585,7 @@
   EnergyOut: 5000, type: int, display: false, formatter: Watt  # do not display for solar generator
   Mass: 2050, type: float, display: true, formatter: Kilogram
   Volume: 150, type: float, display: true, formatter: Liter
-  CPUIn: 50, type: int, display: true
+  CPUIn: 2, type: int, display: true
   
   BlastParticleIndex: 4
   BlastRadius: 5
@@ -21753,7 +21774,7 @@
   Volume: 50, type: float, display: true, formatter: Liter
   StackSize: 1000
   MaxCount: 500, type: int, display: true
-  CPUIn: 2, type: int, display: true
+  CPUIn: 5, type: int, display: true
   ChildBlocks: "SolarPanelSlopeSmall, SolarPanelSlope3Small, SolarPanelHorizontalSmall"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21780,7 +21801,7 @@
   HitPoints: 100, type: int, display: true
   Mass: 350, type: float, display: true, formatter: Kilogram
   MaxCount: 500, type: int, display: true
-  CPUIn: 2, type: int, display: true
+  CPUIn: 5, type: int, display: true
   TemplateRoot: SolarPanelSmallBlocks
   IsOxygenTight: true, display: true 
   BlockColor: "110,110,110"    
@@ -21798,6 +21819,8 @@
 
 #  New AI weapons for POI  
 { +Block Id: 1517, Name: TurretEnemyRocket, Ref: TurretIONCannon     #TurretAlienGeneric BA Rocket
+  Group: cpgTurret
+  IndexName: Turret
   Model: @models/Blocks/Turrets/TurretsEnemy/TurretEnemyLaserPrefab
   Mesh-Damage-1: Mesh/D0
   Mesh-Damage-2: Mesh/D1
@@ -21811,6 +21834,8 @@
   AboveTerrainCheck: false
 }
 { +Block Id: 1518, Name: TurretEnemyArtillery, Ref: TurretIONCannon    #TurretAlienGeneric BA Artillery
+  Group: cpgTurret
+  IndexName: Turret
   Model: @models/Blocks/Turrets/TurretsEnemy/TurretEnemyLaserPrefab
   Mesh-Damage-1: Mesh/D0
   Mesh-Damage-2: Mesh/D1
@@ -24025,7 +24050,7 @@
   Info: bkiTurretAlien, display: true
   RepairToTemplate: false, display: true
   Class: TurretAuto
-  Group: cpgAlien
+  Group: cpgTurret
   IndexName: Turret
   Material: metalhard
   Shape: Turret
@@ -24058,6 +24083,8 @@
 }
 
 { +Block Id: 1680, Name: TurretEnemyEMP, Ref: TurretIONCannon     #TurretAlien Generic EMP
+  Group: cpgTurret
+  IndexName: Turret
   Model: @models/Blocks/Turrets/TurretsEnemy/TurretEnemyLaserPrefab
   Mesh-Damage-1: Mesh/D0
   Mesh-Damage-2: Mesh/D1
@@ -25221,6 +25248,8 @@
 } 
 #  New AI weapons for POI  
 { +Block Id: 1773, Name: TurretEnemyBallista, Ref: TurretIONCannon     #TurretAlien Talon Ballista
+  Group: cpgTurret
+  IndexName: Turret
 # { +Block Id: 1773, Name: TurretEnemyBallista, Ref: TurretBaseFlak
   Model: @models/Blocks/Turrets/TurretsEnemy/TurretBallistaPrefab
   # Mesh-Damage-1: Mesh/D0
@@ -28048,41 +28077,57 @@
 # === High Tier sphere turret types (generic)===
 
 { +Block Name: TurretEnemyBlack, Ref: TurretAlien            #Random; not assigned to faction yet
+  Group: cpgTurret  
+  IndexName: Turret
   Info: bkiTurretEnemyColored, display: true
   Model: @models/Blocks/Turrets/TurretEnemyBlackPrefab  
   WeaponItem: TurretEnemyLaserWeaponBlack
 }
 { +Block Name: TurretEnemyBlue, Ref: TurretAlien            #Plasma; not assigned to faction yet
+  Group: cpgTurret
+  IndexName: Turret
   Info: bkiTurretEnemyColored, display: true
   Model: @models/Blocks/Turrets/TurretEnemyBluePrefab
   WeaponItem: TurretEnemyLaserWeaponBlue
 }
 { +Block Name: TurretEnemyCyan, Ref: TurretAlien            #Random; not assigned to faction yet
+  Group: cpgTurret
+  IndexName: Turret
   Info: bkiTurretEnemyColored, display: true
   Model: @models/Blocks/Turrets/TurretEnemyCyanPrefab
   WeaponItem: TurretEnemyLaserWeaponCyan
 }
 { +Block Name: TurretEnemyGreen, Ref: TurretAlien            #Random; Tresari faction
+  Group: cpgTurret
+  IndexName: Turret
   Info: bkiTurretEnemyColored, display: true
   Model: @models/Blocks/Turrets/TurretEnemyGreenPrefab
   WeaponItem: TurretEnemyLaserWeaponGreen
 }
 { +Block Name: TurretEnemyOrange, Ref: TurretAlien            #Random; not assigned to faction yet
+  Group: cpgTurret
+  IndexName: Turret
   Info: bkiTurretEnemyColored, display: true
   Model: @models/Blocks/Turrets/TurretEnemyOrangePrefab
   WeaponItem: TurretEnemyLaserWeaponOrange
 }
 { +Block Name: TurretEnemyPurple, Ref: TurretAlien            #Turret Faction CVBA DarkMatter TESCH  
+  Group: cpgTurret
+  IndexName: Turret
   Info: bkiTurretEnemyTESCH, display: true
   Model: @models/Blocks/Turrets/TurretEnemyPurplePrefab
   WeaponItem: TurretEnemyLaserWeaponPurple
 }
 { +Block Name: TurretEnemyRed, Ref: TurretAlien             #Laser; not assigned to faction yet
+  Group: cpgTurret
+  IndexName: Turret
   Info: bkiTurretEnemyColored, display: true
   Model: @models/Blocks/Turrets/TurretEnemyRedPrefab
   WeaponItem: TurretEnemyLaserWeaponRed
 }
 { +Block Name: TurretEnemyYellow, Ref: TurretAlien            #EMP; not assigned to faction yet
+  Group: cpgTurret
+  IndexName: Turret
   Info: bkiTurretEnemyColored, display: true
   Model: @models/Blocks/Turrets/TurretEnemyYellowPrefab
   WeaponItem: TurretEnemyLaserWeaponYellow
@@ -28239,6 +28284,12 @@
   CostPerLY: 1, display: true
   RangeAU: 250, display: true
   RangeLY: 150, display: true
+  
+  # Short Range Warp  
+  CostPerKM: 4, display: true
+  RangeKM: 60000, display: true
+  #RangeKMuseDetector: true, display: true
+  MicroWarpCooldown: 25, dipslay: true
       
   Radiation: 25, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
   Temperature: 40, display: true
@@ -28418,7 +28469,7 @@
   # WeaponItem: TurretMSMinigunWeapon
   Class: TurretManual   # TurretAuto ?
   IndexName: Turret
-  Group: cpgAlien     # Indicates non-player origin; default cpgTurret
+  Group: cpgTurret     # Indicates non-player origin; default cpgTurret
   Category: Weapons/Items
   RepairToTemplate: false, display: true                    #Blocks can be placed, but not R2T when destroyed
   AllowedInBlueprint: false, display: true  #Struct with these blocks cannot be blueprinted to avoid easy multiplication of these blocks!
@@ -37542,14 +37593,21 @@
   StackSize: 250
   MaxCount: 1, type: int, display: true
   ForceMaxCount: true     
+  
   IsAccessible: true, type: bool
+  IsActivateable: false
   IsActivatedOnPlace: true
   IsDuplicateable: false
+  
   EnergyIn: 3125, type: int, display: true, formatter: Watt
+  EnergyInIdle: 50, type: int, display: true, formatter: Watt
+  EnergyDynamicGroup: Shield
+  
   HitPoints: 500, type: int, display: true 
   Mass: 6460, type: float, display: true, formatter: Kilogram
   Volume: 2160, type: float, display: true, formatter: Liter
   CPUIn: 16055, type: int, display: true 
+  
   ShieldCapacityBonus: 12500, type: int, display: true
   ShieldRechargeBonus: 0, type: int, display: true
   MarketPrice: 82672, display: true 
@@ -37568,6 +37626,8 @@
   BlockColor: "110,110,110"
   # SizeInBlocksLocked: "MS"
   EnergyIn: 2250, type: int, display: true, formatter: Watt  
+  EnergyInIdle: 25, type: int, display: true, formatter: Watt
+  EnergyDynamicGroup: Shield
   HitPoints: 500, type: int, display: true 
   Mass: 6460, type: float, display: true, formatter: Kilogram
   Volume: 2160, type: float, display: true, formatter: Liter
@@ -37589,6 +37649,8 @@
   # SizeInBlocksLocked: "SS"
   MaxCount: 1, type: int, display: true
   EnergyIn: 450, type: int, display: true, formatter: Watt  
+  EnergyInIdle: 5, type: int, display: true, formatter: Watt
+  EnergyDynamicGroup: Shield
   HitPoints: 250, type: int, display: true 
   Mass: 815, type: float, display: true, formatter: Kilogram
   Volume: 93.75, type: float, display: true, formatter: Liter
@@ -37611,6 +37673,8 @@
   # SizeInBlocksLocked: "GV" 
   MaxCount: 1, type: int, display: true
   EnergyIn: 450, type: int, display: true, formatter: Watt  
+  EnergyInIdle: 5, type: int, display: true, formatter: Watt
+  EnergyDynamicGroup: Shield
   HitPoints: 250, type: int, display: true 
   Mass: 815, type: float, display: true, formatter: Kilogram
   Volume: 93.75, type: float, display: true, formatter: Liter
@@ -38057,6 +38121,7 @@
 ## Talon Faction weapon - fixed Pulse Laser with higher frequency but same dps; additional shield damage; available for players as upgrade for MSWeapon02.
 
 { +Block Name: WeaponMSLaserFactionTalonar
+  CustomIcon: WeaponMS02
   Info: bkiWeaponMSLaserFactionTalonar, display: true 
   Class: Weapon
   IndexName: WeaponShip
@@ -38194,6 +38259,12 @@
   CostPerLY: 1, display: true
   RangeAU: 48, display: true
   RangeLY: 60, display: true
+  
+  # Short Range Warp  
+  CostPerKM: 3, display: true
+  RangeKM: 40000, display: true
+  #RangeKMuseDetector: true, display: true
+  MicroWarpCooldown: 25, dipslay: true
       
   Radiation: 25, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
   Temperature: 40, display: true
@@ -38203,4 +38274,71 @@
   UnlockLevel: 20, display: true
   TechTreeParent: WarpDrive
   TechTreeNames: Capital Vessel
+}
+## Player GIN Console4
+
+{ +Block Name: PlayerConsoleGIN 
+  CustomIcon: ScifiComputerTable
+  Class: NPCDialogue    
+  DialogueState: GIN_Console_Initialize  #Not yet updated to 1.15 contents. Test new contents in scenario "default random EXP" !
+  NPCModelRotation: false 
+  Group: cpgCrewStationHuman
+  Material: metallight
+  Shape: ModelEntity
+  Model: @models2/Entities/Decorations/Sci-Fi_InteriorPack/PlayerConsolePrefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  Info: bkiPlayerConsoleGIN, display: true
+  Category: Devices 
+  AllowPlacingAt: "Base,MS", display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  IsAccessible: true, type: bool
+ # IsLockable: true
+  IsOxygenTight: false, display: true
+ # TemplateRoot: ConsoleBlocks
+  Mass: 65, type: float, display: true, formatter: Kilogram
+  Volume: 12, type: float, display: true, formatter: Liter
+  # ModelOffset: "0,0.5,0"
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  # BlockColor: "0,64,255"
+  BlockColor: "0,255,255"
+  
+  BlastParticleIndex: 11
+  BlastRadius: 1
+  BlastDamage: 80
+  
+  UnlockCost: 0, display: true
+  UnlockLevel: 1, display: true
+ # TechTreeParent: GeneratorSV
+  TechTreeNames: Misc
+}
+
+{ +Block Name: Jumpgate87x87    
+  Info: bkiJumpgate, display: true 
+  Model: @models/Blocks/Misc/JumpgatePrefab     #use this model if you want JUMPGATE functionality (voxel vessels only; no player-on-foot or hoverbikes)
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Group: cpgTransportation
+ # IndexName: Jumpgate
+  Shape: ModelEntity
+  Material: metalhard 
+  Place: Free
+  BlockColor: "110,110,110"
+  AllowedInBlueprint: false, display: true
+  AllowPlacingAt: Base, display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  IsActivateable: true
+  IsAccessible: true, type: bool
+  IsLockable: true
+  IsOxygenTight: false, display: true
+  ShowBlockName: true
+  StackSize: 1000
+  Mass: 1000, type: float, display: true, formatter: Kilogram
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Category: Devices    
+  # Jumpgate Customizer 
+  JumpgateBaseScale: 0.000839            # Default base scale of model game objects that equals a 2-m ingame block (CV/BA block) (DO NOT CHANGE unless other VFX is used!)
+  JumpgateDiameter: 87, display: true                  #Default: 1; 1 = 2m diameter = 1x large block; 10 = 20m diameter = 10 large blocks; Use Un-even numbers as the insertion point is always in the center block!  
+  #JumpgateEffectEnabled: false       #commented out / default: true; Activates/Deactivates the Vortex effects of the jumpgate
 }
