@@ -2433,7 +2433,7 @@
   Mass: 13510, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 400, type: int, display: true
 }
 { +Block Id: 284, Name: TurretMSRocketRetract, Ref: TurretTemplate   #TurretPlayer CV Rocket
   Model: @models/Blocks/Turrets/TurretMSRocketRetractPrefab
@@ -2450,7 +2450,7 @@
   Mass: 11850, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 400, type: int, display: true
   RotSpeed: 120, type: int, display: true  
   SoundRotate: Weapons/Turret/TurretRotateVeryFast
   CPUIn: 9700, type: int, display: true
@@ -2598,7 +2598,7 @@
   # BlockColor: "26,50,89"
   # ModelOffset: "0,0.5,0"
   StackSize: 6
-  MaxCount: 60, type: int, display: true
+  MaxCount: 600, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -2962,7 +2962,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 12, type: int, display: true
+  MaxCount: 40, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 2
   BlastDamage: 50
@@ -10328,7 +10328,7 @@
   EnergyInIdle: 1, type: int, display: true, formatter: Watt
   HitPoints: 500, type: int, display: true
   StackSize: 1000
-  MaxCount: 12, type: int, display: true
+  MaxCount: 6, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -21540,7 +21540,7 @@
   Volume: 55, type: float, display: true, formatter: Liter
   StackSize: 500
   MaxCount: 500, type: int, display: true
-  CPUIn: 15, type: int, display: true
+  CPUIn: 4, type: int, display: true
   ChildBlocks: "SolarPanelSlope, SolarPanelSlope2, SolarPanelSlope3, SolarPanelHorizontal, SolarPanelHorizontal2, SolarPanelHorizontalMount, SolarPanelHorizontalStand"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21585,7 +21585,7 @@
   EnergyOut: 5000, type: int, display: false, formatter: Watt  # do not display for solar generator
   Mass: 2050, type: float, display: true, formatter: Kilogram
   Volume: 150, type: float, display: true, formatter: Liter
-  CPUIn: 2, type: int, display: true
+  CPUIn: 50, type: int, display: true
   
   BlastParticleIndex: 4
   BlastRadius: 5
@@ -21614,7 +21614,7 @@
   HitPoints: 150, type: int, display: true
   Mass: 730, type: float, display: true, formatter: Kilogram
   MaxCount: 500, type: int, display: true
-  CPUIn: 5, type: int, display: true
+  CPUIn: 45, type: int, display: true
   TemplateRoot: SolarPanelBlocks
   IsOxygenTight: false, display: true
   BlockColor: "110,110,110"  
@@ -21774,7 +21774,7 @@
   Volume: 50, type: float, display: true, formatter: Liter
   StackSize: 1000
   MaxCount: 500, type: int, display: true
-  CPUIn: 5, type: int, display: true
+  CPUIn: 20, type: int, display: true
   ChildBlocks: "SolarPanelSlopeSmall, SolarPanelSlope3Small, SolarPanelHorizontalSmall"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21801,7 +21801,7 @@
   HitPoints: 100, type: int, display: true
   Mass: 350, type: float, display: true, formatter: Kilogram
   MaxCount: 500, type: int, display: true
-  CPUIn: 5, type: int, display: true
+  CPUIn: 20, type: int, display: true
   TemplateRoot: SolarPanelSmallBlocks
   IsOxygenTight: true, display: true 
   BlockColor: "110,110,110"    
@@ -27794,7 +27794,7 @@
   ShowUser: No
   AllowedInBlueprint: false, display: true
 }
-=====   Posters Deco ========
+# =====   Posters Deco ========
 { Block Name: PosterARest  
   Model: @models2/Entities/Decorations/Posters/aRestPosterPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!  
@@ -28498,7 +28498,7 @@
   # IsRetractable: true
   # AboveTerrainCheck: false                 # Required?
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   # MarketPrice: 2200, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
@@ -28736,7 +28736,7 @@
   # IsRetractable: true
   # AboveTerrainCheck: false                 # Required?
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   # MarketPrice: 2200, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
