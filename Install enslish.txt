@@ -1,0 +1,39 @@
+Installation of the Solar Only or Solar + Turrets files
+Both folders modify the game's blocksConfig file, but with different effects:
+
+Solar Only:
+- Increases the solar panel limit to 500
+- Reduces their CPU usage
+- Allows placing them on capital vessels
+
+Solar + Turrets:
+- Includes all modifications from Solar Only
+- Also increases the maximum number of turrets on all elements that can support them
+
+Installation Procedure
+
+01 - Open the game installation folder
+- Open your file explorer.
+- Navigate to the folder where the game is installed (Steam, Epic, or manual installation).
+- Example for Steam: C:\Program Files (x86)\Steam\steamapps\common\GameName
+
+02 - Access the configuration folder
+- The file to replace is located in the "config" folder.
+- Open the "config" folder inside the game directory.
+- Make sure the file blocksConfig.ecf (or blocksConfig) is present.
+
+03 - Choose the mod version
+- Important: select the file that matches the features you want.
+- To modify only solar panels → use Solar Only
+- To modify solar panels and turrets → use Solar + Turrets
+
+04 - Replace the blocksConfig file
+- Copy the blocksConfig file from the chosen folder.
+- Paste it into the game's "config" folder.
+- Accept the replacement of the existing file.
+
+05 - Launch the game and check
+- Start the game.
+- Open a creative mode game.
+- Display all constructions (press H).
+- If the solar panels and the charger show a red and yellow dot, the modification is correctly applied.

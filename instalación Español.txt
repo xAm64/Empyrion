@@ -1,0 +1,39 @@
+Instalación de los archivos Solar Only o Solar + Turrets
+Ambas carpetas modifican el archivo blocksConfig del juego, pero con efectos diferentes:
+
+Solar Only:
+- Aumenta el límite de paneles solares a 500
+- Reduce su consumo de CPU
+- Permite colocarlos en naves capitales
+
+Solar + Turrets:
+- Incluye todas las modificaciones de Solar Only
+- También aumenta el número máximo de torretas en todos los elementos que pueden tenerlas
+
+Procedimiento de instalación
+
+01 - Abrir la carpeta de instalación del juego
+- Abra el explorador de archivos.
+- Navegue hasta la carpeta donde está instalado el juego (Steam, Epic o instalación manual).
+- Ejemplo en Steam: C:\Program Files (x86)\Steam\steamapps\common\NombreDelJuego
+
+02 - Acceder a la carpeta de configuración
+- El archivo que debe reemplazarse se encuentra en la carpeta "config".
+- Abra la carpeta "config" dentro del directorio del juego.
+- Verifique que el archivo blocksConfig.ecf (o blocksConfig) esté presente.
+
+03 - Elegir la versión del mod
+- Importante: seleccione el archivo que corresponda a las funciones que desea.
+- Para modificar solo los paneles solares → usar Solar Only
+- Para modificar paneles solares y torretas → usar Solar + Turrets
+
+04 - Reemplazar el archivo blocksConfig
+- Copie el archivo blocksConfig de la carpeta elegida.
+- Péguelo en la carpeta "config" del juego.
+- Acepte reemplazar el archivo existente.
+
+05 - Iniciar el juego y comprobar
+- Inicie el juego.
+- Abra una partida en modo creativo.
+- Muestre todas las construcciones (tecla H).
+- Si los paneles solares y el cargador muestran un punto rojo y amarillo, la modificación se ha aplicado correctamente.
