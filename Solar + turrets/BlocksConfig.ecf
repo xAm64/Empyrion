@@ -109,17 +109,18 @@
 # IMPORTANT: for use in ghe BlockShapesWindow.ecf all BUILDINGblocks need a FIXED ID below the 2048 limit!
 #
 # BA / CV:
-# 396	WoodBlocks				Wood Blocks
-# 399	ConcreteBlocks			Concrete Blocks
-# 1322	ConcreteArmoredBlocks	Armored Concrete Blocks
-# 1481	PlasticLargeBlocks		Carbon Composite Blocks L
-# 402	HullLargeBlocks			Steel Blocks L
-# 405	HullArmoredLargeBlocks	Hardened Steel Blocks L
-# 411	HullCombatLargeBlocks	Combat Steel Blocks L
-# 1395	AlienLargeBlocks 		Xeno Steel Blocks L 
-# 408	AlienBlocks				Radioactive; for POI building only; Same Texture range than 1395 
-# 865	FleshLargeBlocks		BLOCKED FOR DF > Flesh blocks > Symelite Blocks (for DF)
-# 866	SymelitArmorLargeBlocks	BLOCKED FOR DF > Symelite Armor Blocks (for Player)
+# 396	WoodBlocks						Wood Blocks
+# 399	ConcreteBlocks					Concrete Blocks
+# 1322	ConcreteArmoredBlocks			Armored Concrete Blocks
+# 1481	PlasticLargeBlocks				Carbon Composite Blocks L
+# 402	HullLargeBlocks					Steel Blocks L
+# 405	HullArmoredLargeBlocks			Hardened Steel Blocks L
+# 411	HullCombatLargeBlocks			Combat Steel Blocks L
+# 1395	AlienLargeBlocks 				Xeno Steel Blocks L 
+# 408	AlienBlocks						Radioactive; for POI building only; Same Texture range than 1395 
+# 865	FleshLargeBlocks				BLOCKED FOR DF > Flesh blocks > Symelite Blocks (for DF)
+# 866	SymelitArmorLargeBlocks			BLOCKED FOR DF > Symelite Armor Blocks (for Player)
+# 
 # 
 # SV / HV:
 # 1478	PlasticSmallBlocks		Carbon Composite Blocks S
@@ -1637,7 +1638,7 @@
   Volume: 100, type: float, display: true, formatter: Liter
   IsLockable: true
   IsIgnoreLC: true
-  Info: bkiCockpit, display: true
+  Info: bkiCockpitCV, display: true
   YawRotation: 150          # how far in degrees head of player can be rotated (default 75°)
   StackSize: 1000
   BlockColor: "110,110,110"
@@ -1690,7 +1691,7 @@
   IndexName: FuelTank
   Group: cpgFuelTank
   EssentialCategory: cpgFuelTank
-  MarketPrice: 850, display: true
+  MarketPrice: 850, display: false
   # LootList: 22   # 10 slots 
   Material: metallight
   Shape: ModelEntity
@@ -1736,7 +1737,7 @@
 { +Block Id: 260, Name: FuelTankMSLarge, Ref: FuelTankMSSmall
   # LootList: 23    # 20 slots
   Model: @models/Blocks/Mothership/FuelTankMSLargePrefab
-  MarketPrice: 3845, display: true
+  MarketPrice: 3845, display: false
   HitPoints: 80, type: int, display: true
   FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   FuelCapacity: 2700, type: int, display: true 
@@ -1819,7 +1820,7 @@
   IndexName: O2Tank
   Group: cpgO2Tank
   EssentialCategory: cpgO2Tank
-  MarketPrice: 1078, display: true
+  MarketPrice: 1078, display: false
   # LootList: 24     # 10 slots 
   Material: metallight
   Shape: ModelEntity
@@ -1941,7 +1942,7 @@
   Group: cpgPassengerSeat
   Material: metal
   Shape: ModelEntity
-  MarketPrice: 230, display: true
+  MarketPrice: 230, display: false
   ShowBlockName: true
   Model: @models/Blocks/Mothership/passengerSeatMSPrefab
   Mesh-Damage-1: Mesh/D0
@@ -1956,7 +1957,7 @@
   Volume: 32, type: float, display: true, formatter: Liter
   IsActivateable: true
   IsLockable: true
-  IsOxygenTight: false, display: true
+  IsOxygenTight: false, display: false
   Info: bkiPassengerSeat, display: true  
   YawRotation: 150          # how far in degrees head of player can be rotated (default 75°)
   StackSize: 1000
@@ -1994,7 +1995,7 @@
   TemplateRoot: CockpitBlocksCV
   IsLockable: true
   IsIgnoreLC: true
-  Info: bkiCockpit, display: true
+  Info: bkiCockpitCV, display: true
   YawRotation: 150          # how far in degrees head of player can be rotated (default 75°)
   StackSize: 1000
   Category: Devices
@@ -2107,7 +2108,7 @@
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
-  MarketPrice: 805, display: true
+  MarketPrice: 805, display: false
   Model: @models/Blocks/Mothership/RCS_BlockPrefab
   Mesh-Damage-1: Mesh/D0
   Mesh-Damage-2: Mesh/D1
@@ -2300,7 +2301,7 @@
   Class: Light
   Group: cpgLight
   IndexName: Light
-  MarketPrice: 85, display: true
+  MarketPrice: 85, display: false
   CanSetColor: true
   Material: metallight
   Shape: ModelEntity
@@ -2318,8 +2319,8 @@
   RemoveOnSI: true
   StabilitySupport: false
 
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
  # TechTreeParent: SpotlightBlocks
   TechTreeNames: "Small Vessel,Hover Vessel"
 }
@@ -2433,7 +2434,7 @@
   Mass: 13510, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 400, type: int, display: true
+  # MaxCount: 40, type: int, display: true
 }
 { +Block Id: 284, Name: TurretMSRocketRetract, Ref: TurretTemplate   #TurretPlayer CV Rocket
   Model: @models/Blocks/Turrets/TurretMSRocketRetractPrefab
@@ -2450,7 +2451,7 @@
   Mass: 11850, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 400, type: int, display: true
+  # MaxCount: 40, type: int, display: true
   RotSpeed: 120, type: int, display: true  
   SoundRotate: Weapons/Turret/TurretRotateVeryFast
   CPUIn: 9700, type: int, display: true
@@ -2537,7 +2538,7 @@
 { +Block Id: 289, Name: TurretRadar
   #  Class: Turret    
   Material: metal
-  MarketPrice: 1525, display: true
+  MarketPrice: 1525, display: false
   Shape: ModelEntity
   Model: @models/Blocks/Misc/RadarPrefab
   Mesh-Damage-1: Mesh/D0
@@ -2598,7 +2599,7 @@
   # BlockColor: "26,50,89"
   # ModelOffset: "0,0.5,0"
   StackSize: 6
-  MaxCount: 600, type: int, display: true
+  MaxCount: 60, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -2616,7 +2617,7 @@
   Class: O2Station
   Group: cpgO2Station
   Material: metal
-  MarketPrice: 1800, display: true
+  MarketPrice: 1800, display: false
   Shape: ModelEntity
   # BuffName: OxygenStation IS DONE DIFFERENT NOW  
   ShowBlockName: true
@@ -3165,7 +3166,7 @@
   Material: metallight
   Shape: Invisible
   ShowBlockName: true
-  MarketPrice: 2450, display: true
+  MarketPrice: 2450, display: false
   # Model: @models/Blocks/Mothership/AntennaPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -3230,7 +3231,7 @@
   Group: cpgEquipment
   IndexName: OP
   Material: metal
-  MarketPrice: 34500, display: true
+  MarketPrice: 34500, display: false
   Shape: ModelEntity
   ShowBlockName: true
   Model: @models/Blocks/Mothership/OfflineProtectorPrefab
@@ -3266,7 +3267,7 @@
 { +Block Id: 336, Name: PentaxidTank
   Class: WarpDriveTank
   Group: cpgWarp
-  MarketPrice: 22120, display: true
+  MarketPrice: 22120, display: false
   IndexName: WarpDriveTank
   LootList: 3   #   lootcontainer Warp Drive Tank  
   Material: metal
@@ -3355,7 +3356,7 @@
   Material: woodblock
   Shape: Invisible
   LifetimeOnDrop: 1200
-  MarketPrice: 3.25, display: true
+  MarketPrice: 3.25, display: false
   # Model: @models/Blocks/Terrain/SurvivalTent01Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   SizeInBlocks: "4,2,4"     #no need to display info for terrain placeables (removed to reduce hover info density)
@@ -3367,7 +3368,8 @@
   PickupToToolbar: true
   CanPickup: true
   
-  BuffNamesActivate: "Rested", display: StatusEffect
+  #BuffNamesActivate: "Rested", display: StatusEffect
+  BuffNamesActivate: "NeutralBodyTemp", display: false
   DebuffNamesActivate: "Hangover,BadTrip", display: EffectiveAgainst
   
   ChildBlocks: "SurvivalTent01, SurvivalTent02, SurvivalTent03"
@@ -3506,7 +3508,7 @@
   IndexName: Turret
   Group: cpgTurret
   CustomIcon: TurretGVMinigun
-  MarketPrice: 400, display: true
+  MarketPrice: 400, display: false
   Material: metalhard
   Shape: Turret
   Place: Face
@@ -3922,7 +3924,7 @@
 #  Steel Blocks (small blocks) - block group  
 { +Block Id: 380, Name: HullSmallBlocks  
   Material: hull
-  MarketPrice: 14, display: true
+  MarketPrice: 14, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   # do not change - block used in old structures
   Texture: 50
@@ -3931,12 +3933,12 @@
   Place: Free
   Model: Cube
   TemplateRoot: HullSmallBlocks
-  Info: bkiBlockGroup, display: true
+  Info: bkiHullSmallBlocks, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: "SS,GV", display: true
   HitPoints: 50, type: int, display: false
   Mass: 8, type: float, display: true, formatter: Kilogram
-  Volume: 12.5, type: float, display: true, formatter: Liter
+  Volume: 2.5, type: float, display: true, formatter: Liter
   StackSize: 2000
   BlockSizeScale: 2   
   Category: BuildingBlocks
@@ -3945,6 +3947,9 @@
   UnlockCost: 0
   UnlockLevel: 1 
   TechTreeNames: ""  
+  UpgradeTo: HullArmoredSmallBlocks, display: true  
+  DowngradeTo: PlasticSmallBlocks, display: false 
+
 }
 #  Two shape families for Steel Blocks (small blocks)   
 { +Block Id: 381, Name: HullFullSmall
@@ -4117,22 +4122,23 @@
 #  Hardened Steel Blocks (small blocks) - block group   
 { +Block Id: 393, Name: HullArmoredSmallBlocks   
   Material: hull
-  MarketPrice: 85, display: true
+  MarketPrice: 85, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 54
   BlockColor: "170,170,170"
   Shape: New          # cannot set to Invisible because block ID has been used in older versions 
   Model: Cube
-  Info: bkiBlockGroup, display: true
+  Info: bkiHullArmoredSmallBlocks, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: "SS,GV", display: true
   HitPoints: 200, type: int, display: false
   Mass: 32, type: float, display: true, formatter: Kilogram
-  Volume: 12.5, type: float, display: true, formatter: Liter
+  Volume: 2.5, type: float, display: true, formatter: Liter
   StackSize: 1000
   BlockSizeScale: 2   
   Category: BuildingBlocks
   ChildBlocks: "HullArmoredFullSmall, HullArmoredThinSmall, HullArmoredExtendedSmall, HullArmoredExtendedSmall2, HullArmoredExtendedSmall3, HullArmoredExtendedSmall4, HullArmoredExtendedSmall5, HullArmoredExtendedSmall6, HullArmoredExtendedSmall7"
+  UpgradeTo: HullCombatSmallBlocks, display: true
 
   UnlockCost: 0
   UnlockLevel: 1 
@@ -4172,23 +4178,24 @@
 { +Block Id: 396, Name: WoodBlocks  # rename: WoodFullBlocks
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Material: woodblock
-  MarketPrice: 1.25, display: true
+  MarketPrice: 1.25, display: false
   Texture: 70
   TextureTable: 1    #  1 = wood table  
   BlockColor: "187,135,90"
   Shape: Invisible
   Place: Free
   # Model: Cube
-  Info: bkiBlockGroup, display: true
+  Info: bkiWoodBlock, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: Base, display: true
   HitPoints: 100, type: int, display: false
   Mass: 360, type: float, display: true, formatter: Kilogram
   StackSize: 1000
   BlockSizeScale: 8  
-  Volume: 80, type: float, display: true, formatter: Liter
+  Volume: 16, type: float, display: true, formatter: Liter
   Category: BuildingBlocks
   ChildBlocks: "WoodFull, WoodThin, WoodExtended, WoodExtended2, WoodExtended3, WoodExtended4, WoodExtended5, WoodExtended6, WoodExtended7"
+  UpgradeTo: ConcreteBlocks, display: true
 
   UnlockCost: 0
   UnlockLevel: 1 
@@ -4224,7 +4231,7 @@
 #  Standard Concrete Block  
 { +Block Id: 399, Name: ConcreteBlocks    
   Material: concrete
-  MarketPrice: 30, display: true
+  MarketPrice: 30, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 92
   TextureTable: 2    #  2 = concrete table  
@@ -4232,16 +4239,17 @@
   Shape: Invisible
   Place: Free
   # Model: Cube
-  Info: bkiBlockGroup, display: true
+  Info: bkiWoodBlock, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: Base, display: true
   HitPoints: 600, type: int, display: false
   Mass: 1100, type: float, display: true, formatter: Kilogram
-  Volume: 80, type: float, display: true, formatter: Liter
+  Volume: 16, type: float, display: true, formatter: Liter
   StackSize: 1000
   BlockSizeScale: 8  
   Category: BuildingBlocks
   ChildBlocks: "ConcreteFull, ConcreteThin, ConcreteExtended, ConcreteExtended2, ConcreteExtended3, ConcreteExtended4, ConcreteExtended5, ConcreteExtended6, ConcreteExtended7"
+  UpgradeTo: ConcreteArmoredBlocks, display: true
 
   UnlockCost: 0
   UnlockLevel: 1 
@@ -4265,30 +4273,30 @@
   BlockSizeScale: 8 
   ChildShapes: "Cube, CutCornerE, CutCornerB, SlicedCornerA1, CornerHalfB, CornerSmallC, CornerC, CornerHalfA3, RampCMedium, RampA, RampC, CornerRoundB, CornerRoundADouble, RoundCornerA, CubeRoundConnectorA, EdgeRound, Cylinder, RampRoundFTriple, RampRoundF, SmallCornerRoundB, SmallCornerRoundA, SphereHalf, Cone, ConeB, CutCornerC, Cylinder6Way, CornerRoundATriple, CornerA, CornerHalfA1, CornerDoubleA3, CornerSmallB, PyramidA"
   UpgradeTo: ConcreteArmoredFull, display: true
-  DowngradeTo: WoodFull, display: true 
+  DowngradeTo: WoodFull, display: false 
 }
 
 { +Block Id: 401, Name: ConcreteThin, Ref: ConcreteFull
   ChildShapes: "Wall, WallLShape, WallSloped, WallSloped3Corner, WallSlopedC, WallSlopedCMediumright, WallSlopedAright, WallSlopedCMediumleft, WallSlopedAleft, WallCornerRoundB, WallSlopedRound, WallEdgeRound, WallEdgeRound3Way, WallCornerRoundA, WallCornerRoundC, WallSloped3CornerLow, WallCorner, WallLow, CubeHalf, RampADouble, RampCLow, RampBMedium, RampD, CutCornerEMedium, Beam, CylinderThin, CylinderThinTJoint, CylinderL, PipesFence, FenceTop, RampCHalf, CornerHalfA3Medium"
   UpgradeTo: ConcreteArmoredThin, display: true
-  DowngradeTo: WoodThin, display: true 
+  DowngradeTo: WoodThin, display: false 
 }
 
 #  Steel Block (large) - block group  
 { +Block Id: 402, Name: HullLargeBlocks   
   Material: hullarmored
-  MarketPrice: 130, display: true
+  MarketPrice: 130, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 50
   BlockColor: "110,110,110"
   Shape: New         # cannot set to Invisible because block ID has been used in older versions 
   Model: Cube
-  Info: bkiBlockGroup, display: true
+  Info: bkiHullLargeBlocks, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: "Base,MS", display: true
   HitPoints: 500, type: int, display: false
   Mass: 1000, type: float, display: true, formatter: Kilogram
-  Volume: 80, type: float, display: true, formatter: Liter
+  Volume: 16, type: float, display: true, formatter: Liter
   StackSize: 1000
   BlockSizeScale: 8   
   Category: BuildingBlocks
@@ -4297,6 +4305,10 @@
   UnlockCost: 0
   UnlockLevel: 1 
   TechTreeNames: ""
+  
+  #For display only
+  DowngradeTo: PlasticLargeBlocks, display: false 
+  UpgradeTo: HullArmoredLargeBlocks, display: true
 }
 
 #  Two shape families for Steel Blocks (large)  
@@ -4327,18 +4339,18 @@
 #  Hardened Steel Block (large) - block group  
 { +Block Id: 405, Name: HullArmoredLargeBlocks   
   Material: hullarmored
-  MarketPrice: 772, display: true
+  MarketPrice: 772, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 54
   BlockColor: "170,170,170"
   Shape: New       # cannot set to Invisible because block ID has been used in older versions 
   Model: Cube
-  Info: bkiBlockGroup, display: true  
+  Info: bkiHullArmoredLargeBlock, display: true  
   IsOxygenTight: true, display: true
   AllowPlacingAt: "Base,MS", display: true
   HitPoints: 1000, type: int, display: false
   Mass: 2000, type: float, display: true, formatter: Kilogram
-  Volume: 80, type: float, display: true, formatter: Liter
+  Volume: 16, type: float, display: true, formatter: Liter
   StackSize: 1000
   BlockSizeScale: 8  
   Category: BuildingBlocks
@@ -4347,6 +4359,10 @@
   UnlockCost: 0
   UnlockLevel: 1 
   TechTreeNames: ""
+  
+  #For display only  
+  DowngradeTo: HullLargeBlocks, display: false
+  UpgradeTo: HullCombatLargeBlocks, display: true
 }
 
 #  Two shape families for Steel Blocks (large)  
@@ -4364,11 +4380,13 @@
   Mass: 2000, type: float, display: true, formatter: Kilogram
   BlockSizeScale: 8  
   ChildShapes: "Cube, CutCornerE, CutCornerB, SlicedCornerA1, CornerHalfB, CornerSmallC, CornerC, CornerHalfA3, RampCMedium, RampA, RampC, CornerRoundB, CornerRoundADouble, RoundCornerA, CubeRoundConnectorA, EdgeRound, Cylinder, RampRoundFTriple, RampRoundF, SmallCornerRoundB, SmallCornerRoundA, SphereHalf, Cone, ConeB, CutCornerC, Cylinder6Way, CornerRoundATriple, CornerA, CornerHalfA1, CornerDoubleA3, CornerSmallB, PyramidA"
+  DowngradeTo: HullFullLarge, display: false
   UpgradeTo: HullCombatFullLarge, display: true
 }
 
 { +Block Id: 407, Name: HullArmoredThinLarge, Ref: HullArmoredFullLarge
   ChildShapes: "Wall, WallLShape, WallSloped, WallSloped3Corner, WallSlopedC, WallSlopedCMediumright, WallSlopedAright, WallSlopedCMediumleft, WallSlopedAleft, WallCornerRoundB, WallSlopedRound, WallEdgeRound, WallEdgeRound3Way, WallCornerRoundA, WallCornerRoundC, WallSloped3CornerLow, WallCorner, WallLow, CubeHalf, RampADouble, RampCLow, RampBMedium, RampD, CutCornerEMedium, Beam, CylinderThin, CylinderThinTJoint, CylinderL, PipesFence, FenceTop, RampCHalf, CornerHalfA3Medium"
+  DowngradeTo: HullThinLarge, display: true
   UpgradeTo: HullCombatThinLarge, display: true
 }
 
@@ -4423,18 +4441,18 @@
 #  Combat Steel Blocks (large blocks) - block group  
 { +Block Id: 411, Name: HullCombatLargeBlocks   
   Material: hullcombat
-  MarketPrice: 1415, display: true
+  MarketPrice: 1415, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 56
   BlockColor: "170,170,170"
   Shape: Invisible
   # Model: Cube
-  Info: bkiBlockGroup, display: true
+  Info: bkiHullArmoredLargeBlock, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: "Base,MS", display: true
   HitPoints: 2000, type: int, display: false
   Mass: 4000, type: float, display: true, formatter: Kilogram
-  Volume: 80, type: float, display: true, formatter: Liter
+  Volume: 16, type: float, display: true, formatter: Liter
   StackSize: 1000
   BlockSizeScale: 8   
   Category: BuildingBlocks
@@ -4443,6 +4461,10 @@
   UnlockCost: 0
   UnlockLevel: 1 
   TechTreeNames: ""
+  
+  #For display only
+  DowngradeTo: HullArmoredLargeBlocks, display: false
+  
 }
 
 #  Two shape families for Combat hull (large blocks)  
@@ -4460,10 +4482,14 @@
   Mass: 4000, type: float, display: true, formatter: Kilogram
   BlockSizeScale: 8  
   ChildShapes: "Cube, CutCornerE, CutCornerB, SlicedCornerA1, CornerHalfB, CornerSmallC, CornerC, CornerHalfA3, RampCMedium, RampA, RampC, CornerRoundB, CornerRoundADouble, RoundCornerA, CubeRoundConnectorA, EdgeRound, Cylinder, RampRoundFTriple, RampRoundF, SmallCornerRoundB, SmallCornerRoundA, SphereHalf, Cone, ConeB, CutCornerC, Cylinder6Way, CornerRoundATriple, CornerA, CornerHalfA1, CornerDoubleA3, CornerSmallB, PyramidA"
+  DowngradeTo: HullArmoredFullLarge, display: false
+  
 }
 
 { +Block Id: 413, Name: HullCombatThinLarge, Ref: HullCombatFullLarge
   ChildShapes: "Wall, WallLShape, WallSloped, WallSloped3Corner, WallSlopedC, WallSlopedCMediumright, WallSlopedAright, WallSlopedCMediumleft, WallSlopedAleft, WallCornerRoundB, WallSlopedRound, WallEdgeRound, WallEdgeRound3Way, WallCornerRoundA, WallCornerRoundC, WallSloped3CornerLow, WallCorner, WallLow, CubeHalf, RampADouble, RampCLow, RampBMedium, RampD, CutCornerEMedium, Beam, CylinderThin, CylinderThinTJoint, CylinderL, PipesFence, FenceTop, RampCHalf, CornerHalfA3Medium"
+  DowngradeTo: HullArmoredThinLarge, display: false
+  
 }
 
 { +Block Id: 414, Name: DecalsControlBlock
@@ -4509,7 +4535,7 @@
   SizeInBlocks: "2,1,2"
   BlockColor: "180,180,180"
   # ShowBlockName: true
-  HitPoints: 20, type: int, display: true
+  HitPoints: 15, type: int, display: true  # was 20 (Three hits with survival tool, now two)
   ShowUser: No
   { Child DropOnDestroy_1
     Item: PlasticMaterial
@@ -4577,7 +4603,7 @@
 }
 { +Block Id: 418, Name: GeneratorSV
   IndexName: Generator
-  MarketPrice: 856, display: true
+  MarketPrice: 856, display: false
   Class: Generator
   Group: cpgGenerator
   EssentialCategory: cpgGenerator
@@ -4622,7 +4648,7 @@
 { +Block Id: 419, Name: FuelTankSV
   Class: FuelTank
   IndexName: FuelTank
-  MarketPrice: 260, display: true
+  MarketPrice: 260, display: false
   Group: cpgFuelTank
   EssentialCategory: cpgFuelTank
   # LootList: 26   # 10 slots
@@ -4671,7 +4697,7 @@
   IndexName: RCS
   Group: cpgRCS
   Material: metal
-  MarketPrice: 6630, display: true
+  MarketPrice: 6630, display: false
   Shape: ModelEntity
   ShowBlockName: true
   Model: @models/Blocks/Mothership/RCS_BlockPrefab
@@ -4732,7 +4758,7 @@
   Class: O2Tank
   IndexName: O2Tank
   Group: cpgO2Tank
-  MarketPrice: 70, display: true
+  MarketPrice: 70, display: false
   LootList: 25     # 5 slots
   Material: metallight
   Shape: ModelEntity
@@ -4766,15 +4792,15 @@
   BlastRadius: 2
   BlastDamage: 100
 
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: "Small Vessel,Hover Vessel"
 }
 { +Block Id: 423, Name: FridgeSV
   Class: Container
   IndexName: Fridge
   Group: cpgFridge
-  MarketPrice: 265, display: true
+  MarketPrice: 265, display: false
   LootList: 1   #  empty medium  
   DontDecayFood: true   #  now this loot container is a fridge  
   Material: metal
@@ -4950,7 +4976,7 @@
   IndexName: WeaponShip
   Group: cpgWeapon
   Material: metalhard
-  MarketPrice: 8245, display: true
+  MarketPrice: 8245, display: false
   Shape: ModelEntity
   ShowBlockName: true
   WeaponItem: RailgunSSWeapon
@@ -5004,7 +5030,7 @@
   IndexName: WeaponShip
   Group: cpgWeapon
   Material: metalhard
-  MarketPrice: 3500, display: true
+  MarketPrice: 3500, display: false
   Shape: ModelEntity
   ShowBlockName: true
   WeaponItem: MinigunSSWeapon
@@ -5053,7 +5079,7 @@
   IndexName: WeaponShip
   Group: cpgWeapon
   Material: metalhard
-  MarketPrice: 5026, display: true
+  MarketPrice: 5026, display: false
   Shape: ModelEntity
   ShowBlockName: true
   WeaponItem: PulseLaserSSWeapon
@@ -5106,7 +5132,7 @@
   Class: Weapon
   IndexName: WeaponShip
   Group: cpgWeapon
-  MarketPrice: 9000, display: true
+  MarketPrice: 9000, display: false
   Material: metalhard
   Shape: ModelEntity
   ShowBlockName: true
@@ -5474,7 +5500,7 @@
   Class: Thruster
   IndexName: Thruster
   Group: cpgThruster
-  MarketPrice: 685, display: true
+  MarketPrice: 685, display: false
   EssentialCategory: cpgThruster
   Place: Free
   Material: metalhard
@@ -5525,7 +5551,7 @@
   Class: Thruster
   IndexName: Thruster
   Group: cpgThruster
-  MarketPrice: 6385, display: true
+  MarketPrice: 6385, display: false
   EssentialCategory: cpgThruster
   Place: Free
   Material: metalhard
@@ -5707,7 +5733,7 @@
   Material: fertile
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: "6,31,31,31,31,31"
-  MarketPrice: 1100, display: true
+  MarketPrice: 1100, display: false
   Shape: New
   Place: Free
   Model: Cube
@@ -5846,7 +5872,7 @@
   Class: Elevator
   Material: metal
   Shape: Ext3dModel
-  MarketPrice: 580, display: true
+  MarketPrice: 580, display: false
   Mesh: models
   Model: Mothership/Elevator, param1: ElevatorBlock
   #  Model: Mothership/Elevator, param1: Collider_Mesh   
@@ -5876,7 +5902,7 @@
   IndexName: Generator
   Class: Generator
   Group: cpgGenerator
-  MarketPrice: 20845, display: true
+  MarketPrice: 20845, display: false
   EssentialCategory: cpgGenerator
   Material: metalhard
   Shape: ModelEntity
@@ -5923,7 +5949,7 @@
   Class: FuelTank
   IndexName: FuelTank
   Group: cpgFuelTank
-  MarketPrice: 120, display: true
+  MarketPrice: 120, display: false
   EssentialCategory: cpgFuelTank
   # LootList: 26   # 10 slots
   Material: metallight
@@ -5960,8 +5986,8 @@
   
   Radiation: 0.5, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
 
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: "Small Vessel,Hover Vessel"
 }
 { +Block Id: 471, Name: GeneratorSVSmall
@@ -5969,7 +5995,7 @@
   IndexName: Generator
   Class: Generator
   Group: cpgGenerator
-  MarketPrice: 400, display: true
+  MarketPrice: 400, display: false
   EssentialCategory: cpgGenerator
   LootList: 1
   Material: metalhard
@@ -6000,8 +6026,8 @@
   BlastRadius: 3
   BlastDamage: 200
 
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: "Small Vessel,Hover Vessel"
   
   Temperature: 50, display: true
@@ -6368,7 +6394,7 @@
 
 { Block Id: 493, Name: ArtMassBlocks
   Material: hull
-  MarketPrice: 270, display: true
+  MarketPrice: 270, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 31
   BlockColor: "110,110,110"
@@ -6462,7 +6488,7 @@
   IndexName: Generator
   Class: Generator
   Group: cpgGenerator
-  MarketPrice: 3600, display: true
+  MarketPrice: 3600, display: false
   EssentialCategory: cpgGenerator
   Material: metalhard
   Shape: ModelEntity
@@ -7107,7 +7133,7 @@
   Material: metalhard
   Shape: Invisible
   Place: Free
-  MarketPrice: 1045, display: true
+  MarketPrice: 1045, display: false
   # Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterSSRoundNormalPrefab
   # Mesh-Damage-1: Mesh/D0
   # Mesh-Damage-2: Mesh/D1
@@ -7204,7 +7230,7 @@
   Material: hullcombat
   Shape: Invisible
   Mesh: models
-  MarketPrice: 1110, display: true
+  MarketPrice: 1110, display: false
   # Model: Mothership/windowVertMS, param1: window_nontransparent
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Info: bkiWindowsShutter, display: true
@@ -7231,7 +7257,7 @@
 { +Block Id: 546, Name: ThrusterSVRoundNormalT2, Ref: ThrusterSVRoundNormal
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterGVRoundNormalT2Prefab
   SizeInBlocks: "1,2,1", display: true
-  MarketPrice: 2227, display: true
+  MarketPrice: 2227, display: false
   HitPoints: 340, type: int, display: true
   Mass: 520, type: float, display: true, formatter: Kilogram
   Volume: 62.5, type: float, display: true, formatter: Liter
@@ -7252,7 +7278,7 @@
 { +Block Id: 547, Name: ThrusterSVRoundLarge, Ref: ThrusterSVRoundNormal
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterGVRoundLargePrefab
   SizeInBlocks: "1,3,1", display: true
-  MarketPrice: 2000, display: true
+  MarketPrice: 2000, display: false
   HitPoints: 350, type: int, display: true
   Volume: 93.75, type: float, display: true, formatter: Liter
   Mass: 406, type: float, display: true, formatter: Kilogram
@@ -7271,7 +7297,7 @@
 { +Block Id: 548, Name: ThrusterSVRoundLargeT2, Ref: ThrusterSVRoundNormal
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterGVRoundLargeT2Prefab
   SizeInBlocks: "1,3,1", display: true
-  MarketPrice: 3950, display: true
+  MarketPrice: 3950, display: false
   HitPoints: 400, type: int, display: true
   Volume: 93.75, type: float, display: true, formatter: Liter
   Mass: 842, type: float, display: true, formatter: Kilogram
@@ -7503,7 +7529,7 @@
   Class: O2Generator
   Material: metal
   Shape: ModelEntity
-  MarketPrice: 325, display: true
+  MarketPrice: 325, display: false
   Model: @models/Blocks/Terrain/OxygenGeneratorPrefab
   Mesh-Damage-1: Mesh/D0
   Mesh-Damage-2: Mesh/D1
@@ -7597,7 +7623,7 @@
   StackSize: 1000
   AllowPlacingAt: "MS,SS,GV", display: true
   IsActivateable: true
-  IsOxygenTight: true, display: true
+  IsOxygenTight: true, display: false
   MaxCount: 30, type: int, display: true
   Info: bkiSpotlight, display: true
   Category: Devices
@@ -7629,7 +7655,7 @@
   Class: Core
   Group: cpgCore
   IndexName: Core
-  MarketPrice: 1166, display: true
+  MarketPrice: 1166, display: false
   EssentialCategory: cpgCore
   Material: metal
   Shape: ModelEntity
@@ -7665,8 +7691,8 @@
   HitPoints: 250, type: int, display: true
   AllowWander: true
 
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: "Small Vessel,Hover Vessel,Capital Vessel,Base"
   
   # UpgradeTo: CoreNoCPU, display: true
@@ -8025,7 +8051,7 @@
   #  Class: Light    
   IndexName: Light
   Material: metallight
-  MarketPrice: 22, display: true
+  MarketPrice: 22, display: false
   Shape: ModelEntity
   Model: @models/Blocks/Terrain/LightWorkPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
@@ -8240,6 +8266,7 @@
   SizeInBlocks: "1,1,1"
   ShowBlockName: true
   ShowUser: No
+  HitPoints: 100, type: int, display: true
   { Child DropOnDestroy
     Item: PromethiumOre
     Count: "3,10"
@@ -8375,7 +8402,7 @@
 { +Block Id: 588, Name: WaterGenerator
   Class: WaterGenerator
   Material: metal
-  MarketPrice: 530, display: true
+  MarketPrice: 530, display: false
   Shape: ModelEntity
   Model: @models/Blocks/Terrain/WaterGeneratorPrefab
   # Mesh-Damage-1: Mesh/D0
@@ -8421,7 +8448,7 @@
   Class: Thruster
   IndexName: Thruster
   Group: cpgThruster
-  MarketPrice: 665, display: true
+  MarketPrice: 665, display: false
   EssentialCategory: cpgThruster
   Place: Free
   Material: metalhard
@@ -8860,7 +8887,7 @@
 { +Block Id: 603, Name: HoverBooster
   IndexName: HoverBooster
   Group: cpgHoverEngine
-  MarketPrice: 2226, display: true
+  MarketPrice: 2226, display: false
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
@@ -8898,7 +8925,7 @@
   IndexName: RCS
   Group: cpgRCS
   Material: metal
-  MarketPrice: 200, display: true
+  MarketPrice: 200, display: false
   Shape: ModelEntity
   ShowBlockName: true
   Model: @models/Blocks/Mothership/RCS_BlockPrefab
@@ -9115,7 +9142,7 @@
   BuffNameActivate: StaminaRecover, display: StatusEffect
   # CanPickup: true
   ShowUser: Yes
-  BuffNamesActivate: "IncreaseBodyTemp", display: StatusEffect
+  BuffNamesActivate: "NeutralBodyTemp", display: StatusEffect
   DebuffNamesActivate: "Hangover,BadTrip", display: EffectiveAgainst
 }
 { +Block Id: 613, Name: Sofa, Ref: DecoTemplate
@@ -9139,7 +9166,10 @@
   SizeInBlocks: "1,1,2", display: true
   SymType: 4
   ShowUser: Yes
-  VolumeCapacity: 1000, type: float, display: true, formatter: Liter     
+  VolumeCapacity: 1000, type: float, display: true, formatter: Liter   
+  IsAccessible: true, type: bool   
+  IsLockable: true 
+  Group: cpgEquipment   
 }
 { +Block Id: 615, Name: KitchenTable, Ref: DecoTemplate
   Group: cpgEquipment
@@ -9184,7 +9214,10 @@
   SizeInBlocks: "1,1,2", display: true
   SymType: 4
   ShowUser: Yes
-  VolumeCapacity: 1000, type: float, display: true, formatter: Liter      
+  VolumeCapacity: 1000, type: float, display: true, formatter: Liter
+  IsAccessible: true, type: bool   
+  IsLockable: true 
+  Group: cpgEquipment   
 }
 { +Block Id: 620, Name: Toilet, Ref: DecoTemplate
   Model: @models2/Entities/Decorations/HomeSweetHome/ToiletPrefab
@@ -9205,6 +9238,7 @@
   IsLockable: true
   # BuffNamesActivate: "ReduceRadiation,DecreaseBodyTemp,IncreaseBodyTemp", display: StatusEffect
   BuffNamesActivate: "ReduceRadiation,NeutralBodyTemp", display: StatusEffect
+  DebuffNamesActivate: "DermalParasite", display: EffectiveAgainst
   SfxBuffActivate: UseActions/BlockShower
   ShowUser: Yes  
 }
@@ -9724,7 +9758,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 6, type: int, display: true
+  MaxCount: 60, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -9865,14 +9899,14 @@
   BuffNameActivate: StaminaRecover, display: StatusEffect
   Model: @models2/Entities/Decorations/Misc/BunkBedPrefab
   SizeInBlocks: "1,1,1", display: true
-  BuffNamesActivate: "IncreaseBodyTemp", display: StatusEffect
+  BuffNamesActivate: "NeutralBodyTemp", display: StatusEffect
   DebuffNamesActivate: "Hangover,BadTrip", display: EffectiveAgainst
 }
 { +Block Id: 652, Name: LightWork02
   IndexName: Light
   Material: metallight
   Shape: ModelEntity
-  MarketPrice: 43, display: true
+  MarketPrice: 43, display: false
   Model: @models/Blocks/Terrain/LightWork02Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   IsTerrainDecoration: true
@@ -10116,7 +10150,7 @@
   IndexName: WeaponShip
   Group: cpgHarvest
   Material: metalhard
-  MarketPrice: 1520, display: true
+  MarketPrice: 1520, display: false
   Shape: ModelEntity
   ShowBlockName: true
   WeaponItem: SawAttachmentWeapon
@@ -10296,7 +10330,7 @@
   IndexName: WeaponShip
   Group: cpgHarvest
   Material: metalhard
-  MarketPrice: 1655, display: true
+  MarketPrice: 1655, display: false
   Shape: ModelEntity
   ShowBlockName: true
   WeaponItem: DrillAttachmentWeapon
@@ -10328,7 +10362,7 @@
   EnergyInIdle: 1, type: int, display: true, formatter: Watt
   HitPoints: 500, type: int, display: true
   StackSize: 1000
-  MaxCount: 6, type: int, display: true
+  MaxCount: 60, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -10464,7 +10498,7 @@
   Class: Thruster
   IndexName: Thruster
   Group: cpgThruster
-  MarketPrice: 3255, display: true
+  MarketPrice: 3255, display: false
   EssentialCategory: cpgThruster
   Place: Free
   Material: metalhard
@@ -10511,7 +10545,7 @@
 }
 { +Block Id: 695, Name: ThrusterJetRound3x10x3, Ref: ThrusterJetRound3x7x3
   Model: @models/Blocks/Thrusters/ThrusterJetRound3x10x3Prefab
-  MarketPrice: 4349, display: true
+  MarketPrice: 4349, display: false
   SizeInBlocks: "3,10,3", display: true
   Volume: 2812.5, type: float, display: true, formatter: Liter  
   Mass: 3060, type: float, display: true, formatter: Kilogram
@@ -10529,7 +10563,7 @@
 }
 { +Block Id: 696, Name: ThrusterJetRound3x13x3, Ref: ThrusterJetRound3x7x3
   Model: @models/Blocks/Thrusters/ThrusterJetRound3x13x3Prefab
-  MarketPrice: 5444, display: true
+  MarketPrice: 5444, display: false
   SizeInBlocks: "3,13,3", display: true
   Volume: 3656.25, type: float, display: true, formatter: Liter  
   Mass: 4833, type: float, display: true, formatter: Kilogram
@@ -10547,7 +10581,7 @@
 }
 { +Block Id: 697, Name: ThrusterJetRound1x3x1, Ref: ThrusterJetRound3x7x3
   Model: @models/Blocks/Thrusters/ThrusterJetRound1x3x1Prefab
-  MarketPrice: 1525, display: true
+  MarketPrice: 1525, display: false
   SizeInBlocks: "1,3,1", display: true
   Volume: 93.75, type: float, display: true, formatter: Liter  
   Mass: 743, type: float, display: true, formatter: Kilogram
@@ -10566,7 +10600,7 @@
 }
 { +Block Id: 698, Name: ThrusterJetRound2x5x2, Ref: ThrusterJetRound3x7x3
   Model: @models/Blocks/Thrusters/ThrusterJetRound2x5x2Prefab
-  MarketPrice: 2389, display: true
+  MarketPrice: 2389, display: false
   SizeInBlocks: "2,5,2", display: true
   Volume: 625, type: float, display: true, formatter: Liter  
   Mass: 1240, type: float, display: true, formatter: Kilogram
@@ -10893,7 +10927,7 @@
 #  Current SurvConstructor - with recursive capabilities: currently used  
 { +Block Id: 711, Name: ConstructorSurvival
   Class: ConstructorSurvivalV2
-  MarketPrice: 100, display: true
+  MarketPrice: 100, display: false
   Material: metalhard
   Shape: ModelEntity
   Model: @models/Blocks/Devices/PortableConstructorFWNPrefab #1.11 update
@@ -10939,7 +10973,7 @@
   Class: PassengerSeat
   Group: cpgPassengerSeat
   Material: metalhard
-  MarketPrice: 200, display: true
+  MarketPrice: 200, display: false
   Shape: ModelEntity
   ShowBlockName: true
   # ModelOffset: "0,0.5,0"
@@ -11063,7 +11097,7 @@
   Class: PassengerSeat
   Group: cpgPassengerSeat
   Material: metalhard
-  MarketPrice: 155, display: true
+  MarketPrice: 155, display: false
   Shape: ModelEntity
   ShowBlockName: true
   Model: @models/Blocks/Spaceship/PassengerSeat2SVPrefab
@@ -11141,7 +11175,7 @@
   Class: O2Tank
   IndexName: O2Tank
   Group: cpgO2Tank
-  MarketPrice: 210, display: true
+  MarketPrice: 210, display: false
   EssentialCategory: cpgO2Tank
   LootList: 25     # 5 slots 
   Material: metallight
@@ -11233,7 +11267,7 @@
   IndexName: WarpDrive
   Material: metal
   Shape: ModelEntity
-  MarketPrice: 83216, display: true
+  MarketPrice: 83216, display: false
   ShowBlockName: true
   Model: @models/Blocks/Mothership/WarpDriveT1Prefab
   Mesh-Damage-1: Mesh/D0
@@ -11272,7 +11306,7 @@
   RangeAU: 24, display: true
   RangeLY: 30, display: true
   
-  # Short Range Warp  (Microwarp)
+  # Short Range Warp  (Microwarp / CV T1)
   CostPerKM: 2, display: true
   RangeKM: 20000, display: true
   #RangeKMuseDetector: true, display: true
@@ -11290,7 +11324,7 @@
   Class: O2Station
   Group: cpgO2Station
   Material: metallight
-  MarketPrice: 220, display: true
+  MarketPrice: 220, display: false
   Shape: ModelEntity
   # BuffName: OxygenStationSS DONE DIFFERENT NOW  
   ShowBlockName: true
@@ -11365,7 +11399,7 @@
   Class: Container
   Group: cpgAmmo
   IndexName: AmmoCntr
-  MarketPrice: 1367, display: true
+  MarketPrice: 1367, display: false
   LootList: 70
   Material: metallight
   Shape: ModelEntity
@@ -11502,7 +11536,7 @@
 { +Block Id: 730, Name: DockingPad, Ref: LandinggearShort
   Info: bkiLandinggearHV, display: true
   AllowPlacingAt: "GV", display: true
-  MarketPrice: 160, display: true
+  MarketPrice: 160, display: false
   TemplateRoot: DockingPad
   Mass: 122, type: float, display: true, formatter: Kilogram
   Volume: 32.5, type: float, display: true, formatter: Liter
@@ -12312,7 +12346,7 @@
 }
 { +Block Id: 772, Name: ThrusterMSRoundBlocks
   IndexName: Thruster
-  MarketPrice: 10982, display: true
+  MarketPrice: 10982, display: false
   Material: metalhard
   Shape: Invisible
   Place: Free
@@ -12484,7 +12518,7 @@
   Group: cpgMedic
   Material: metal
   Shape: ModelEntity
-  MarketPrice: 700, display: true
+  MarketPrice: 700, display: false
   ShowBlockName: true
   Model: @models/Blocks/Mothership/CloneChamberSmallPrefab
   #Mesh-Damage-1: Mesh/D0
@@ -12523,7 +12557,7 @@
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
-  MarketPrice: 805, display: true
+  MarketPrice: 805, display: false
   Model: @models/Blocks/Mothership/RCS_BlockPrefab
   Mesh-Damage-1: Mesh/D0
   Mesh-Damage-2: Mesh/D1
@@ -12837,7 +12871,7 @@
 { +Block Id: 836, Name: WindowSmallBlocks
   Material: hull
   Shape: Invisible
-  MarketPrice: 50, display: true
+  MarketPrice: 50, display: false
   # Model: @models/Blocks/Windows/Standard/Window_v1x1Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Info: bkiWindows, display: true
@@ -12861,7 +12895,7 @@
 
 { +Block Id: 837, Name: TrussSmallBlocks
   Material: metallight
-  MarketPrice: 10, display: true
+  MarketPrice: 10, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Shape: Invisible
   Place: Free
@@ -12889,7 +12923,7 @@
 # obsolete but do not remove
 { +Block Id: 838, Name: WalkwayBlocks
   Material: metallight
-  MarketPrice: 180, display: true
+  MarketPrice: 180, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Shape: Invisible
   Place: Free
@@ -13022,7 +13056,7 @@
   LootList: 37   #  still used?  
   IndexName: WeaponShip
   Group: cpgHarvest
-  MarketPrice: 26273, display: true
+  MarketPrice: 26273, display: false
   Material: metalhard
   Shape: ModelEntity
   ShowBlockName: true
@@ -13882,7 +13916,7 @@
 { +Block Id: 927, Name: DecoBlocks
   Material: metallight
   Shape: Invisible
-  MarketPrice: 10, display: true
+  MarketPrice: 10, display: false
   # Model: @models2/Entities/Decorations/Sci-Fi_InteriorPack/ScifiBedPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -13904,7 +13938,7 @@
 { +Block Id: 928, Name: ConsoleBlocks
   Material: metallight
   Shape: Invisible
-  MarketPrice: 810, display: true
+  MarketPrice: 810, display: false
   ShowBlockName: true
   # Model: @models/Blocks/Mothership/ConsoleMS01Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
@@ -13930,7 +13964,7 @@
 { +Block Id: 929, Name: IndoorPlants
   Material: metallight
   Shape: Invisible
-  MarketPrice: 4, display: true
+  MarketPrice: 4, display: false
   # Model: @models2/Entities/Decorations/IndoorPlants/IndoorPlant01Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -13992,7 +14026,7 @@
   IndexName: RCS
   Group: cpgRCS
   Material: metal
-  MarketPrice: 48470, display: true
+  MarketPrice: 48470, display: false
   Shape: ModelEntity
   ShowBlockName: true
   Model: @models/Blocks/Mothership/RCS_BlockT2Prefab
@@ -14540,7 +14574,7 @@
   Group: cpgConstructor
   Material: metalhard
   Shape: ModelEntity
-  MarketPrice: 16522, display: true
+  MarketPrice: 16522, display: false
   ShowBlockName: true
   Model: @models/Blocks/Devices/ConstructorT1FWNPrefab #1.11 update
   #Model: @models/Blocks/Mothership/ConstructorT1Prefab
@@ -14601,7 +14635,7 @@
 { +Block Id: 962, Name: FoodProcessorV2
   Class: FoodProcessorV2
   IndexName: Constructor
-  MarketPrice: 2894, display: true
+  MarketPrice: 2894, display: false
   Group: cpgFoodProcessor
   DontDecayFood: true   #  now this loot container is a fridge  
   Material: metallight
@@ -14654,7 +14688,7 @@
 { +Block Id: 964, Name: OxygenGeneratorSmall    #Water / O2 Condenser
   Class: O2GeneratorSmall
   Material: metal
-  MarketPrice: 30, display: true
+  MarketPrice: 30, display: false
   Shape: ModelEntity
   Model: @models/Blocks/Devices/PortableWaterO2CondenserFWNPrefab #1.11 update
   #Model: @models/Blocks/Terrain/OxygenGeneratorSmallPrefab
@@ -14688,8 +14722,8 @@
   HitPoints: 80, type: int, display: true
   FuelAccept: "EnergyCell, EnergyCellLarge, EnergyCellHydrogen, FusionCell, BioFuel, EnergyCellSmall"
   
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: Misc
   
   MapIcon: map_OxyGenerator
@@ -14807,7 +14841,7 @@
 { +Block Id: 974, Name: WindowArmoredSmallBlocks
   Material: hullarmored
   Shape: Invisible
-  MarketPrice: 190, display: true
+  MarketPrice: 190, display: false
   # Model: @models/Blocks/Windows/Standard/Window_v1x1ThickPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -14864,7 +14898,7 @@
   Material: hullarmored
   Shape: Invisible
   Mesh: models
-  MarketPrice: 230, display: true
+  MarketPrice: 230, display: false
   # Model: Mothership/windowVertMS, param1: window_nontransparent
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Info: bkiWindowsShutter, display: true
@@ -15005,7 +15039,7 @@
   Class: Door
   IndexName: Door
   Group: cpgDoor
-  MarketPrice: 250, display: true
+  MarketPrice: 250, display: false
   Material: metal
   Shape: Invisible
   # Model: @models/Blocks/Mothership/DoorInterior01Prefab
@@ -15091,7 +15125,7 @@
   Class: Door
   IndexName: Door
   Group: cpgDoor
-  MarketPrice: 3000, display: true
+  MarketPrice: 3000, display: false
   Material: hullarmored
   Shape: Invisible
   # Model: @models/Blocks/Mothership/HangarDoor/HangarDoor10x5Prefab
@@ -15250,7 +15284,7 @@
   IndexName: Door
   Material: hullarmored
   Shape: Invisible
-  MarketPrice: 1000, display: true
+  MarketPrice: 1000, display: false
   # Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor1x1Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -15320,7 +15354,7 @@
   IndexName: Door
   Material: hullarmored
   Shape: Invisible
-  MarketPrice: 470, display: true
+  MarketPrice: 470, display: false
   # Model: @models/Blocks/Spaceship/ShutterDoor1x1SVPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -15481,7 +15515,7 @@
 }
 { +Block Id: 1035, Name: FuelTankMSLargeT2, Ref: FuelTankMSLarge
   LootList: 47
-  MarketPrice: 9458, display: true
+  MarketPrice: 9458, display: false
   Model: @models/Blocks/Mothership/FuelTankMSLargeT2Prefab
   SizeInBlocks: "2,2,1", display: true
   Volume: 255, type: float, display: true, formatter: Liter
@@ -15993,7 +16027,7 @@
   Group: cpgEquipment  
   IsAccessible: true, type: bool
   IsLockable: true
-  BuffNamesActivate: "IncreaseBodyTemp", display: StatusEffect
+  BuffNamesActivate: "NeutralBodyTemp", display: StatusEffect
   DebuffNamesActivate: "Hangover,BadTrip", display: EffectiveAgainst
   # CanPickup: true
   Model: @models2/Entities/Decorations/Sci-Fi_InteriorPack/ScifiBedPrefab
@@ -16029,7 +16063,7 @@
 { +Block Id: 1075, Name: TrussLargeBlocks
   Material: hullarmored
   Shape: Invisible
-  MarketPrice: 70, display: true
+  MarketPrice: 70, display: false
   Place: Free
   # Model: Truss/TrussCube
   Mesh: cutout
@@ -16101,6 +16135,7 @@
   EnergyIn: 0, type: int, display: true, formatter: Watt
   # BuffNamesActivate: "ReduceRadiation,DecreaseBodyTemp,IncreaseBodyTemp", display: StatusEffect
   BuffNamesActivate: "ReduceRadiation,NeutralBodyTemp", display: StatusEffect
+  DebuffNamesActivate: "DermalParasite", display: EffectiveAgainst
   SfxBuffActivate: UseActions/BlockShower
   ShowUser: Yes
 }
@@ -16252,7 +16287,7 @@
   Class: CockpitSS
   IndexName: Cockpit
   Group: cpgCockpit
-  MarketPrice: 1178, display: true
+  MarketPrice: 1178, display: false
   EssentialCategory: cpgCockpit
   Material: metalhard
   Shape: Invisible
@@ -16271,8 +16306,8 @@
   ChildBlocks: "CockpitSV01, CockpitSV_ShortRange, CockpitSV02New, CockpitSV04, CockpitSV05New, CockpitSV06, CockpitSV07New, CockpitSV03New, CockpitOpenSV, CockpitOpen2SV, CockpitSV02, CockpitSV03, CockpitSV05, CockpitSV07"
   MaxCount: 2, type: int, display: true
   
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: "Small Vessel,Hover Vessel"
 }
 { +Block Id: 1094, Name: CockpitSV04, Ref: CockpitSV02
@@ -16285,7 +16320,7 @@
 { +Block Id: 1095, Name: LCDScreenBlocks
   Material: metallight
   Shape: Invisible
-  MarketPrice: 475, display: true
+  MarketPrice: 475, display: false
   # Model: @models/Blocks/Misc/LCDNoFrame1x1Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   HitPoints: 50, type: int, display: false
@@ -16395,7 +16430,7 @@
   Material: metalhard
   Shape: Invisible
   Place: Free
-  MarketPrice: 700, display: true
+  MarketPrice: 700, display: false
   # Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterSSRoundNormalPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   StackSize: 1000
@@ -16558,7 +16593,7 @@
   Class: Door
   IndexName: Door
   Group: cpgDoor
-  MarketPrice: 795, display: true
+  MarketPrice: 795, display: false
   Material: metal
   Shape: Invisible
   # Model: @models/Blocks/Mothership/DoorNewArmoredPrefab
@@ -16620,7 +16655,7 @@
   IndexName: LandingGear
   Material: metalhard
   Shape: Invisible
-  MarketPrice: 145, display: true
+  MarketPrice: 145, display: false
   ShowBlockName: true
   IsPhysicsColliders: false
   # Model: @models/Blocks/Landinggears/LandinggearLightPrefab
@@ -16647,7 +16682,7 @@
 }
 { +Block Id: 1119, Name: LandinggearBlocksHeavySV, Ref: LandinggearBlocksSV
   Shape: Invisible
-  MarketPrice: 340, display: true
+  MarketPrice: 340, display: false
   # Model: @models/Blocks/Landinggears/LandinggearHeavyPrefab
   Info: bkiBlockGroup, display: true
   SizeInBlocks: "2,1,2", display: false
@@ -16665,7 +16700,7 @@
   Material: metalhard
   Shape: Invisible
   ShowBlockName: true
-  MarketPrice: 1534, display: true
+  MarketPrice: 1534, display: false
   # Model: @models/Blocks/Landinggears/LandinggearLightPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -16760,7 +16795,7 @@
   Group: cpgHoverEngine
   EssentialCategory: cpgHoverEngine
   Material: metal
-  MarketPrice: 665, display: true
+  MarketPrice: 665, display: false
   Shape: ModelEntity
   ShowBlockName: true
   # ModelOffset: "0,0.5,0"
@@ -16807,7 +16842,7 @@
 { +Block Id: 1128, Name: WindowLargeBlocks
   Material: hull
   Shape: Invisible
-  MarketPrice: 390, display: true
+  MarketPrice: 390, display: false
   # Model: @models/Blocks/Windows/Standard/Window_v1x1Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -16838,7 +16873,7 @@
 { +Block Id: 1129, Name: WindowArmoredLargeBlocks
   Material: hullcombat
   Shape: Invisible
-  MarketPrice: 1046, display: true
+  MarketPrice: 1046, display: false
   # Model: @models/Blocks/Windows/Standard/Window_v1x1ThickPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -16866,7 +16901,7 @@
 
 { +Block Id: 1130, Name: HoverEngineLarge, Ref: HoverEngineSmall
   SizeInBlocks: "2,1,2", display: true
-  MarketPrice: 1298, display: true
+  MarketPrice: 1298, display: false
   Model: @models/Blocks/Spaceship/HoverEngineLargePrefab
   Mass: 340, type: float, display: true, formatter: Kilogram
   Volume: 125, type: float, display: true, formatter: Liter
@@ -16983,7 +17018,7 @@
 { +Block Id: 1134, Name: ATM
   Class: ATM
   Group: cpgTrading
-  MarketPrice: 1774, display: true
+  MarketPrice: 1774, display: false
   Material: metallight
   Shape: ModelEntity
   ShowBlockName: true
@@ -17018,7 +17053,7 @@
 { +Block Id: 1135, Name: WingBlocks
   Material: metallight
   Texture: 50
-  MarketPrice: 150, display: true
+  MarketPrice: 150, display: false
   BlockColor: "110,110,110"
   Shape: Invisible
   # Model: Wings/Wing6x9a
@@ -17041,7 +17076,7 @@
 
 { +Block Id: 1136, Name: BlastDoorLargeBlocks
   Class: Door
-  MarketPrice: 11615, display: true
+  MarketPrice: 11615, display: false
   CustomIcon: BlastShutterDoors1x1x1
   IndexName: Door
   Material: hullcombat
@@ -18108,7 +18143,7 @@
 { +Block Id: 1230, Name: SensorTriggerBlocksSV
   Material: metal
   Shape: Invisible
-  MarketPrice: 127, display: true
+  MarketPrice: 127, display: false
   # Model: @models/Blocks/Misc/LeverPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   # ModelOffset: "0,0.5,0"
@@ -18175,7 +18210,7 @@
   # Model: @models/Blocks/WeaponsShip/DrillAttachmentT2Prefab
   WeaponItem: DrillAttachmentT2Weapon
   Damage: 30, display: true
-  MarketPrice: 14411, display: true
+  MarketPrice: 14411, display: false
   
   Volume: 62.5, type: float, display: true, formatter: Liter
   Mass: 1165, type: float, display: true, formatter: Kilogram
@@ -18344,7 +18379,7 @@
   Class: CockpitSS
   IndexName: Cockpit
   Group: cpgCockpit
-  MarketPrice: 18081, display: true
+  MarketPrice: 18081, display: false
   EssentialCategory: cpgCockpit
   Material: metal
   Shape: Invisible
@@ -18352,7 +18387,7 @@
   # Model: @models/Blocks/Cockpits/CockpitCVPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Cockpit
-  Info: bkiCockpit, display: true
+  Info: bkiCockpitCV, display: true
   Mass: 800, type: float, display: true, formatter: Kilogram
   Volume: 365, type: float, display: true, formatter: Liter
   HitPoints: 700, type: int, display: false
@@ -18422,7 +18457,7 @@
 { +Block Id: 1257, Name: SensorTriggerBlocks
   Material: metal
   Shape: Invisible
-  MarketPrice: 260, display: true
+  MarketPrice: 260, display: false
   # Model: @models/Blocks/Misc/LeverPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   # ModelOffset: "0,0.5,0"
@@ -18784,7 +18819,7 @@
 { +Block Id: 1278, Name: LightLargeBlocks   #Lamps and lights that are usually smaller than a block high or would typically be placed on ceilings indoors
   Material: metallight
   Shape: Invisible
-  MarketPrice: 255, display: true
+  MarketPrice: 255, display: false
   # Model: @models/Blocks/Mothership/lightMS01Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -18816,7 +18851,7 @@
 }
 { +Block Id: 1281, Name: DecoBlocks2, Ref: DecoBlocks
   Shape: Invisible
-  MarketPrice: 308, display: true
+  MarketPrice: 308, display: false
   # Model: @models2/Entities/Decorations/LaboratoryPack/Scanner3Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   SizeInBlocks: "1,1,1", display: true
@@ -18954,8 +18989,8 @@
   Group: cpgEquipment
   IsAccessible: true, type: bool
   IsLockable: true
-  DebuffNamesActivate: "OpenWound,Frostbite,DermalBurn,Necrosis,InfectedWound,Sepsis", display: EffectiveAgainst
-  # DebuffNamesActivate: "OpenWound,Frostbite,DermalBurn,Necrosis,InfectedWound,Sepsis,Test", display: EffectiveAgainst
+  DebuffNamesActivate: "OpenWound,Frostbite,DermalBurn,Necrosis,InfectedWoundStaged,Sepsis", display: EffectiveAgainst
+  # DebuffNamesActivate: "OpenWound,Frostbite,DermalBurn,Necrosis,InfectedWoundStaged,Sepsis,Test", display: EffectiveAgainst
   TemplateRoot: MedicalStationBlocks
   Model: @models2/Entities/Decorations/LaboratoryPack/ScannerBase1Prefab
   EnergyIn: 10, type: int, display: true, formatter: Watt
@@ -19062,7 +19097,7 @@
   Info: bkiDetector, display: true  
   WeaponItem: DetectorCVWeapon
   WeaponItemRotation: false
-  MarketPrice: 10195, display: true
+  MarketPrice: 10195, display: false
   IndexName: WeaponShip
   Group: cpgEquipment
   Material: metal
@@ -19284,7 +19319,7 @@
 }
 { +Block Id: 1321, Name: SpotlightBlocks, Ref: SpotlightSSCube
   Shape: Invisible
-  MarketPrice: 145, display: true
+  MarketPrice: 145, display: false
   # Model: @models/Blocks/Spaceship/spotlightSSCubePrefab
   Mass: 85, type: float, display: true, formatter: Kilogram   
   Volume: 12.5, type: float, display: true, formatter: Liter
@@ -19301,7 +19336,7 @@
 #  Armored Concrete Block  
 { +Block Id: 1322, Name: ConcreteArmoredBlocks 
   Material: concretearmored
-  MarketPrice: 115, display: true
+  MarketPrice: 115, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 93
   TextureTable: 2    #  2 = concrete table  
@@ -19309,7 +19344,7 @@
   Shape: New
   Place: Free
   Model: Cube
-  Info: bkiBlockGroup, display: true
+  Info: bkiConcreteArmoredBlock, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: Base, display: true
   HitPoints: 2200, type: int, display: false
@@ -19683,8 +19718,8 @@
   AllowedInBlueprint: false, display: true
   BlockColor: "0,15,100"
 
-  UnlockCost: 0 
-  UnlockLevel: 1 
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: Hidden
 }
 { +Block Id: 1362, Name: Antenna01, Ref: Antenna
@@ -19777,7 +19812,7 @@
   Class: ArmorLocker
   Group: cpgEquipment
   GridSize: "5,3"
-  MarketPrice: 1762, display: true
+  MarketPrice: 1762, display: false
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
@@ -19956,7 +19991,7 @@
   Class: Door
   IndexName: Door
   Material: metal
-  MarketPrice: 220, display: true
+  MarketPrice: 220, display: false
   Shape: Invisible
   # Model: @models/Blocks/Spaceship/DoorNewSSPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
@@ -20056,7 +20091,7 @@
 { +Block Id: 1380, Name: ArmorLockerSV
   Class: ArmorLocker
   Group: cpgEquipment
-  MarketPrice: 1040, display: true
+  MarketPrice: 1040, display: false
   GridSize: "5,1"
   Material: metal
   Shape: ModelEntity
@@ -20293,21 +20328,34 @@
   IsOxygenTight: false, display: true
 }
 
-{ +Block Id: 1395, Name: AlienLargeBlocks, Ref: AlienBlocks     #Xeno Steel, not radioactive
+#{ +Block Id: 1395, Name: AlienLargeBlocks, Ref: AlienBlocks     
+{ +Block Id: 1395, Name: AlienLargeBlocks                       #Xeno Steel, not radioactive # Very similar to AlienBlocks, but not radioactive, allowed in BP
+
   Material: alien
-  MarketPrice: 865, display: true
+  MarketPrice: 865, display: false
   Info: bkiBlockGroup, display: true
   AllowedInBlueprint: true, display: false 
   HitPoints: 2750, type: int, display: false
   Mass: 2600, type: float, display: true, formatter: Kilogram
-  Volume: 80, type: float, display: true, formatter: Liter
+  Volume: 16, type: float, display: true, formatter: Liter
   BlockSizeScale: 8 
   ChildBlocks: "AlienFullLarge, AlienThinLarge, AlienExtendedLarge, AlienExtendedLarge2, AlienExtendedLarge3, AlienExtendedLarge4, AlienExtendedLarge5, AlienExtendedLarge6, AlienExtendedLarge7"
-  Radiation: 0
+  Radiation: 0, display: false
 
   UnlockCost: 0
   UnlockLevel: 1 
   TechTreeNames: ""
+
+  # (Below are References from AlienBlocks - Using Ref resulted in a display glitch (ignoring 'display:false')
+  TextureTable: 3    #  3 = alien table  
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Shape: Invisible
+  # Model: Cube
+  IsOxygenTight: true, display: true
+  AllowPlacingAt: "Base,MS", display: true
+  StackSize: 1000
+  Category: BuildingBlocks
+
 }
 { +Block Id: 1396, Name: AlienFullLarge, Ref: AlienFull
   Material: alien
@@ -20387,7 +20435,7 @@
   Place: Free
   Mass: 1, type: float, display: true, formatter: Kilogram
   StackSize: 1000
-  Temperature: 900 
+  Temperature: 900, display: true
   AllowPlacingAt: "Base,MS", display: true
   ShowUser: Yes
   HitPoints: 1200, type: int, display: true
@@ -20512,7 +20560,7 @@
 { +Block Id: 1417, Name: ThrusterGVJetRound1x3x1, Ref: ThrusterGVRoundNormal
   Info: bkiThrusterJetMS, display: true
   Model: @models/Blocks/Thrusters/ThrusterJetRound1x3x1Prefab
-  MarketPrice: 1315, display: true
+  MarketPrice: 1315, display: false
   Mass: 743, type: float, display: true, formatter: Kilogram
   Volume: 93.75, type: float, display: true, formatter: Liter
   HitPoints: 300, type: int, display: true
@@ -20633,7 +20681,7 @@
 { +Block Id: 1435, Name: WarpDriveSV, Ref: WarpDrive
   Model: @models/Blocks/Spaceship/WarpDriveSVPrefab
   AllowPlacingAt: SS, display: true
-  MarketPrice: 12410, display: true
+  MarketPrice: 12410, display: false
   SizeInBlocks: "3,2,5", display: true
   Mass: 1490, type: float, display: true, formatter: Kilogram
   Volume: 937.5, type: float, display: true, formatter: Liter
@@ -20643,11 +20691,11 @@
   
   ItemPerAU: PentaxidCrystal, display: true
   CostPerAU: 1, display: true
-  CostPerLY: 0, display: true
+  CostPerLY: 0, display: false
   RangeAU: 15, display: true
-  RangeLY: 0, display: true
+  RangeLY: 0, display: false
   
-  # Short Range Warp  
+  # Short Range Warp  (Microwarp / SV T2)
   CostPerKM: 1, display: true
   RangeKM: 15000, display: true
   #RangeKMuseDetector: true, display: true
@@ -20662,7 +20710,7 @@
 { +Block Id: 1436, Name: LandClaimDevice
   Class: LandClaimDevice
   Group: cpgEquipment
-  MarketPrice: 29615, display: true
+  MarketPrice: 29615, display: false
   IndexName: LCDevice
   Material: metal
   Shape: ModelEntity
@@ -20695,7 +20743,7 @@
 { +Block Id: 1437, Name: PentaxidTankSV
   Class: WarpDriveTank
   Group: cpgWarp
-  MarketPrice: 2737, display: true
+  MarketPrice: 2737, display: false
   IndexName: WarpDriveTank
   LootList: 13   #   lootcontainer Warp Drive Tank SV 
   Material: metal
@@ -20798,7 +20846,7 @@
 { +Block Id: 1440, Name: StairsBlocksConcrete, Ref: StairsBlocks
   Material: concrete
   Info: bkiStairs, display: true
-  MarketPrice: 30, display: true
+  MarketPrice: 30, display: false
   AllowPlacingAt: Base, display: true
   Mass: 200, type: float, display: true, formatter: Kilogram
   Volume: 80, type: float, display: true, formatter: Liter
@@ -20834,7 +20882,7 @@
 { +Block Id: 1443, Name: StairsBlocksWood, Ref: StairsBlocks
   Material: woodblock
   Info: bkiStairs, display: true
-  MarketPrice: 15, display: true
+  MarketPrice: 15, display: false
   AllowPlacingAt: Base, display: true
   Mass: 100, type: float, display: true, formatter: Kilogram
   Volume: 80, type: float, display: true, formatter: Liter
@@ -20868,7 +20916,7 @@
 }
 { +Block Id: 1446, Name: ConstructorSV, Ref: ConstructorSmallV2
   Class: ConstructorSmallV2
-  MarketPrice: 1220, display: true
+  MarketPrice: 1220, display: false
   AllowPlacingAt: "SS", display: true
   TemplateRoot: ConstructorSV
 
@@ -20887,7 +20935,7 @@
 
 { +Block Id: 1447, Name: ConstructorHV, Ref: ConstructorSmallV2
   Class: ConstructorHover
-  MarketPrice: 1150, display: true
+  MarketPrice: 1150, display: false
   AllowPlacingAt: "GV", display: true
   TemplateRoot: ConstructorHV
   Mass: 390, type: float, display: true, formatter: Kilogram
@@ -21085,7 +21133,7 @@
 { +Block Id: 1465, Name: AlienNPCBlocks
   Material: human
   Class: NPCDialogue
-  MarketPrice: 5850, display: true 
+  MarketPrice: 5850, display: false 
   Shape: Invisible
   # Model: @models2/Entities/Decorations/DecoNPC/ControlStationNPCPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
@@ -21219,21 +21267,22 @@
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Material: plastic
   Texture: 77
-  MarketPrice: 5, display: true
+  MarketPrice: 5, display: false
   BlockColor: "10,10,10"
   Shape: Invisible
   Place: Free
   # Model: Cube
-  Info: bkiBlockGroup, display: true
+  Info: bkiHullSmallBlocks, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: "SS,GV", display: true
   HitPoints: 20, type: int, display: false
   Mass: 3, type: float, display: true, formatter: Kilogram
-  Volume: 12.5, type: float, display: true, formatter: Liter
+  Volume: 2.5, type: float, display: true, formatter: Liter
   StackSize: 2000
   BlockSizeScale: 2   
   Category: BuildingBlocks
   ChildBlocks: "PlasticFullSmall, PlasticThinSmall, PlasticExtendedSmall, PlasticExtendedSmall2, PlasticExtendedSmall3, PlasticExtendedSmall4, PlasticExtendedSmall5, PlasticExtendedSmall6, PlasticExtendedSmall7"
+  UpgradeTo: HullSmallBlocks, display: true
 
   UnlockCost: 0
   UnlockLevel: 1 
@@ -21266,17 +21315,17 @@
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Material: plastic
   Texture: 77
-  MarketPrice: 8, display: true
+  MarketPrice: 8, display: false
   BlockColor: "10,10,10"
   Shape: New
   Place: Free
   Model: Cube
-  Info: bkiBlockGroup, display: true
+  Info: bkiHullLargeBlocks, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: "Base,MS", display: true
   HitPoints: 200, type: int, display: false
   Mass: 100, type: float, display: true, formatter: Kilogram
-  Volume: 80, type: float, display: true, formatter: Liter
+  Volume: 16, type: float, display: true, formatter: Liter
   StackSize: 1000
   BlockSizeScale: 8   
   Category: BuildingBlocks
@@ -21285,6 +21334,9 @@
   UnlockCost: 0
   UnlockLevel: 1 
   TechTreeNames: ""
+  
+  #For display only  
+  UpgradeTo: HullLargeBlocks, display: true
 }
 #  Two shape families for Plastic Large Block  
 { +Block Id: 1482, Name: PlasticFullLarge
@@ -21311,7 +21363,7 @@
 { +Block Id: 1484, Name: HoverEngineThruster
   IndexName: HoverEngineV2
   Group: cpgHoverEngine
-  MarketPrice: 285, display: true
+  MarketPrice: 285, display: false
   EssentialCategory: "cpgHoverEngine, cpgThruster"
   Material: metal
   Shape: ModelEntity
@@ -21351,14 +21403,14 @@
   BlastRadius: 2
   BlastDamage: 50
 
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: Hover Vessel
 }
 { +Block Id: 1485, Name: MobileAirCon
   Material: metalhard
   Shape: ModelEntity
-  MarketPrice: 15, display: true
+  MarketPrice: 15, display: false
   Model: @models/Blocks/Devices/PortableHeaterCoolerFWNPrefab #1.11 update
   #Model: @models/Blocks/Terrain/MobileAirConPrefab
   # Mesh-Damage-1: Mesh/D0
@@ -21438,7 +21490,7 @@
   SizeInBlocksLocked: "Base,MS"
   IsLockable: true
   IsIgnoreLC: true
-  Info: bkiCockpit, display: true
+  Info: bkiCockpitCV, display: true
   YawRotation: 150          # how far in degrees head of player can be rotated (default 75°)
   StackSize: 25
   Category: Devices
@@ -21513,7 +21565,7 @@
   Group: cpgEquipment
   IsAccessible: true, type: bool
   IsLockable: true
-  BuffNamesActivate: "IncreaseBodyTemp", display: StatusEffect
+  BuffNamesActivate: "NeutralBodyTemp", display: StatusEffect
   DebuffNamesActivate: "Hangover,BadTrip", display: EffectiveAgainst
   # CanPickup: true
   Model: @models2/Entities/Decorations/Misc/BunkBed02Prefab
@@ -21525,7 +21577,7 @@
   Class: SolarPanel
   IndexName: SolarPanel
   Group: cpgSolar
-  MarketPrice: 268, display: true
+  MarketPrice: 268, display: false
   PanelAngle: 30
   SolarPanelEfficiency: 1.8, display: true 
   EssentialCategory: cpgFuelTank
@@ -21540,7 +21592,7 @@
   Volume: 55, type: float, display: true, formatter: Liter
   StackSize: 500
   MaxCount: 500, type: int, display: true
-  CPUIn: 4, type: int, display: true
+  CPUIn: 5, type: int, display: true
   ChildBlocks: "SolarPanelSlope, SolarPanelSlope2, SolarPanelSlope3, SolarPanelHorizontal, SolarPanelHorizontal2, SolarPanelHorizontalMount, SolarPanelHorizontalStand"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21554,7 +21606,7 @@
   Class: SolarGenerator
   IndexName: SolarGenerator
   Group: cpgSolar
-  MarketPrice: 380, display: true
+  MarketPrice: 380, display: false
   EssentialCategory: cpgGenerator
   IsSolarPanel: true
   Material: metalhard
@@ -21591,8 +21643,8 @@
   BlastRadius: 5
   BlastDamage: 200
   
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: "Base"
 }
 { +Block Id: 1496, Name: SolarPanelSlope
@@ -21614,7 +21666,7 @@
   HitPoints: 150, type: int, display: true
   Mass: 730, type: float, display: true, formatter: Kilogram
   MaxCount: 500, type: int, display: true
-  CPUIn: 45, type: int, display: true
+  CPUIn: 5, type: int, display: true
   TemplateRoot: SolarPanelBlocks
   IsOxygenTight: false, display: true
   BlockColor: "110,110,110"  
@@ -21757,7 +21809,7 @@
   Class: SolarPanel
   IndexName: SolarPanel
   Group: cpgSolar
-  MarketPrice: 180, display: true
+  MarketPrice: 180, display: false
   PanelAngle: 30
   SolarPanelEfficiency: 1.0, display: true 
   EssentialCategory: cpgFuelTank
@@ -21774,13 +21826,13 @@
   Volume: 50, type: float, display: true, formatter: Liter
   StackSize: 1000
   MaxCount: 500, type: int, display: true
-  CPUIn: 20, type: int, display: true
+  CPUIn: 2, type: int, display: true
   ChildBlocks: "SolarPanelSlopeSmall, SolarPanelSlope3Small, SolarPanelHorizontalSmall"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
   
-  UnlockCost: 0, display: true
-  UnlockLevel: 1, display: true
+  UnlockCost: 0, display: false
+  UnlockLevel: 1, display: false
   TechTreeNames: "Base"
 }
 { +Block Id: 1514, Name: SolarPanelSlope3Small
@@ -21801,7 +21853,7 @@
   HitPoints: 100, type: int, display: true
   Mass: 350, type: float, display: true, formatter: Kilogram
   MaxCount: 500, type: int, display: true
-  CPUIn: 20, type: int, display: true
+  CPUIn: 2, type: int, display: true
   TemplateRoot: SolarPanelSmallBlocks
   IsOxygenTight: true, display: true 
   BlockColor: "110,110,110"    
@@ -22061,7 +22113,7 @@
   SizeInBlocks: "2,1,2"
   BlockColor: "180,180,180"
   ShowUser: No
-  HitPoints: 60, type: int, display: true
+  HitPoints: 24, type: int, display: true  # Was: 60, and a reference for all the other standard resources except carbon
   { Child DropOnDestroy_1
     Item: IronOre
     Count: "2,3"
@@ -22070,6 +22122,7 @@
 }
 { Block Id: 1539, Name: RockResourceCobalt, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourceCobaltPrefab
+  HitPoints: 30, type: int, display: true
   { Child DropOnDestroy_1
     Item: CobaltOre
     Count: "1,2"
@@ -22078,6 +22131,7 @@
 }
 { Block Id: 1540, Name: RockResourceCopper, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourceCopperPrefab
+  HitPoints: 24, type: int, display: true
   { Child DropOnDestroy_1
     Item: CopperOre
     Count: "2,3"
@@ -22086,6 +22140,7 @@
 }
 { Block Id: 1541, Name: RockResourceSilicon, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourceSiliconPrefab
+  HitPoints: 24, type: int, display: true
   { Child DropOnDestroy_1
     Item: SiliconOre
     Count: "1,3"
@@ -22094,6 +22149,7 @@
 }
 { Block Id: 1542, Name: RockResourceMagnesium, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourceMagnesiumPrefab
+  HitPoints: 24, type: int, display: true
   { Child DropOnDestroy_1
     Item: MagnesiumOre
     Count: "1,3"
@@ -22102,6 +22158,7 @@
 }
 { Block Id: 1543, Name: RockResourceNeodymium, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourceNeodymiumPrefab
+  HitPoints: 60, type: int, display: true
   { Child DropOnDestroy_1
     Item: NeodymiumOre
     Count: "1,3"
@@ -22110,6 +22167,7 @@
 }
 { Block Id: 1544, Name: RockResourceGold, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourceGoldPrefab
+  HitPoints: 30, type: int, display: true
   { Child DropOnDestroy_1
     Item: GoldOre
     Count: "1,3"
@@ -22118,6 +22176,7 @@
 }
 { Block Id: 1545, Name: RockResourceErestrum, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourceErestrumPrefab
+  HitPoints: 40, type: int, display: true
   { Child DropOnDestroy_1
     Item: ErestrumOre
     Count: "1,3"
@@ -22126,6 +22185,7 @@
 }
 { Block Id: 1546, Name: RockResourceSathium, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourceSathiumPrefab
+  HitPoints: 60, type: int, display: true
   { Child DropOnDestroy_1
     Item: SathiumOre
     Count: "1,3"
@@ -22134,6 +22194,7 @@
 }
 { Block Id: 1547, Name: RockResourceZascosium, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourceZascosiumPrefab
+  HitPoints: 60, type: int, display: true
   { Child DropOnDestroy_1
     Item: ZascosiumOre
     Count: "1,3"
@@ -22142,6 +22203,7 @@
 }
 { Block Id: 1548, Name: RockResourcePromethium, Ref: RockResourceIron
   Model: @models2/Environment/Rocks/Resources/RockResourcePromethiumPrefab
+  HitPoints: 60, type: int, display: true
   { Child DropOnDestroy_1
     Item: PromethiumOre
     Count: "1,3"
@@ -22152,7 +22214,7 @@
 { +Block Id: 1549, Name: HeavyWindowBlocks
   Material: hullcombat
   Shape: Invisible
-  MarketPrice: 2155, display: true
+  MarketPrice: 2155, display: false
   # Model: @models/Blocks/Windows/Heavy/HeavyWindowAPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -22319,7 +22381,7 @@
 { +Block Id: 1571, Name: MedicalStationBlocks
   Material: metallight
   Shape: Invisible
-  MarketPrice: 2975, display: true
+  MarketPrice: 2975, display: false
   # Model: @models/Blocks/Mothership/MedicStationPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -22375,7 +22437,7 @@
 { +Block Id: 1575, Name: DetectorHVT1 
   Info: bkiDetector, display: true 
   WeaponItem: DetectorHVWeapon
-  MarketPrice: 110, display: true
+  MarketPrice: 110, display: false
   WeaponItemRotation: false
   CustomIcon: DetectorSVT1
   IndexName: WeaponShip
@@ -22539,7 +22601,7 @@
   HitPoints: 500, type: int, display: true
   Damage: 30, display: true
   StackSize: 500
-  MaxCount: 6, type: int, display: true
+  MaxCount: 60, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
@@ -22555,7 +22617,7 @@
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
-  MarketPrice: 300, display: true
+  MarketPrice: 300, display: false
   Model: @models/Blocks/Spaceship/CloneChamberHVPrefab
   Mesh-Damage-1: Mesh/D0
   Mesh-Damage-2: Mesh/D1
@@ -22589,7 +22651,7 @@
   Class: MedicStation
   # BuffName: MedicStation
   # IndexName: SpawnPoint   # no spawning in medic station HV
-  MarketPrice: 330, display: true
+  MarketPrice: 330, display: false
   Group: cpgMedic
   Material: metal
   Shape: ModelEntity
@@ -22625,7 +22687,7 @@
 { +Block Id: 1585, Name: ThrusterJetRound2x5x2V2, Ref: ThrusterJetRound2x5x2
   Info: bkiThrusterJetMSvariant, display: true
   Model: @models/Blocks/Thrusters/ThrusterJetRound2x5x2V2Prefab
-  MarketPrice: 2390, display: true
+  MarketPrice: 2390, display: false
   
   UnlockCost: 14, display: true
   UnlockLevel: 12, display: true
@@ -22663,7 +22725,7 @@
 { +Block Id: 1588, Name: FridgeBlocks
   Material: metal 
   Shape: Invisible
-  MarketPrice: 923, display: true
+  MarketPrice: 923, display: false
   # Model: @models/Blocks/Mothership/FridgeT1Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -22718,7 +22780,7 @@
 { +Block Id: 1591, Name: ThrusterJetRound3x10x3V2, Ref: ThrusterJetRound3x10x3
   Info: bkiThrusterJetMSvariant, display: true
   Model: @models/Blocks/Thrusters/ThrusterJetRound3x10x3V2Prefab
-  MarketPrice: 4350, display: true
+  MarketPrice: 4350, display: false
   
   UnlockCost: 15, display: true
   UnlockLevel: 17, display: true
@@ -22728,7 +22790,7 @@
 { +Block Id: 1592, Name: ThrusterJetRound3x13x3V2, Ref: ThrusterJetRound3x13x3
   Info: bkiThrusterJetMSvariant, display: true
   Model: @models/Blocks/Thrusters/ThrusterJetRound3x13x3V2Prefab
-  MarketPrice: 5400, display: true
+  MarketPrice: 5400, display: false
   
   UnlockCost: 25, display: true
   UnlockLevel: 20, display: true
@@ -22745,16 +22807,16 @@
   Material: hullcombat
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Texture: 56
-  MarketPrice: 155, display: true
+  MarketPrice: 155, display: false
   BlockColor: "170,170,170"
   Shape: Invisible
   # Model: Cube
-  Info: bkiBlockGroup, display: true
+  Info: bkiHullArmoredSmallBlocks, display: true
   IsOxygenTight: true, display: true
   AllowPlacingAt: "GV", display: true
   HitPoints: 400, type: int, display: false
   Mass: 64, type: float, display: true, formatter: Kilogram
-  Volume: 12.5, type: float, display: true, formatter: Liter
+  Volume: 2.5, type: float, display: true, formatter: Liter
   StackSize: 1000
   BlockSizeScale: 2   
   Category: BuildingBlocks
@@ -23061,7 +23123,7 @@
   ShowUser: NoButCSV
 }
 { +Block Id: 1626, Name: ModularWingBlocks
-  MarketPrice: 134, display: true
+  MarketPrice: 134, display: false
   Material: metal
   Shape: Invisible
   # Model: @models/Blocks/WingsModular/ModWingTaperLPrefab
@@ -23089,7 +23151,7 @@
 { +Block Id: 1627, Name: RemoteConnection
   Class: RemoteConnector
   IndexName: Connector
-  MarketPrice: 341, display: true
+  MarketPrice: 341, display: false
   Group: cpgEquipment
   Material: metallight 
   Shape: ModelEntity
@@ -23126,7 +23188,7 @@
 # "Base Constructor" for Bases and CV's (below Large Constructor)
 { +Block Id: 1628, Name: ConstructorT0, Ref: ConstructorT1V2
   Class: ConstructorT0
-  MarketPrice: 8310, display: true
+  MarketPrice: 8310, display: false
   Model: @models/Blocks/Devices/ConstructorT0FWNPrefab      #1.11 update
   #Model: @models/Blocks/Mothership/ConstructorT0Prefab
   SizeInBlocks: "1,1,1", display: true
@@ -23326,7 +23388,7 @@
   Info: bkiDetector, display: true
   WeaponItem: DetectorSVWeapon
   WeaponItemRotation: false
-  MarketPrice: 208, display: true
+  MarketPrice: 208, display: false
   SizeInBlocks: "1,1,1", display: true
   AllowPlacingAt: "SS", display: true  
   MaxCount: 1, type: int, display: true
@@ -23369,7 +23431,7 @@
   AllowedInBlueprint: false, display: true
   RepairToTemplate: false, display: true 
   Shape: ModelEntity
-  MarketPrice: 5850, display: true 
+  MarketPrice: 5850, display: false 
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   # ModelOffset: "0,0.5,0"  
   BlockColor: "110,110,110"  
@@ -23691,7 +23753,7 @@
   IndexName: Turret
   Group: cpgTurret
   Material: metalhard
-  MarketPrice: 6330, display: true
+  MarketPrice: 6330, display: false
   Shape: Invisible
   Place: Face
   # Model: @models/Blocks/Turrets/TurretMSPulseLaserPrefab
@@ -23909,7 +23971,7 @@
   Class: TurretManual
   IndexName: Turret
   Group: cpgTurret
-  MarketPrice: 1373, display: true
+  MarketPrice: 1373, display: false
   Material: metal
   Shape: Invisible
   Place: Face
@@ -24116,7 +24178,7 @@
   Class: ContainerController
   IndexName: Container
   Group: cpgCargoBox
-  MarketPrice: 258, display: true
+  MarketPrice: 258, display: false
   LootList: 76        # 128 slots
   Material: metal
   Shape: ModelEntity
@@ -24157,7 +24219,7 @@
   LootList: 68        # 63 slots
   Material: metal
   Shape: New
-  MarketPrice: 155, display: true
+  MarketPrice: 155, display: false
   Place: Free
   Model: Cube
   # Texture: 15
@@ -24200,7 +24262,7 @@
   Model: @models/Blocks/Spaceship/ContainerControllerSmallPrefab
   Mass: 55, type: float, display: true, formatter: Kilogram
   Volume: 11, type: float, display: true, formatter: Liter
-  MarketPrice: 78, display: true
+  MarketPrice: 78, display: false
   HitPoints: 100, type: int, display: true
   StackSize: 2000
   VolumeCapacity: 125, type: float, display: true, formatter: Liter
@@ -24217,7 +24279,7 @@
 { +Block Id: 1685, Name: ContainerExtensionSmall, Ref: ContainerExtensionLarge
   Mass: 52, type: float, display: true, formatter: Kilogram
   HitPoints: 100, type: int, display: true
-  MarketPrice: 15, display: true
+  MarketPrice: 15, display: false
   Volume: 11, type: float, display: true, formatter: Liter
   StackSize: 2000
   VolumeCapacity: 125, type: float, display: true, formatter: Liter
@@ -24236,7 +24298,7 @@
 { +Block Id: 1686, Name: ContainerHarvestControllerSmall, Ref: ContainerControllerLarge
   Class: ContainerController
   Group: cpgHarvest
-  MarketPrice: 75, display: true
+  MarketPrice: 75, display: false
   IndexName: HarvestCntr
   Model: @models/Blocks/Spaceship/ContainerHarvestControllerSmallPrefab
   BlockColor: "62,30,10"
@@ -24259,7 +24321,7 @@
   Class: ContainerController
   Group: cpgHarvest
   IndexName: HarvestCntr
-  MarketPrice: 258, display: true
+  MarketPrice: 258, display: false
   Model: @models/Blocks/Mothership/ContainerHarvestControllerLargePrefab
   BlockColor: "62,30,10"
   Info: bkiContainerHarvest, display: true                                      # adapt 
@@ -24275,7 +24337,7 @@
   Class: ContainerController
   Group: cpgAmmo
   IndexName: AmmoCntr
-  MarketPrice: 75, display: true
+  MarketPrice: 75, display: false
   Model: @models/Blocks/Spaceship/ContainerAmmoControllerSmallPrefab
   BlockColor: "0,40,0"
   Info: bkiContainerAmmo, display: true                                         # adapt 
@@ -24297,7 +24359,7 @@
   Class: ContainerController
   Group: cpgAmmo
   IndexName: AmmoCntr
-  MarketPrice: 610, display: true
+  MarketPrice: 610, display: false
   Model: @models/Blocks/Mothership/ContainerAmmoControllerLargePrefab
   BlockColor: "0,40,0"
   Info: bkiContainerAmmo, display: true                                      # adapt 
@@ -24316,7 +24378,7 @@
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Shape: Invisible
   Place: Free
-  MarketPrice: 15, display: true
+  MarketPrice: 15, display: false
   Mesh: cutout
   # Model: Walkway
   Texture: 61
@@ -24347,7 +24409,7 @@
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Shape: Invisible
   Place: Free
-  MarketPrice: 65, display: true
+  MarketPrice: 65, display: false
   Mesh: cutout
   # Model: Walkway
   Texture: 61
@@ -24379,7 +24441,7 @@
   IndexName: Door
   Material: hullarmored
   Shape: Invisible
-  MarketPrice: 1428, display: true
+  MarketPrice: 1428, display: false
   # Model: @models/Blocks/Mothership/Ramps/Ramp3x1x1Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Face
@@ -24411,7 +24473,7 @@
   Class: Door
   IndexName: Door
   Material: hullarmored
-  MarketPrice: 395, display: true
+  MarketPrice: 395, display: false
   Shape: Invisible
   # Model: @models/Blocks/Mothership/Ramps/Ramp3x1x1Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
@@ -24576,7 +24638,7 @@
   Group: cpgRamp
   Material: hullarmored
   Shape: Invisible
-  MarketPrice: 1910, display: true
+  MarketPrice: 1910, display: false
   # Model: @models/Blocks/Mothership/HangarDoor/HangarDoor10x5Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -24664,7 +24726,7 @@
   Shape: Invisible
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
-  MarketPrice: 155, display: true
+  MarketPrice: 155, display: false
   AllowPlacingAt: "Base,MS", display: true
   Mass: 1250, type: float, display: true, formatter: Kilogram
   Volume: 90, type: float, display: true, formatter: Liter
@@ -24683,7 +24745,7 @@
 { +Block Id: 1712, Name: ContainerSmallBlocks
   Material: metal
   Shape: Invisible
-  MarketPrice: 15, display: true
+  MarketPrice: 15, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
   AllowPlacingAt: "SS,GV", display: true
@@ -24769,7 +24831,7 @@
 { +Block Id: 1719, Name: DecoVesselBlocks
   Material: metal
   Shape: Invisible
-  MarketPrice: 150, display: true
+  MarketPrice: 150, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Face
   Info: bkiBlockGroup, display: true
@@ -24942,7 +25004,7 @@
   # Group: cpgEquipment  
   # IsAccessible: true, type: bool
   # IsLockable: true
-  BuffNamesActivate: "IncreaseBodyTemp", display: StatusEffect
+  BuffNamesActivate: "NeutralBodyTemp", display: StatusEffect
   DebuffNamesActivate: "Hangover,BadTrip", display: EffectiveAgainst
   Material: woodblock
   Model: @models2/Entities/Decorations/TribalAssets/TribalBed1Prefab
@@ -24958,7 +25020,7 @@
   # Group: cpgEquipment  
   # IsAccessible: true, type: bool
   # IsLockable: true
-  BuffNamesActivate: "IncreaseBodyTemp", display: StatusEffect
+  BuffNamesActivate: "NeutralBodyTemp", display: StatusEffect
   DebuffNamesActivate: "Hangover,BadTrip", display: EffectiveAgainst
 }
 { +Block Id: 1745, Name: TribalBookcase1, Ref: DecoTemplate
@@ -25268,7 +25330,7 @@
 { +Block Id: 1774, Name: ThrusterGVRoundNormalT2, Ref: ThrusterGVRoundNormal
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterGVRoundNormalT2Prefab
   SizeInBlocks: "1,2,1", display: true
-  MarketPrice: 1425, display: true
+  MarketPrice: 1425, display: false
   HitPoints: 220, type: int, display: true
   Mass: 485, type: float, display: true, formatter: Kilogram
   Volume: 62.5, type: float, display: true, formatter: Liter
@@ -25287,7 +25349,7 @@
 }  
 { +Block Id: 1775, Name: ThrusterGVRoundLarge, Ref: ThrusterGVRoundNormal
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterGVRoundLargePrefab
-  MarketPrice: 1307, display: true
+  MarketPrice: 1307, display: false
   SizeInBlocks: "1,3,1", display: true
   HitPoints: 350, type: int, display: true
   Volume: 96.75, type: float, display: true, formatter: Liter
@@ -25306,7 +25368,7 @@
 } 
 { +Block Id: 1776, Name: ThrusterGVRoundLargeT2, Ref: ThrusterGVRoundNormal
   Model: @models/Blocks/Thrusters/RoundThrusters/ThrusterGVRoundLargeT2Prefab
-  MarketPrice: 2865, display: true
+  MarketPrice: 2865, display: false
   SizeInBlocks: "1,3,1", display: true
   HitPoints: 400, type: int, display: true
   Volume: 96.75, type: float, display: true, formatter: Liter
@@ -25400,10 +25462,13 @@
 }
 { +Block Id: 1787, Name: HullArmoredExtendedLarge, Ref: HullArmoredFullLarge
   ChildShapes: "CornerCMedium, CornerSmallCMedium, CornerSmallA, SmallCornerRoundC, RampRoundDDouble, NotchedC, NotchedA, NotchedCMedium, CubeQuarter, CylinderThinXJoint, CornerDoubleA1, CutCornerA, CornerDoubleB3, SlicedCornerD, EdgeRoundMedium, RampB, CornerRoundBMedium, CornerRoundBLow, CornerRoundAMedium, CornerRoundALow, EdgeRoundMediumHalf, EdgeRoundLow, PipesFenceDiagonal, FenceTopDiagonal, CubeRoundConnectorBleft, CubeRoundConnectorBright, CylinderRoundTransition, WallEdge, RampRoundConnectorBleft, RampRoundConnectorBright, RampRoundConnectorAleft, RampRoundConnectorAright"
+  DowngradeTo: HullExtendedLarge, display: true
   UpgradeTo: HullCombatExtendedLarge, display: true
 }
 { +Block Id: 1788, Name: HullCombatExtendedLarge, Ref: HullCombatFullLarge
   ChildShapes: "CornerCMedium, CornerSmallCMedium, CornerSmallA, SmallCornerRoundC, RampRoundDDouble, NotchedC, NotchedA, NotchedCMedium, CubeQuarter, CylinderThinXJoint, CornerDoubleA1, CutCornerA, CornerDoubleB3, SlicedCornerD, EdgeRoundMedium, RampB, CornerRoundBMedium, CornerRoundBLow, CornerRoundAMedium, CornerRoundALow, EdgeRoundMediumHalf, EdgeRoundLow, PipesFenceDiagonal, FenceTopDiagonal, CubeRoundConnectorBleft, CubeRoundConnectorBright, CylinderRoundTransition, WallEdge, RampRoundConnectorBleft, RampRoundConnectorBright, RampRoundConnectorAleft, RampRoundConnectorAright"
+  DowngradeTo: HullArmoredExtendedLarge, display: true
+  
 }
 { +Block Id: 1789, Name: AlienExtended, Ref: AlienFull
   ChildShapes: "CornerCMedium, CornerSmallCMedium, CornerSmallA, SmallCornerRoundC, RampRoundDDouble, NotchedC, NotchedA, NotchedCMedium, CubeQuarter, CylinderThinXJoint, CornerDoubleA1, CutCornerA, CornerDoubleB3, SlicedCornerD, EdgeRoundMedium, RampB, CornerRoundBMedium, CornerRoundBLow, CornerRoundAMedium, CornerRoundALow, EdgeRoundMediumHalf, EdgeRoundLow, PipesFenceDiagonal, FenceTopDiagonal, CubeRoundConnectorBleft, CubeRoundConnectorBright, CylinderRoundTransition, WallEdge, RampRoundConnectorBleft, RampRoundConnectorBright, RampRoundConnectorAleft, RampRoundConnectorAright"
@@ -25489,7 +25554,7 @@
   Class: CockpitSS
   IndexName: Cockpit
   Group: cpgCockpit
-  MarketPrice: 2910, display: true
+  MarketPrice: 2910, display: false
   EssentialCategory: cpgCockpit
   Material: metalhard
   Shape: Invisible
@@ -25874,10 +25939,13 @@
 }
 { +Block Id: 1829, Name: HullArmoredExtendedLarge2, Ref: HullArmoredFullLarge
   ChildShapes: "WallLShapeMedium, WallLShapeLow, RampDLow, RampE, RampCMediumQuarter, RampConnectorBleft, RampConnectorBright, CubeEighth, SlicedCornerA2, SlicedCornerA1Medium, SlicedCornerDMedium, NotchedB, BeamQuarter, WallCornerSloped, RampADoubleHalf, RampBDoubleHalf, WallUShape, WallDouble, WallSlopedCDoubleMedium, WallSlopedCDoubleLow, CorridorPillarD, CubeDummy, RampCMediumHalfright, RampCMediumHalfleft, WallSlopedCDouble, WallSlopedBDouble, WallSlopedBDoubleMedium, WallSlopedADouble, RampAHalfright, RampAHalfleft, CylinderFramed, CubeFramed"  
+  DowngradeTo: HullExtendedLarge2, display: true
   UpgradeTo: HullCombatExtendedLarge2, display: true
 }
 { +Block Id: 1830, Name: HullCombatExtendedLarge2, Ref: HullCombatFullLarge
   ChildShapes: "WallLShapeMedium, WallLShapeLow, RampDLow, RampE, RampCMediumQuarter, RampConnectorBleft, RampConnectorBright, CubeEighth, SlicedCornerA2, SlicedCornerA1Medium, SlicedCornerDMedium, NotchedB, BeamQuarter, WallCornerSloped, RampADoubleHalf, RampBDoubleHalf, WallUShape, WallDouble, WallSlopedCDoubleMedium, WallSlopedCDoubleLow, CorridorPillarD, CubeDummy, RampCMediumHalfright, RampCMediumHalfleft, WallSlopedCDouble, WallSlopedBDouble, WallSlopedBDoubleMedium, WallSlopedADouble, RampAHalfright, RampAHalfleft, CylinderFramed, CubeFramed"  
+  DowngradeTo: HullArmoredExtendedLarge2, display: true
+  
 }
 { +Block Id: 1831, Name: AlienExtended2, Ref: AlienFull
   ChildShapes: "WallLShapeMedium, WallLShapeLow, RampDLow, RampE, RampCMediumQuarter, RampConnectorBleft, RampConnectorBright, CubeEighth, SlicedCornerA2, SlicedCornerA1Medium, SlicedCornerDMedium, NotchedB, BeamQuarter, WallCornerSloped, RampADoubleHalf, RampBDoubleHalf, WallUShape, WallDouble, WallSlopedCDoubleMedium, WallSlopedCDoubleLow, CorridorPillarD, CubeDummy, RampCMediumHalfright, RampCMediumHalfleft, WallSlopedCDouble, WallSlopedBDouble, WallSlopedBDoubleMedium, WallSlopedADouble, RampAHalfright, RampAHalfleft, CylinderFramed, CubeFramed"  
@@ -25928,10 +25996,13 @@
 }
 { +Block Id: 1842, Name: HullArmoredExtendedLarge3, Ref: HullArmoredFullLarge
   ChildShapes: "CubeSliced, CubeStepped, RampConnectorDleft, RampConnectorDright, RampConnectorEleft, RampConnectorFright, CubeDummy, CubeDummy, CornerDoubleA2, CornerDoubleB2, CornerDoubleB1, CornerSmallBMedium, CornerSmallBLow, CornerHalfA3Low, CornerSmallCLow, CornerB, CornerHalfA2, CornerCLow, CornerHalfC, CornerRoundBMediumQuarter, CornerRoundBLowQuarter, PipesX, PipesFenceKinked, CubeDummy, PipesL, PipesT, CylinderThin6Way, CornerRoundAMediumQuarter, CornerRoundALowQuarter, EdgeRoundLowHalf, EdgeRoundLowQuarter, EdgeRoundLowEighth"
+  DowngradeTo: HullExtendedLarge3, display: true
   UpgradeTo: HullCombatExtendedLarge3, display: true
 }
 { +Block Id: 1843, Name: HullCombatExtendedLarge3, Ref: HullCombatFullLarge
   ChildShapes: "CubeSliced, CubeStepped, RampConnectorDleft, RampConnectorDright, RampConnectorEleft, RampConnectorFright, CubeDummy, CubeDummy, CornerDoubleA2, CornerDoubleB2, CornerDoubleB1, CornerSmallBMedium, CornerSmallBLow, CornerHalfA3Low, CornerSmallCLow, CornerB, CornerHalfA2, CornerCLow, CornerHalfC, CornerRoundBMediumQuarter, CornerRoundBLowQuarter, PipesX, PipesFenceKinked, CubeDummy, PipesL, PipesT, CylinderThin6Way, CornerRoundAMediumQuarter, CornerRoundALowQuarter, EdgeRoundLowHalf, EdgeRoundLowQuarter, EdgeRoundLowEighth"
+  DowngradeTo: HullArmoredExtendedLarge3, display: true
+  
 }
 { +Block Id: 1844, Name: AlienExtended3, Ref: AlienFull
   ChildShapes: "CubeSliced, CubeStepped, RampConnectorDleft, RampConnectorDright, RampConnectorEleft, RampConnectorFright, CubeDummy, CubeDummy, CornerDoubleA2, CornerDoubleB2, CornerDoubleB1, CornerSmallBMedium, CornerSmallBLow, CornerHalfA3Low, CornerSmallCLow, CornerB, CornerHalfA2, CornerCLow, CornerHalfC, CornerRoundBMediumQuarter, CornerRoundBLowQuarter, PipesX, PipesFenceKinked, CubeDummy, PipesL, PipesT, CylinderThin6Way, CornerRoundAMediumQuarter, CornerRoundALowQuarter, EdgeRoundLowHalf, EdgeRoundLowQuarter, EdgeRoundLowEighth"
@@ -25981,10 +26052,13 @@
 }
 { +Block Id: 1855, Name: HullArmoredExtendedLarge4, Ref: HullArmoredFullLarge
   ChildShapes: "EdgeRoundThin, EdgeRoundMediumHalfDouble, RampRoundE, EdgeRoundThin, EdgeRoundMediumHalfDouble, CubeRoundTransitionleft, CubeDummy, CubeDummy, PipesL, CubeDummy, CubeRoundTransitionright, EdgeRoundHalf, EdgeRoundDoubleA, EdgeRoundDoubleAHalf, EdgeRoundMediumQuarter, RampEHalf, RampRoundADouble, RampRoundADoubleHalf, RampRoundBDouble, RampRoundC, RampConnectorAleft, RampConnectorAright, SlicedCornerA1Low, SlicedCornerB1, SlicedCornerB2, SlicedCornerB1Medium, SlicedCornerB2Medium, CylinderThin3Way, CylinderThin4Way, CylinderThin5Way, CubeDummy"
+  DowngradeTo: HullExtendedLarge4, display: true
   UpgradeTo: HullCombatExtendedLarge4, display: true
 }
 { +Block Id: 1856, Name: HullCombatExtendedLarge4, Ref: HullCombatFullLarge
   ChildShapes: "EdgeRoundThin, EdgeRoundMediumHalfDouble, RampRoundE, EdgeRoundThin, EdgeRoundMediumHalfDouble, CubeRoundTransitionleft, CubeDummy, CubeDummy, PipesL, CubeDummy, CubeRoundTransitionright, EdgeRoundHalf, EdgeRoundDoubleA, EdgeRoundDoubleAHalf, EdgeRoundMediumQuarter, RampEHalf, RampRoundADouble, RampRoundADoubleHalf, RampRoundBDouble, RampRoundC, RampConnectorAleft, RampConnectorAright, SlicedCornerA1Low, SlicedCornerB1, SlicedCornerB2, SlicedCornerB1Medium, SlicedCornerB2Medium, CylinderThin3Way, CylinderThin4Way, CylinderThin5Way, CubeDummy"
+  DowngradeTo: HullArmoredExtendedLarge4, display: true
+  
 }
 { +Block Id: 1857, Name: AlienExtended4, Ref: AlienFull
   ChildShapes: "EdgeRoundThin, EdgeRoundMediumHalfDouble, RampRoundE, EdgeRoundThin, EdgeRoundMediumHalfDouble, CubeRoundTransitionleft, CubeDummy, CubeDummy, PipesL, CubeDummy, CubeRoundTransitionright, EdgeRoundHalf, EdgeRoundDoubleA, EdgeRoundDoubleAHalf, EdgeRoundMediumQuarter, RampEHalf, RampRoundADouble, RampRoundADoubleHalf, RampRoundBDouble, RampRoundC, RampConnectorAleft, RampConnectorAright, SlicedCornerA1Low, SlicedCornerB1, SlicedCornerB2, SlicedCornerB1Medium, SlicedCornerB2Medium, CylinderThin3Way, CylinderThin4Way, CylinderThin5Way, CubeDummy"
@@ -26036,10 +26110,13 @@
 }
 { +Block Id: 1868, Name: HullArmoredExtendedLarge5, Ref: HullArmoredFullLarge
   ChildShapes: "CubeLShape, CubeRoundTransitionleft, CubeRoundTransitionright, RampEHalf, CutCornerDLow, RampConnectorCleft, RampConnectorCright, NotchedBMedium, NotchedCLow, CutCornerD, CutCornerDMedium, CorridorWallA, CorridorEdgeA, CorridorPillarA, CorridorWallB, CorridorEdgeB, CorridorEdgeC, CorridorPillarB, CorridorPillarC, CorridorRoof, CorridorRoofCorner, CorridorRoofCornerRound, CorridorBulkyWallA, CorridorBulkyWallAWindowed, CorridorBulkyWallB, CorridorBulkyWallBWindowed, CorridorRampA, CorridorRampB, DoorframeA, DoorframeB, DoorframeC, CorridorRoofCornerInverted"
+  DowngradeTo: HullExtendedLarge5, display: true
   UpgradeTo: HullCombatExtendedLarge5, display: true
 }
 { +Block Id: 1869, Name: HullCombatExtendedLarge5, Ref: HullCombatFullLarge
   ChildShapes: "CubeLShape, CubeRoundTransitionleft, CubeRoundTransitionright, RampEHalf, CutCornerDLow, RampConnectorCleft, RampConnectorCright, NotchedBMedium, NotchedCLow, CutCornerD, CutCornerDMedium, CorridorWallA, CorridorEdgeA, CorridorPillarA, CorridorWallB, CorridorEdgeB, CorridorEdgeC, CorridorPillarB, CorridorPillarC, CorridorRoof, CorridorRoofCorner, CorridorRoofCornerRound, CorridorBulkyWallA, CorridorBulkyWallAWindowed, CorridorBulkyWallB, CorridorBulkyWallBWindowed, CorridorRampA, CorridorRampB, DoorframeA, DoorframeB, DoorframeC, CorridorRoofCornerInverted"
+  DowngradeTo: HullArmoredExtendedLarge5, display: true
+  
 }
 { +Block Id: 1870, Name: AlienExtended5, Ref: AlienFull
   ChildShapes: "CubeLShape, CubeRoundTransitionleft, CubeRoundTransitionright, RampEHalf, CutCornerDLow, RampConnectorCleft, RampConnectorCright, NotchedBMedium, NotchedCLow, CutCornerD, CutCornerDMedium, CorridorWallA, CorridorEdgeA, CorridorPillarA, CorridorWallB, CorridorEdgeB, CorridorEdgeC, CorridorPillarB, CorridorPillarC, CorridorRoof, CorridorRoofCorner, CorridorRoofCornerRound, CorridorBulkyWallA, CorridorBulkyWallAWindowed, CorridorBulkyWallB, CorridorBulkyWallBWindowed, CorridorRampA, CorridorRampB, DoorframeA, DoorframeB, DoorframeC, CorridorRoofCornerInverted"
@@ -26068,7 +26145,7 @@
 
 { +Block Id: 1876, Name: DrillAttachmentLarge, Ref: DrillAttachment
   Model: @models/Blocks/WeaponsShip/DrillAttachmentLargePrefab
-  MarketPrice: 2710, display: true
+  MarketPrice: 2710, display: false
   IsRetractable: false, display: true  
   WeaponItem: DrillAttachmentLargeWeapon
   SizeInBlocks: "3,8,3", display: true
@@ -26475,7 +26552,7 @@
 { +Block Id: 1956, Name: VentilatorBlocks 
   Material: hull
   Shape: Invisible
-  MarketPrice: 210, display: true
+  MarketPrice: 210, display: false
   # Model: @models/Blocks/Mothership/VentilatorCubePrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   AllowPlacingAt: "Base,MS,SS,GV", display: true
@@ -26939,7 +27016,7 @@
   IndexName: CPUExtender
   # EssentialCategory: cpgCPUExtender
   Material: metal
-  MarketPrice: 4048, display: true
+  MarketPrice: 4048, display: false
   Shape: ModelEntity
   ShowBlockName: true
   Model: @models/Blocks/Misc/CPUExtenderSmallT2Prefab
@@ -26957,7 +27034,7 @@
   MaxCount: 1, type: int, display: true
   ForceMaxCount: true
   IsOxygenTight: true, display: true
-  Info: bkiCore, display: true
+  Info: bkiCPUExtender, display: true
   Category: Devices
   BlastParticleIndex: 4
   BlastRadius: 1
@@ -27005,7 +27082,7 @@
   MaxCount: 2, type: int, display: true
   ForceMaxCount: true
   IsOxygenTight: true, display: true
-  Info: bkiCore, display: true
+  Info: bkiCPUExtender, display: true
   Category: Devices
   BlastParticleIndex: 4
   BlastRadius: 1
@@ -27055,7 +27132,7 @@
   # Class: CPUExtender
   Group: cpgCore
   IndexName: CPUExtender
-  MarketPrice: 6020, display: true
+  MarketPrice: 6020, display: false
   # EssentialCategory: cpgCPUExtender
   Material: metal
   Shape: ModelEntity
@@ -27075,7 +27152,7 @@
   MaxCount: 1, type: int, display: true
   ForceMaxCount: true
   IsOxygenTight: true, display: true
-  Info: bkiCore, display: true
+  Info: bkiCPUExtender, display: true
   Category: Devices
   BlastParticleIndex: 4
   BlastRadius: 1
@@ -27123,7 +27200,7 @@
   MaxCount: 2, type: int, display: true
   ForceMaxCount: true
   IsOxygenTight: true, display: true
-  Info: bkiCore, display: true
+  Info: bkiCPUExtender, display: true
   Category: Devices
   BlastParticleIndex: 4
   BlastRadius: 1
@@ -27170,7 +27247,7 @@
  # ShowUser: No
 }
 { +Block Id: 2029, Name: CPUExtenderCVT2
-  MarketPrice: 12750, display: true
+  MarketPrice: 12750, display: false
   # Class: CPUExtender
   Group: cpgCore
   IndexName: CPUExtender
@@ -27193,7 +27270,7 @@
   MaxCount: 1, type: int, display: true
   ForceMaxCount: true
   IsOxygenTight: true, display: true
-  Info: bkiCore, display: true
+  Info: bkiCPUExtender, display: true
   Category: Devices
   BlastParticleIndex: 4
   BlastRadius: 1
@@ -27241,7 +27318,7 @@
   MaxCount: 2, type: int, display: true
   ForceMaxCount: true
   IsOxygenTight: true, display: true
-  Info: bkiCore, display: true
+  Info: bkiCPUExtender, display: true
   Category: Devices
   BlastParticleIndex: 4
   BlastRadius: 1
@@ -27288,7 +27365,7 @@
  # ShowUser: No
 }
 { +Block Id: 2032, Name: CPUExtenderBAT2
-  MarketPrice: 11050, display: true
+  MarketPrice: 11050, display: false
   # Class: CPUExtender
   Group: cpgCore
   IndexName: CPUExtender
@@ -27311,7 +27388,7 @@
   MaxCount: 1, type: int, display: true
   ForceMaxCount: true
   IsOxygenTight: true, display: true
-  Info: bkiCore, display: true
+  Info: bkiCPUExtender, display: true
   Category: Devices
   BlastParticleIndex: 4
   BlastRadius: 1
@@ -27359,7 +27436,7 @@
   MaxCount: 2, type: int, display: true
   ForceMaxCount: true
   IsOxygenTight: true, display: true
-  Info: bkiCore, display: true
+  Info: bkiCPUExtender, display: true
   Category: Devices
   BlastParticleIndex: 4
   BlastRadius: 1
@@ -27430,10 +27507,13 @@
 }
 { +Block Id: 2040, Name: HullArmoredExtendedLarge6, Ref: HullArmoredFullLarge
   ChildShapes: "WallMediumDouble, RampBDouble, SmallCornerRoundB2, CubeSteppedEdge, CubeQuarterEdge, CubeHalfRamp, CubeHalfCubeConnector, CornerSmallCMediumLow, WallLowDouble, CubeRoundConnectorAMedium, CubeRoundConnectorALow, CornerSmallBMediumLow, WallSlopedBold, CylinderCubeConnector, CylinderCubeHalfConnector, CylinderWallConnector, CubeHalfEdge, CutCornerFL, CutCornerFR, RoundedRampBLeft, RoundedRampBRight, HalfCylinder90Degree, HalfCylinderConnectorA, Cylinder90Degree, HalfCylinderEdge, HalfCylinderConnectorB, RampRoundMediumTransitionLeft, RampRoundMediumTransitionRight, RampRoundConnectorCLeft, RampRoundConnectorCRight, NotchedDright, NotchedDleft"
+  DowngradeTo: HullExtendedLarge6, display: true
   UpgradeTo: HullCombatExtendedLarge6, display: true
 }
 { +Block Id: 2041, Name: HullCombatExtendedLarge6, Ref: HullCombatFullLarge
   ChildShapes: "WallMediumDouble, RampBDouble, SmallCornerRoundB2, CubeSteppedEdge, CubeQuarterEdge, CubeHalfRamp, CubeHalfCubeConnector, CornerSmallCMediumLow, WallLowDouble, CubeRoundConnectorAMedium, CubeRoundConnectorALow, CornerSmallBMediumLow, WallSlopedBold, CylinderCubeConnector, CylinderCubeHalfConnector, CylinderWallConnector, CubeHalfEdge, CutCornerFL, CutCornerFR, RoundedRampBLeft, RoundedRampBRight, HalfCylinder90Degree, HalfCylinderConnectorA, Cylinder90Degree, HalfCylinderEdge, HalfCylinderConnectorB, RampRoundMediumTransitionLeft, RampRoundMediumTransitionRight, RampRoundConnectorCLeft, RampRoundConnectorCRight, NotchedDright, NotchedDleft"
+  DowngradeTo: HullArmoredExtendedLarge6, display: true
+  
 }
 { +Block Id: 2042, Name: AlienExtended6, Ref: AlienFull
   ChildShapes: "WallMediumDouble, RampBDouble, SmallCornerRoundB2, CubeSteppedEdge, CubeQuarterEdge, CubeHalfRamp, CubeHalfCubeConnector, CornerSmallCMediumLow, WallLowDouble, CubeRoundConnectorAMedium, CubeRoundConnectorALow, CornerSmallBMediumLow, WallSlopedBold, CylinderCubeConnector, CylinderCubeHalfConnector, CylinderWallConnector, CubeHalfEdge, CutCornerFL, CutCornerFR, RoundedRampBLeft, RoundedRampBRight, HalfCylinder90Degree, HalfCylinderConnectorA, Cylinder90Degree, HalfCylinderEdge, HalfCylinderConnectorB, RampRoundMediumTransitionLeft, RampRoundMediumTransitionRight, RampRoundConnectorCLeft, RampRoundConnectorCRight, NotchedDright, NotchedDleft"
@@ -27488,10 +27568,13 @@
 }
 { Block Name: HullArmoredExtendedLarge7, Ref: HullArmoredFullLarge
   ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
+  DowngradeTo: HullExtendedLarge7, display: true
   UpgradeTo: HullCombatExtendedLarge7, display: true
 }
 { Block Name: HullCombatExtendedLarge7, Ref: HullCombatFullLarge
-  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
+  ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"  
+  DowngradeTo: HullArmoredExtendedLarge7, display: true
+  
 }
 { Block Name: AlienExtended7, Ref: AlienFull
   ChildShapes: "RoundedA, RoundedRampA, RoundedEdge, RoundedB, RampABDouble, RampRoundDTriple, CutCone, CutCornerBLeft, CutCornerBRight, RampConnectorF2Left, RampConnectorF2Right, NotchedELeft, NotchedERight, CornerHalfDLeft, CornerHalfDRight"
@@ -27604,7 +27687,7 @@
   SizeInBlocks: "1,1,1", display: true 
   Class: FoodProcessorV2
   IndexName: Constructor
-  MarketPrice: 2894, display: true
+  MarketPrice: 2894, display: false
   Group: cpgFoodProcessor
   DontDecayFood: true   #  now this loot container is a fridge  
   Shape: ModelEntity
@@ -27691,7 +27774,7 @@
   Class: Furnace
   IndexName: Constructor
   Group: cpgConstructor 
-  MarketPrice: 7500, display: true
+  MarketPrice: 7500, display: false
   Shape: ModelEntity
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   DropInventoryEntity: DropContainer
@@ -27735,7 +27818,7 @@
   Category: Devices
   Material: wood
   Shape: ModelEntity
-  MarketPrice: 700, display: true
+  MarketPrice: 700, display: false
   ShowBlockName: true
   Place: Free
   AllowPlacingAt: "Base", display: true
@@ -27770,7 +27853,7 @@
   Category: Devices
   Material: wood
   Shape: ModelEntity
-  MarketPrice: 700, display: true
+  MarketPrice: 700, display: false
   ShowBlockName: true
   Place: Free
   AllowPlacingAt: "SS,GV", display: true
@@ -27900,7 +27983,7 @@
   Material: hullcombat
   CustomIcon: HeavyWindowDetailedCT2COR
   Shape: Invisible
-  MarketPrice: 2155, display: true
+  MarketPrice: 2155, display: false
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
   Info: bkiBlockGroup, display: true
@@ -28245,7 +28328,7 @@
   IndexName: WarpDrive
   Material: metal
   Shape: ModelEntity
-  MarketPrice: 83216, display: true
+  MarketPrice: 83216, display: false
   ShowBlockName: true
   RepairToTemplate: false                    #Blocks can NOT be placed, and used for R2T when destroyed
   AllowedInBlueprint: false, display: true  #Struct with these blocks cannot be blueprinted to avoid easy multiplication of these blocks!
@@ -28283,9 +28366,9 @@
   CostPerAU: 2, display: true
   CostPerLY: 1, display: true
   RangeAU: 250, display: true
-  RangeLY: 150, display: true
+  RangeLY: 150, display: true 
   
-  # Short Range Warp  
+  # Short Range Warp  (Microwarp / CV T4)
   CostPerKM: 4, display: true
   RangeKM: 60000, display: true
   #RangeKMuseDetector: true, display: true
@@ -28736,7 +28819,7 @@
   # IsRetractable: true
   # AboveTerrainCheck: false                 # Required?
   StackSize: 500
-  # MaxCount: 4, type: int, display: true
+  # MaxCount: 40, type: int, display: true
   # MarketPrice: 2200, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
@@ -29079,7 +29162,7 @@
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
-  MarketPrice: 805, display: true
+  MarketPrice: 805, display: false
   Model: @models/Blocks/Mothership/RCS_BlockPrefab
   Mesh-Damage-1: Mesh/D0
   Mesh-Damage-2: Mesh/D1
@@ -30807,7 +30890,7 @@
   Volume: 40, type: float, display: true, formatter: Liter
   EnergyIn: 1, type: int, display: false, formatter: Watt  
   # VolumeCapacity: 8000, type: float, display: true, formatter: Liter       
-  MarketPrice: 1200, display: true
+  MarketPrice: 1200, display: false
   XpFactor: 0  
   RPFactor: 0
 
@@ -30872,7 +30955,7 @@
   # ModelOffset: "0,0.5,0"
   Category: Deco Blocks 
   
-  MarketPrice: 20, display: true
+  MarketPrice: 20, display: false
   XpFactor: 0  
   RPFactor: 0
   
@@ -30902,7 +30985,7 @@
   # ModelOffset: "0,0.5,0"
   Category: Deco Blocks 
   
-  MarketPrice: 20, display: true
+  MarketPrice: 20, display: false
   XpFactor: 0  
   RPFactor: 0
 }
@@ -36016,6 +36099,7 @@
   }
 }
 { Block Name: P_Rock_1
+  Model: @models2/EnvironmentNew/Rocks/P_Rock_1
   Material: rock
   Shape: Deco
   IsTerrainDecoration: true
@@ -36023,7 +36107,6 @@
   IsPlant: true
   BigDecorationRadius: 10
   ShowUser: No
-  Model: @models2/EnvironmentNew/Rocks/P_Rock_1
   HitPoints: 298, type: int, display: false
   { Child DropOnDestroy_1
     Item: CrushedStone
@@ -36172,7 +36255,7 @@
 
   Mass: 9540, type: float, display: true, formatter: Kilogram    #Only relevant for the group item; calculated as an average of devices!
   Volume: 3240, type: float, display: true, formatter: Liter   #Only relevant for the group item; calculated as an average of devices!
-  MarketPrice: 9205, display: true     #Only relevant for the group item; calculated as an average of devices!
+  MarketPrice: 9205, display: false     #Only relevant for the group item; calculated as an average of devices!
   
   IsOxygenTight: false, display: true    #all of the group!
   StackSize: 250
@@ -36285,7 +36368,7 @@
 
   Mass: 564, type: float, display: true, formatter: Kilogram    #Only relevant for the group item; calculated as an average of devices!
   Volume: 564, type: float, display: true, formatter: Liter   #Only relevant for the group item; calculated as an average of devices!
-  MarketPrice: 2085, display: true     #Only relevant for the group item; calculated as an average of devices!
+  MarketPrice: 2085, display: false     #Only relevant for the group item; calculated as an average of devices!
   
   IsOxygenTight: false, display: true    #all of the group!
   StackSize: 250
@@ -36531,7 +36614,7 @@
 { Block Name: DecoTables
   Material: metallight
   Shape: Invisible
-  MarketPrice: 10, display: true 
+  MarketPrice: 10, display: false 
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
   AllowPlacingAt: "Base,MS", display: true
@@ -36665,7 +36748,7 @@
 { Block Name: StreetLightBlocks    # lights higher than 1 block and/or lamps that would be placed singular or NOT neccessarily at a ceiling but besides walkways, streets etc; All HAVE colliders!
   Material: metallight
   Shape: Invisible
-  MarketPrice: 255, display: true
+  MarketPrice: 255, display: false
   # Model: @models/Blocks/Mothership/lightMS01Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -36803,7 +36886,7 @@
   CustomIcon: ConstructionLamp01
   Material: metallight
   Shape: Invisible
-  MarketPrice: 255, display: true
+  MarketPrice: 255, display: false
   # Model: @models/Blocks/Mothership/lightMS01Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -36907,7 +36990,7 @@
   # ModelOffset: "0,0.5,0"
   Category: Deco Blocks 
   
-  MarketPrice: 20, display: true
+  MarketPrice: 20, display: false
   XpFactor: 0  
   RPFactor: 0
 }
@@ -37249,7 +37332,7 @@
   Info: "Force fields take damage from being shot at, but you can walk through them. They are not airtight. Note: Force fields higher than 1 block can extend into other block areas without colliding.", display: true
   ShowBlockName: true
   Shape: Invisible
-  MarketPrice: 2600, display: true
+  MarketPrice: 2600, display: false
   # Model: @models2/Entities/Forcefields/ForcefieldEmitter1x1Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -37416,7 +37499,7 @@
   Info: bkiForcefieldWalkwayEmitterBlocks, display: true
   ShowBlockName: true
   Shape: Invisible
-  MarketPrice: 2600, display: true
+  MarketPrice: 2600, display: false
   # Model: @models2/Entities/Forcefields/ForcefieldEmitter1x1Prefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   Place: Free
@@ -37715,7 +37798,7 @@
   #CustomIcon: ThrusterJetRound1x3x1
   Model: @models/Blocks/Thrusters/ThrusterJetMSRound1x3x1Prefab
   SizeInBlocks: "1,3,1", display: true
-  MarketPrice: 8609, display: true
+  MarketPrice: 8609, display: false
   Volume: 1140, type: float, display: true, formatter: Liter
   Mass: 2733, type: float, display: true, formatter: Kilogram
   HitPoints: 1225, type: int, display: true
@@ -37739,7 +37822,7 @@
   #CustomIcon: ThrusterJetRound2x5x2
   Model: @models/Blocks/Thrusters/ThrusterJetMSRound2x5x2Prefab
   SizeInBlocks: "2,5,2", display: true
-  MarketPrice: 39272, display: true
+  MarketPrice: 39272, display: false
   Volume: 3343, type: float, display: true, formatter: Liter
   Mass: 11128, type: float, display: true, formatter: Kilogram
   HitPoints: 6503, type: int, display: true
@@ -37763,7 +37846,7 @@
   #CustomIcon: ThrusterJetRound2x5x2V2
   Model: @models/Blocks/Thrusters/ThrusterJetMSRound2x5x2V2Prefab
   SizeInBlocks: "2,5,2", display: true
-  MarketPrice: 39272, display: true
+  MarketPrice: 39272, display: false
   Volume: 3343, type: float, display: true, formatter: Liter
   Mass: 11128, type: float, display: true, formatter: Kilogram
   HitPoints: 6503, type: int, display: true
@@ -37787,7 +37870,7 @@
   #CustomIcon: ThrusterJetRound3x7x3
   Model: @models/Blocks/Thrusters/ThrusterJetMSRound3x7x3Prefab
   SizeInBlocks: "3,7,3", display: true
-  MarketPrice: 98341, display: true
+  MarketPrice: 98341, display: false
   Volume: 6408, type: float, display: true, formatter: Liter
   Mass: 26010, type: float, display: true, formatter: Kilogram
   HitPoints: 17849, type: int, display: true
@@ -38067,7 +38150,7 @@
   Group: cpgPassengerSeat
   Material: metallight
   Shape: ModelEntity
-  MarketPrice: 1230, display: true
+  MarketPrice: 1230, display: false
   ShowBlockName: true
   Model: @models2/Entities/Decorations/LaboratoryPack/VisionBoxPrefab 
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
@@ -38221,7 +38304,7 @@
   IndexName: WarpDrive
   Material: metal
   Shape: ModelEntity
-  MarketPrice: 120000, display: true
+  MarketPrice: 120000, display: false
   ShowBlockName: true
   Model: @models/Blocks/Mothership/WarpDriveT2Prefab
   Mesh-Damage-1: Mesh/D0
@@ -38258,9 +38341,9 @@
   CostPerAU: 3, display: true
   CostPerLY: 1, display: true
   RangeAU: 48, display: true
-  RangeLY: 60, display: true
+  RangeLY: 60, display: true  
   
-  # Short Range Warp  
+  # Short Range Warp  (Microwarp / CV T2)
   CostPerKM: 3, display: true
   RangeKM: 40000, display: true
   #RangeKMuseDetector: true, display: true
@@ -38280,7 +38363,7 @@
 { +Block Name: PlayerConsoleGIN 
   CustomIcon: ScifiComputerTable
   Class: NPCDialogue    
-  DialogueState: GIN_Console_Initialize  #Not yet updated to 1.15 contents. Test new contents in scenario "default random EXP" !
+  DialogueState: GIN_Console_Initialize  #V.1.18 version
   NPCModelRotation: false 
   Group: cpgCrewStationHuman
   Material: metallight
