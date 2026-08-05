@@ -21592,7 +21592,7 @@
   Volume: 55, type: float, display: true, formatter: Liter
   StackSize: 500
   MaxCount: 500, type: int, display: true
-  CPUIn: 5, type: int, display: true
+  CPUIn: 4, type: int, display: true
   ChildBlocks: "SolarPanelSlope, SolarPanelSlope2, SolarPanelSlope3, SolarPanelHorizontal, SolarPanelHorizontal2, SolarPanelHorizontalMount, SolarPanelHorizontalStand"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21666,7 +21666,7 @@
   HitPoints: 150, type: int, display: true
   Mass: 730, type: float, display: true, formatter: Kilogram
   MaxCount: 500, type: int, display: true
-  CPUIn: 5, type: int, display: true
+  CPUIn: 4, type: int, display: true
   TemplateRoot: SolarPanelBlocks
   IsOxygenTight: false, display: true
   BlockColor: "110,110,110"  
@@ -21826,7 +21826,7 @@
   Volume: 50, type: float, display: true, formatter: Liter
   StackSize: 1000
   MaxCount: 500, type: int, display: true
-  CPUIn: 2, type: int, display: true
+  CPUIn: 1, type: int, display: true
   ChildBlocks: "SolarPanelSlopeSmall, SolarPanelSlope3Small, SolarPanelHorizontalSmall"
   Info: bkiSolarPanel, display: true
   IsOxygenTight: varies, display: true        # not all child blocks are the same
@@ -21853,7 +21853,7 @@
   HitPoints: 100, type: int, display: true
   Mass: 350, type: float, display: true, formatter: Kilogram
   MaxCount: 500, type: int, display: true
-  CPUIn: 2, type: int, display: true
+  CPUIn: 1, type: int, display: true
   TemplateRoot: SolarPanelSmallBlocks
   IsOxygenTight: true, display: true 
   BlockColor: "110,110,110"    
@@ -27971,12 +27971,12 @@
 { Block Name: PosterCrystalMoon, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/CrystalMoonPosterPrefab
   PickupTarget: PosterCrystalMoon
-  Info: bkiPosterZiraxAlienWorld, display: true
+  Info: bkiPosterCrystalMoon, display: true
 }
 { Block Name: PosterOffIntoTheUnknown, Ref: PosterARest  
   Model: @models2/Entities/Decorations/Posters/OffIntoTheUnknownPosterPrefab
   PickupTarget: PosterOffIntoTheUnknown
-  Info: bkiPosterZiraxAlienWorld, display: true
+  Info: bkiPosterOffIntoTheUnknown, display: true
 }
 # === Heavy Windows with ornaments ===
 { Block Name: HeavyWindowDetailedBlocks
@@ -38424,4 +38424,22 @@
   JumpgateBaseScale: 0.000839            # Default base scale of model game objects that equals a 2-m ingame block (CV/BA block) (DO NOT CHANGE unless other VFX is used!)
   JumpgateDiameter: 87, display: true                  #Default: 1; 1 = 2m diameter = 1x large block; 10 = 20m diameter = 10 large blocks; Use Un-even numbers as the insertion point is always in the center block!  
   #JumpgateEffectEnabled: false       #commented out / default: true; Activates/Deactivates the Vortex effects of the jumpgate
+}
+
+# More Posters v1.19
+
+{ Block Name: PosterTheEnd, Ref: PosterARest  
+  Model: @models2/Entities/Decorations/Posters/TheEndPosterPrefab
+  PickupTarget: PosterTheEnd
+  Info: bkiPosterTheEnd, display: true
+}  
+{ Block Name: PosterTheTorch, Ref: PosterARest  
+  Model: @models2/Entities/Decorations/Posters/TheTorchPosterPrefab
+  PickupTarget: PosterTheTorch
+  Info: bkiPosterTheTorch, display: true
+}
+{ Block Name: PosterZiraxHuntress, Ref: PosterARest  
+  Model: @models2/Entities/Decorations/Posters/ZiraxHuntressPosterPrefab
+  PickupTarget: PosterZiraxHuntress
+  Info: bkiPosterZiraxHuntress, display: true
 }
