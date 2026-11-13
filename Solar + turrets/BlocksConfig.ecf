@@ -62,7 +62,14 @@
 # RepFac:       > f.e. use RepFac: 0.1  to allow to scale the reputation loss/gain when destroying a block (f.e. to make some blocks more/less "valuable" for reputation changes)
 # DropMeshfile: Entities/Misc/DropContainerNewPrefab  > Defines the container visible when dropped; Small variants: BagSmallNewPrefab, BagSmallChristmasPrefab; Large variants: DropContainerNewPrefab; Old: BagSmallPrefab, DropContainerPrefab
 # DropInventoryEntity: DropContainer   > defines which box variant is dropped when this item/device is dropping from a destroyed cargo container (!)
-# ShieldHitCooldown: 11, type: int, display: true   = ShieldHitCooldown (int): cooldown in seconds after being hit until the shield starts recharging (default: 5s)  
+# ShieldHitCooldown: 11, type: int, display: true   = ShieldHitCooldown (int): cooldown in seconds after being hit until the shield starts recharging (default: 5s)    
+# UsableInCreativeInstance: false  - default: true; If set to false that block can't be accessed in a CREATIVE instance = cannot be interacted with via F-button (Block can still be placed!). Godmode Invisible (GM IV) will override it.
+#
+# DestinationTarget: "<string>"   
+#    A portal placed by a player starts with this target already set. The syntax is the same as in the portal target dialog: "Device@Structure:Playfield@SolarSystem".
+#    The value must be quoted because it contains :.
+#    A target stored with the block (savegame, blueprint, POI) still wins.
+#    Without the playfield part the portal stays closed, and the game logs a warning.
 #
 # == Special: Dialogues ==
 # ExecuteOnActivate: YourDialogState   # Adding a dialogue state from the dialogues.ecf will allow the block/device to activate that dialogue by facing the block and clicking F; Note: Does not require 'IsActivatable' or other properties; Note: If device already has 'IsActivatable' or other activatable-state/Access (F-button, like containers, levers etc) their Access-function will be executed primarily BUT the dialogue will be run (invisible) never the less!
@@ -120,7 +127,7 @@
 # 408	AlienBlocks						Radioactive; for POI building only; Same Texture range than 1395 
 # 865	FleshLargeBlocks				BLOCKED FOR DF > Flesh blocks > Symelite Blocks (for DF)
 # 866	SymelitArmorLargeBlocks			BLOCKED FOR DF > Symelite Armor Blocks (for Player)
-# 
+# 872	HullCombatChargedLargeBlocks 	Charged Combat Steel Blocks L
 # 
 # SV / HV:
 # 1478	PlasticSmallBlocks		Carbon Composite Blocks S
@@ -1656,6 +1663,7 @@
 { +Block Id: 258, Name: ConsoleTrading
   # Class: TradingStation
   Class: NPCDialogue  
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Group: cpgCrewStationAlien
   Material: metallight
@@ -1759,6 +1767,7 @@
 
 { +Block Id: 261, Name: ConsoleMS01
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   Material: metallight
@@ -2434,7 +2443,7 @@
   Mass: 13510, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
 }
 { +Block Id: 284, Name: TurretMSRocketRetract, Ref: TurretTemplate   #TurretPlayer CV Rocket
   Model: @models/Blocks/Turrets/TurretMSRocketRetractPrefab
@@ -2451,7 +2460,7 @@
   Mass: 11850, type: float, display: true, formatter: Kilogram
   Volume: 6150, type: float, display: true, formatter: Liter
   HitPoints: 4500, type: int, display: true  
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   RotSpeed: 120, type: int, display: true  
   SoundRotate: Weapons/Turret/TurretRotateVeryFast
   CPUIn: 9700, type: int, display: true
@@ -3044,7 +3053,7 @@
   IsRetractable: true
   IsOxygenTight: true, display: true
   Info: bkiTurretRetractSpace, display: true
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   RotSpeed: 80, type: int, display: true
   CPUIn: 20700, type: int, display: true
   SoundRotate: Weapons/Turret/TurretRotateSlow
@@ -3063,7 +3072,7 @@
   IsRetractable: true
   IsOxygenTight: true, display: true
   Info: bkiTurretRetractSpace, display: true
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   CPUIn: 1300, type: int, display: true
   HitPoints: 4500, type: int, display: true
   Mass: 13660, type: float, display: true, formatter: Kilogram
@@ -3080,7 +3089,7 @@
   IsRetractable: true
   IsOxygenTight: true, display: true
   Info: bkiTurretRetract, display: true
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   RotSpeed: 150, type: int, display: true
   CPUIn: 2500, type: int, display: true
   SoundRotate: Weapons/Turret/TurretRotateFast
@@ -3114,6 +3123,7 @@
   Material: human           # do not use "alien" because it will show dirt effect
   Shape: ModelEntity
   Class: NPCDialogue 
+  UsableInCreativeInstance: false
   Model: @models2/Entities/Decorations/HomeSweetHome/BedPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
   BlockColor: "110,110,110"
@@ -3138,6 +3148,7 @@
 { +Block Id: 329, Name: NPCHumanTemplate
   Material: human
   Class: NPCDialogue 
+  UsableInCreativeInstance: false
   Shape: ModelEntity
   Model: @models2/Entities/Decorations/HomeSweetHome/BedPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
@@ -3477,6 +3488,7 @@
 
 { +Block Id: 344, Name: GeneralPurposeConsole, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   Material: metallight
@@ -6074,6 +6086,7 @@
   # AllowedInBlueprint: false, display: true
   # CanPickup: true
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   #DialogueState: BJ_Start #ATTENTION! Setting a dialogue state here will overwrite manually set Dialogues for this devices in the blueprints!
   NPCModelRotation: false
   Info: bkiGamblingTableTwoPerson, display: true
@@ -6085,6 +6098,7 @@
 }
 { +Block Id: 475, Name: GamblingTableMultiplePeople, Ref: NPCAlienTemplate
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   #DialogueState: BJ_Start  #ATTENTION! Setting a dialogue state here will overwrite manually set Dialogues for this devices in the blueprints!
   NPCModelRotation: false
   Info: bkiGamblingTableMultiplePeople, display: true
@@ -7383,7 +7397,7 @@
   IsActivateableInCP: true
   #IsAccessible: true
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -7429,7 +7443,7 @@
   IsActivateableInCP: true
   #IsAccessible: true
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -7501,6 +7515,7 @@
   Model: @models2/Entities/Decorations/HolographicAIConsole/HolographicAIConsolePrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!  
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Group: cpgCrewStationAlien
   Category: Deco Blocks
@@ -9396,6 +9411,7 @@
 }
 { +Block Id: 635, Name: ConsoleSmallMS01
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   Group: cpgEquipment
@@ -9424,6 +9440,7 @@
 }
 { +Block Id: 636, Name: ConsoleLargeMS01 
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   Info: bkiGeneralPurposeConsole, display: true 
   NPCModelRotation: false
   Group: cpgEquipment
@@ -9453,6 +9470,7 @@
 }
 { +Block Id: 637, Name: ConsoleLargeMS02, Ref: ConsoleLargeMS01
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   Model: @models/Blocks/Mothership/ConsoleLargeMS02Prefab
@@ -9461,6 +9479,7 @@
 }
 { +Block Id: 638, Name: ConsoleMapMS01, Ref: ConsoleLargeMS01
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   Model: @models/Blocks/Mothership/ConsoleMapMS01Prefab
@@ -9805,7 +9824,7 @@
   Volume: 281.25, type: float, display: true, formatter: Liter
   Mass: 500, type: float, display: true, formatter: Kilogram
   StackSize: 500
-  # MaxCount: 60, type: int, display: true
+  # MaxCount: 6, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 2
   BlastDamage: 50
@@ -9842,7 +9861,7 @@
   Volume: 281.25, type: float, display: true, formatter: Liter
   Mass: 520, type: float, display: true, formatter: Kilogram
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 2
   BlastDamage: 50
@@ -9880,7 +9899,7 @@
   Volume: 281.25, type: float, display: true, formatter: Liter
   Mass: 1050, type: float, display: true, formatter: Kilogram
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 2
   BlastDamage: 50
@@ -10755,7 +10774,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -11159,7 +11178,7 @@
   Mass: 4350, type: float, display: true, formatter: Kilogram
   StackSize: 500
   IsDuplicateable: false
-  # MaxCount: 10, type: int, display: true
+  # MaxCount: 1, type: int, display: true
   
   BlastParticleIndex: 11
   BlastRadius: 2
@@ -11474,6 +11493,7 @@
 }
 { +Block Id: 727, Name: ConsoleLargeMS01a, Ref: ConsoleLargeMS01
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiConsoleLargeMS01a, display: true
   Group: cpgEquipment
@@ -14478,6 +14498,7 @@
   IsAccessible: true, type: bool
 
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   NPCModelRotation: false
 }
 { Block Id: 955, Name: Cactus1
@@ -15795,7 +15816,7 @@
 
   UnlockCost: 12, display: true
   UnlockLevel: 10, display: true
-  TechTreeParent: ContainerLargeBlocks    (Teleporter?)
+  TechTreeParent: ContainerLargeBlocks    #(Teleporter?)
   TechTreeNames: "Base,Capital Vessel"
   
 }
@@ -16217,6 +16238,7 @@
 }
 { +Block Id: 1087, Name: ScifiComputerTable, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -16227,6 +16249,7 @@
 }
 { +Block Id: 1088, Name: ScifiMediaCenter, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -16986,6 +17009,7 @@
 }
 { +Block Id: 1133, Name: TradingStation
   Class: TradingStation
+  UsableInCreativeInstance: false
   Group: cpgTrading
   Material: metallight
   Shape: ModelEntity
@@ -17017,6 +17041,7 @@
 }
 { +Block Id: 1134, Name: ATM
   Class: ATM
+  UsableInCreativeInstance: false
   Group: cpgTrading
   MarketPrice: 1774, display: false
   Material: metallight
@@ -17195,7 +17220,7 @@
   BlockColor: "110,110,110"
   # ModelOffset: "0,0.5,0"
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -17315,7 +17340,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -17353,7 +17378,7 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  # MaxCount: 40, type: int, display: true
+  # MaxCount: 4, type: int, display: true
   BlastParticleIndex: 11
   BlastRadius: 3
   BlastDamage: 80
@@ -19231,6 +19256,7 @@
 
 { +Block Id: 1315, Name: TeleporterCV
   Class: Teleporter
+  UsableInCreativeInstance: false
   Group: cpgTransportation
   Category: Devices
   MarketPrice: 42012, display: true
@@ -20025,6 +20051,7 @@
 { +Block Id: 1377, Name: TeleporterBA
   Info: bkiTeleporterBA, display: true
   Class: Teleporter
+  UsableInCreativeInstance: false
   MarketPrice: 66446, display: true
   Group: cpgTransportation  
   Category: Devices
@@ -20974,6 +21001,7 @@
   #CustomIcon: StandingHexapod                       #Icon required
   # DialogueState: Barking_Military_Random_Init     #create matching barking text
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   NPCModelRotation: true
   AllowedInBlueprint: false, display: true
   IsAccessible: true, type: bool
@@ -21133,6 +21161,7 @@
 { +Block Id: 1465, Name: AlienNPCBlocks
   Material: human
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   MarketPrice: 5850, display: false 
   Shape: Invisible
   # Model: @models2/Entities/Decorations/DecoNPC/ControlStationNPCPrefab
@@ -21152,6 +21181,7 @@
 { +Block Id: 1466, Name: HumanNPCBlocks
   Material: human
   Class: NPCDialogue 
+  UsableInCreativeInstance: false
   Shape: Invisible
   MarketPrice: 5850, display: true
   # Model: @models2/Entities/Decorations/DecoNPC/ConsoleSmallHumanPrefab
@@ -21170,6 +21200,7 @@
 }
 { +Block Id: 1467, Name: CommandingOfficer2, Ref: NPCHumanTemplate
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Group: cpgCrewStationHuman
   Info: bkiCommandingOfficer2, display: true
@@ -21184,6 +21215,7 @@
 { +Block Id: 1468, Name: SecurityGuard2, Ref: NPCHumanTemplate
   NPCModelRotation: true
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   Group: cpgCrewStationHuman
   Info: bkiSecurityGuard2, display: true
   IsAccessible: true, type: bool
@@ -21196,6 +21228,7 @@
 }
 { +Block Id: 1469, Name: CommandingOfficerAlien, Ref: NPCAlienTemplate
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   NPCModelRotation: true
   Group: cpgCrewStationAlien
   Info: bkiCommandingOfficerAlien, display: true
@@ -21209,6 +21242,7 @@
 }
 { +Block Id: 1470, Name: SecurityGuardAlien , Ref: NPCAlienTemplate
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   NPCModelRotation: true
   Group: cpgCrewStationAlien
   Info: bkiSecurityGuardAlien, display: true
@@ -21223,6 +21257,7 @@
 
 { +Block Id: 1471, Name: StandingTalon, Ref: NPCAlienTemplate
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   NPCModelRotation: true  
   Group: cpgCrewStationAlien
   Info: bkiStandingTalon, display: true
@@ -21903,6 +21938,7 @@
 }
 { +Block Id: 1519, Name: CommandingOfficerMale, Ref: NPCHumanTemplate
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   NPCModelRotation: true
  # CustomIcon: CommandingOfficer
   Group: cpgCrewStationHuman
@@ -21918,6 +21954,7 @@
   Model: @models2/Entities/Decorations/DecoNPC/SecurityGuardZiraxPrefab 
   Info: bkiSecurityGuardZirax, display: true 
   Class: NPCDialogue  
+  UsableInCreativeInstance: false
   NPCModelRotation: true  
   #DialogueState: Barking_Zirax_Anywhere_Init
   #OmitCone: true
@@ -23405,6 +23442,7 @@
 
 { Block Id: 1643, Name: TalonChief, Ref: NPCAlienTemplate
   Class: NPCDialogue
+  UsableInCreativeInstance: false
   NPCModelRotation: true  
   Group: cpgCrewStationAlien
   Info: bkiTalonChief, display: true
@@ -23422,6 +23460,7 @@
   Model: @models2/Entities/Decorations/DecoNPC/ZiraxCommanderDecoPrefab
   Info: bkiZiraxCommander, display: true 
   Class: NPCDialogue 
+  UsableInCreativeInstance: false
   NPCModelRotation: true    
   #DialogueState: Barking_Zirax_Anywhere_Init
   #OmitCone: true
@@ -28219,6 +28258,7 @@
 { +Block Name: TeleporterBAT1
   Info: bkiTeleporterBAT1, display: true
   Class: Teleporter
+  UsableInCreativeInstance: false
   MarketPrice: 2200, display: true
   Group: cpgTransportation  
   Category: Devices
@@ -28272,6 +28312,7 @@
 { +Block Name: TeleporterBAEpic
   Info: bkiTeleporterBAEpic, display: true
   Class: Teleporter
+  UsableInCreativeInstance: false
  # MarketPrice: 2200, display: true
   Group: cpgTransportation  
   Category: Devices
@@ -29357,6 +29398,7 @@
 { +Block Name: TeleporterBAEvent
   Info: bkiTeleporterBAEvent, display: true
   Class: Teleporter
+  UsableInCreativeInstance: false
  # MarketPrice: 2200, display: true
   Group: cpgTransportation  
   Category: Devices
@@ -30726,6 +30768,7 @@
  # CustomIcon: PDA
   Material: metallight
   Class: NPCDialogue 
+  UsableInCreativeInstance: false
   Category: Devices
   Info: bkiPDAsingle, display: true
   IndexName: LCD
@@ -30769,6 +30812,7 @@
 { +Block Name: ConsoleGIN 
   CustomIcon: ConsoleTrading
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   DialogueState: GIN_Console_Initialize
   NPCModelRotation: false 
   Group: cpgCrewStationAlien
@@ -36521,6 +36565,7 @@
 
 { Block Name: ComputerStation_C01, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -36531,6 +36576,7 @@
 }
 { Block Name: ComputerStation_C02, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -36541,6 +36587,7 @@
 }
 { Block Name: ConsoleDesk_C03, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -36551,6 +36598,7 @@
 }
 { Block Name: ConsoleDesk_C04, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -36561,6 +36609,7 @@
 }
 { Block Name: ConsoleDesk_C05, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -36571,6 +36620,7 @@
 }
 { Block Name: StandConsole_C06, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks 
@@ -36581,6 +36631,7 @@
 }
 { Block Name: StandConsole_C07, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -36591,6 +36642,7 @@
 }
 { Block Name: StandConsole_C17, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -36601,6 +36653,7 @@
 }
 { Block Name: ConsoleStation_C18, Ref: DecoTemplate
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   NPCModelRotation: false
   Info: bkiGeneralPurposeConsole, display: true
   TemplateRoot: ConsoleBlocks
@@ -38262,6 +38315,7 @@
   Model: @models2/Entities/Decorations/HolographicAIConsole/HolographicAIConsoleTalonArPrefab
   DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!  
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   Group: cpgCrewStationAlien
   Category: Deco Blocks
   NPCModelRotation: false
@@ -38363,6 +38417,7 @@
 { +Block Name: PlayerConsoleGIN 
   CustomIcon: ScifiComputerTable
   Class: NPCDialogue    
+  UsableInCreativeInstance: false
   DialogueState: GIN_Console_Initialize  #V.1.18 version
   NPCModelRotation: false 
   Group: cpgCrewStationHuman
@@ -38442,4 +38497,42 @@
   Model: @models2/Entities/Decorations/Posters/ZiraxHuntressPosterPrefab
   PickupTarget: PosterZiraxHuntress
   Info: bkiPosterZiraxHuntress, display: true
+}
+
+## Player Creative 
+
+
+{ +Block Name: TechPortalCreativePlayer      
+  Info: bkiTechPortalCreativePlayer, display: true
+  #CustomIcon: TechPortal
+  Class: Portal
+  DestinationTarget: "ArrivalSpawnOrbit@Orbital Workshop:Workshop Sector@CreativeSurvival"
+  Group: cpgTransportation  
+  UsableInCreativeInstance: false  #(deny usage when placed inside Instance!)
+  IndexName: Portal
+  Shape: ModelEntity
+  Material: metalhard
+  Model: @models/Blocks/Misc/SurvivalCreativePortalPlayerPrefab
+  DropMeshfile: Entities/Misc/DropContainerNewPrefab             #Large container box; Available variants: see start of this document!
+  Place: Free
+  BlockColor: "110,110,110"
+  AllowedInBlueprint: false, display: true
+  AllowPlacingAt: Base, display: true
+  SizeInBlocks: "1,1,1", display: true
+  SizeInBlocksLocked: "Base,MS"
+  IsActivateable: true
+  IsAccessible: true, type: bool
+  IsOxygenTight: false, display: true
+  ShowBlockName: true
+  StackSize: 1000
+  HitPoints: 500, type: int, display: true
+  Mass: 100, type: float, display: true, formatter: Kilogram
+  EnergyIn: 1, type: int, display: true, formatter: Watt
+  Volume: 10, type: float, display: true, formatter: Liter
+  Category: Devices
+  
+  UnlockCost: 0, display: true
+  UnlockLevel: 1, display: true
+  # TechTreeParent: PentaxidTank
+  TechTreeNames: ""
 }
